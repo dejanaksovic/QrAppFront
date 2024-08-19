@@ -1,0 +1,7 @@
+Models:
+  User: Name, balance, transactions[]
+
+Pages:
+  Admin page [Add, Delete, SeeAll]
+  Worker page (single user) [Add/Remove balance]
+  User [See self page]
