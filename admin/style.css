@@ -1,0 +1,182 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Source Code Pro", monospace;
+}
+.main-div {
+  width: 100vw;
+  height: 100vh;
+  background-color: #0B2E1C;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.enterPass-div {
+  width: 100vw;
+  height: 100vh;
+  background-color: #0B2E1C;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+}
+#passLogo {
+  padding-top: 12vh;
+}
+.logo {
+  padding-top: 10vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo img {
+  width: 40vw;
+  height: auto;
+}
+.password-input {
+  padding-top: 8vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.pass-legend {
+  width: 100vw;
+  text-align: center;
+  padding-bottom: 1vh;
+  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+  font-size: 1em;
+  color: #FFFFFF;
+}
+#password {
+  text-align: center;
+  width: 60vw;
+  height: 5vh;
+  background-color: #B08C3D;
+  color: #FFFFFF;
+  font-size: 1.2rem;
+  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+}
+.confirm-button {
+  padding-top: 10vh;
+  width: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#confirm-button {
+  width: 25vw;
+  height: 4vh;
+  font-size: 1rem;
+  font-weight: bold;
+  text-shadow: 4px 4px 4px rgba(225, 225, 225, 0.3);
+  color: #FFFFFF;
+  background-color: #C18A2B;
+  outline: none;
+  border: none;
+  border-radius: 7px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+}
+.admin-page {
+  padding-top: 10vh;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0B2E1C;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+}
+.users-workers-buttons {
+  width: 100vw;
+  display: flex;
+  margin-top: 10vh;
+  align-content: space-around;
+  justify-content: space-evenly;
+}
+.users-button,
+.workers-button {
+  width: 30vw;
+  height: 15vh;
+  background-color: #C18A2B;
+  border: none;
+  border-radius: 7px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+}
+.users-button img,
+.workers-button img {
+  width: 20vw;
+  height: 12vh;
+}
+.users-page,
+.workers-page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #0B2E1C;
+}
+#logo {
+  margin-top: -5vh;
+}
+.users-box,
+.workers-box {
+  margin-top: -13vh;
+  margin-bottom: -12vh;
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+}
+.usersLegend,
+.workersLegend {
+  padding-left: 15vw;
+  padding-bottom: 1vh;
+  width: 100vw;
+  font-size: 1rem;
+  color: #FFFFFF;
+  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+}
+.box {
+  width: 70vw;
+  height: 50vh;
+  background-color: #B08C3D;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+}
+.add-removeButtons {
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: space-evenly;
+}
+.add-button,
+.remove-button {
+  margin-bottom: -10vh;
+  width: 22vw;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #C18A2B;
+  border: none;
+  border-radius: 7px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+}
+.add-button img,
+.remove-button img {
+  width: 20vw;
+  height: 8vh;
+ }
+
