@@ -14,7 +14,7 @@ const removeBalanceButton = document.querySelector(".removeButton");
 const flashContainer = document.querySelector(".flash-container");
 
 // ESSENTIALS
-const URL = "http://localhost:3000";
+const URL = "https://qrappback.onrender.com";
 let password;
 let balance = localStorage.getItem("password");
 let message;
