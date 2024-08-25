@@ -1,13 +1,9 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Source Code Pro", monospace;
-}
+@import url("base.css");
+
 .main-div {
   width: 100vw;
   height: 100vh;
-  background-color: #0B2E1C;
+  background-color: var(--clr-bg-dark);
   display: flex;
   align-content: flex-start;
   justify-content: center;
