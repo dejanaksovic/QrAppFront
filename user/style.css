@@ -1,0 +1,84 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Source Code Pro", monospace;
+  overflow: hidden;
+}
+.main-div {
+  width: 100vw;
+  height: 100vh;
+  background-color: #0B2E1C;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+
+.logo-div{
+  margin-top: 10vw;
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-content: flex-start;
+}
+.logo-div img {
+  width: 30vw;
+}
+.userPf {
+  text-align: center;
+  width: 100vw;
+  color: #FFFFFF;
+  font: 1rem;
+  margin-bottom: -2vh;
+}
+
+.inputBg {
+  width: 70vw;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #C18A2B;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+}
+.username-div,
+.balance-div,
+.transactions-div {
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-content: center;
+}
+.transactions-div {
+  height: 55vh;
+}
+.legend {
+  width: 100vw;
+  padding: 1vh 2vw;
+  color: #FFFFFF;
+  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+}
+.transactions {
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+  width: 60vw;
+  height: 45vh;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+}
+#username,
+#balance {
+  background-color: #B08C3D;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(107, 79, 20, 0.3);
+  border-radius: 5px;
+  height: 4vh;
+  font-size: 1rem;
+  width: 50vw;
+  outline: none;
+  text-align: center;
+  color: #FFFFFF;
+}
