@@ -149,10 +149,20 @@
   text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
 }
 .box {
+  padding-top: 2vh;
+  display: flex;
   width: 70vw;
   height: 50vh;
   background-color: #B08C3D;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+  align-content: center;
+  justify-content: space-evenly;
+}
+.username,
+.balance {
+  width: 31vw;
+  height: 46vh;
+  background-color: rgba(225, 225, 225, 0.3);
 }
 .add-removeButtons {
   width: 100vw;
