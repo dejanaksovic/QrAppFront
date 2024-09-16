@@ -1,9 +1,5 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: "Source Code Pro", monospace;
-}
+@import url("../base.css");
+
 .main-div {
   width: 100vw;
   height: 100vh;
@@ -13,6 +9,7 @@
   align-items: flex-start;
   flex-wrap: wrap;
 }
+
 .enterPass-div {
   width: 100vw;
   height: 100vh;
@@ -22,9 +19,11 @@
   justify-content: center;
   align-content: flex-start;
 }
+
 #passLogo {
   padding-top: 12vh;
 }
+
 .logo {
   padding-top: 10vh;
   width: 100vw;
@@ -32,10 +31,12 @@
   justify-content: center;
   align-items: center;
 }
+
 .logo img {
   width: 40vw;
   height: auto;
 }
+
 .password-input {
   padding-top: 8vh;
   width: 100vw;
@@ -44,6 +45,7 @@
   align-items: center;
   flex-wrap: wrap;
 }
+
 .pass-legend {
   width: 100vw;
   text-align: center;
@@ -52,6 +54,7 @@
   font-size: 1em;
   color: #FFFFFF;
 }
+
 #password {
   text-align: center;
   width: 60vw;
@@ -65,6 +68,7 @@
   border-radius: 3px;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
 }
+
 .confirm-button {
   padding-top: 10vh;
   width: 100vh;
@@ -72,6 +76,7 @@
   align-items: center;
   justify-content: center;
 }
+
 #confirm-button {
   width: 25vw;
   height: 4vh;
@@ -79,7 +84,6 @@
   font-weight: bold;
   text-shadow: 4px 4px 4px rgba(225, 225, 225, 0.3);
   color: #FFFFFF;
-  background-color: #C18A2B;
   outline: none;
   border: none;
   border-radius: 7px;
