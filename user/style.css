@@ -1,78 +1,89 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Source Code Pro", monospace;
-  overflow: hidden;
-}
+@import url("../base.css");
+
 .main-div {
   width: 100vw;
   height: 100vh;
   background-color: #0B2E1C;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: space-evenly;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .logo-div{
-  margin-top: 10vw;
-  width: 100vw;
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-evenly;
   align-content: flex-start;
 }
 .logo-div img {
-  width: 30vw;
+  width: 150px;
 }
 .userPf {
   text-align: center;
-  width: 100vw;
   color: #FFFFFF;
   font: 1rem;
-  margin-bottom: -2vh;
 }
 
 .inputBg {
-  width: 70vw;
+  width: 95vw;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: #C18A2B;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
 }
 .username-div,
 .balance-div,
 .transactions-div {
-  width: 100vw;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   text-align: center;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: center;
   align-content: center;
+  padding: 1vh 0vw;
 }
 .transactions-div {
   height: 55vh;
 }
 .legend {
-  width: 100vw;
-  padding: 1vh 2vw;
   color: #FFFFFF;
   text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+  padding: 1vh 0vw;
 }
 .transactions {
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
-  width: 60vw;
+  width: 90vw;
   height: 45vh;
   background: rgba(255, 255, 255, 0.3);
   border-radius: 5px;
+  display: flex;
+  justify-content: center;
+}
+.column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#border {
+  border-right: 1px solid rgba(0, 0, 0, 0.3);
+  border-left: 1px solid rgba(0, 0, 0, 0.3); 
+}
+.articles,
+.coins,
+.time {
+  display: flex;
+  flex-direction: column;
+  padding: 1vh 0vw;
+  display: flex;
+  flex-direction: column;
 }
 #username,
 #balance {
   background-color: #B08C3D;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3); 
   border: 1px solid rgba(107, 79, 20, 0.3);
   border-radius: 5px;
   height: 4vh;

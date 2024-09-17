@@ -6,6 +6,7 @@
   --clr-error: #821131;
   --clr-success: #00712D;
   --clr-warning: #ffc300;
+  --clr-font: #FFFFFF;
   --shd-dark: 4px 4px 4px rgba(0, 0, 0, 0.3);
 }
 
@@ -14,7 +15,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Source Code Pro", monospace;
+  font-family: "Roboto", sans-serif;
 }
 
 button {
@@ -22,8 +23,15 @@ button {
   outline: none;
   border: none;
 }
+input {
+  outline: none;
+  border: none;
+}
 
 /* utilities */
+.font-color {
+  color: var(--clr-font);
+}
 .bg-dark {
   background-color: var(--clr-bg-dark);
 }
@@ -44,4 +52,13 @@ button {
 }
 .bg-success {
   background-color: var(--clr-success);
+}
+.bg-blur {
+  backdrop-filter: blur(7px);
+}
+.align-items-center {
+  align-items: center;
+}
+.align-items-right {
+  align-items: right;
 }
