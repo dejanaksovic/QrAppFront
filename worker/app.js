@@ -1,5 +1,6 @@
 // Imports
 import { getUserIdFromUrl } from "../assets/helpers";
+import { FlashMessage } from "../assets/Flash";
 
 // ELEMENTS
 // Pages
@@ -55,18 +56,7 @@ const show404 = () => {
 }
 
 // Flash
-const errorColor = "#821131";
-const successColor = "#00712D";
-const flashTimerSeconds = 5;
-
-const showFlash = (ok) => {
-  flashContainer.textContent = message;
-  ok ? flashContainer.style.setProperty("--clr-bg", `${successColor}`) : flashContainer.style.setProperty("--clr-bg", `${errorColor}`);
-  flashContainer.classList.remove("remove-flash");
-  setTimeout(() => {
-    flashContainer.classList.add("remove-flash");
-  }, flashTimerSeconds * 1000);
-}
+const flashMessage = new FlashMessage("flash");
 
 // GET ID FROM URL
 const id = getUserIdFromUrl(window.location.search);
@@ -130,6 +120,7 @@ confirmPassword.addEventListener("click", handlePasswordInput);
 
 // Balance request handler
 const handleRequest = async (url) => {
+  let message;
   try {
     const res = await fetch(`${url}/users/${id}`, {
       method: "POST",
@@ -153,10 +144,8 @@ const handleRequest = async (url) => {
     if(!res.ok) {
       message = data?.message;
       console.log(message);
-      return showFlash();
+      return flashMessage.showMessage(message, "success");
     }
-    message = "Uspesno menjanje stanja";
-    showFlash(true);
   }
   catch(err) {
     message = "Problem sa konekcijom, proverite internet i pokusajte opet"

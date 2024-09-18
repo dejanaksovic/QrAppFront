@@ -62,3 +62,30 @@ input {
 .align-items-right {
   align-items: right;
 }
+
+.hidden {
+  display: none;
+}
+
+/* Util for flash message */
+.flash-container {
+  --clr-bg: white;
+
+  min-height: 2vh;
+  background-color: var(--clr-bg);
+  color: white;
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  padding: .5rem 1rem;
+  border-radius: .2rem;
+
+  display:flex;
+
+  transition: transform .1s linear;
+  transform-origin: left;
+}
+
+.remove-flash {
+  transform: scaleX(0);
+}
