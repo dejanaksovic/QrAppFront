@@ -29,6 +29,7 @@ export class FlashMessage {
       }
       case "warning": {
         this.container.classList.add("bg-warning");
+        break;
       }
       default: {
         throw Error("Severity not valid");
