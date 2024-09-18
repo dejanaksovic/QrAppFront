@@ -45,13 +45,13 @@ input {
   box-shadow: var(--shd-dark);
 }
 .bg-error {
-  background-color: var(--clr-error);
+  background-color: var(--clr-error) !important;
 }
 .bg-warning {
-  background-color: var(--clr-warning);
+  background-color: var(--clr-warning) !important;
 }
 .bg-success {
-  background-color: var(--clr-success);
+background-color: var(--clr-success) !important;
 }
 .bg-blur {
   backdrop-filter: blur(7px);
@@ -64,15 +64,13 @@ input {
 }
 
 .hidden {
-  display: none;
+  display: none !important; 
 }
 
 /* Util for flash message */
 .flash-container {
-  --clr-bg: white;
-
   min-height: 2vh;
-  background-color: var(--clr-bg);
+  background-color: transparent;
   color: white;
   position: absolute;
   left: 1rem;
@@ -88,4 +86,27 @@ input {
 
 .remove-flash {
   transform: scaleX(0);
+}
+
+/* 404 */
+.container-404 {
+  /* For full with :D, ty Rajko */
+  flex: 1;
+
+  min-height: 100vh;
+  background-color: var(--clr-bg-dark);
+  color: var(--clr-accent-muted);
+  place-items: center;
+  display: grid;
+  place-content: center;
+  padding: 0 1rem;
+}
+
+.container-404 h1 {
+  font-size: 4rem;
+}
+
+.container-404 p {
+  font-size: 1.5rem;
+  text-align: center;
 }

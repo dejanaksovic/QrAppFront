@@ -156,33 +156,9 @@
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* UTIL */
-.hidden {
-  display: none !important;
-}
 
-/* 404 */
-.container-404 {
-  /* For full with :D, ty Rajko */
-  flex: 1;
 
-  min-height: 100vh;
-  background-color: var(--clr-bg-dark);
-  color: var(--clr-accent-muted);
-  place-items: center;
-  display: grid;
-  place-content: center;
-  padding: 0 1rem;
-}
 
-.container-404 h1 {
-  font-size: 4rem;
-}
-
-.container-404 p {
-  font-size: 1.5rem;
-  text-align: center;
-}
 
 
 

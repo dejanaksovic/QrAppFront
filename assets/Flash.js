@@ -14,6 +14,9 @@ export class FlashMessage {
   }
 
   showMessage(message, severity) {
+    // Reset background
+    this.container.classList.remove("bg-error", "bg-warning", "bg-success");
+    // Add message
     this.container.textContent = message;
     switch(severity) {
       case "error": {
@@ -37,8 +40,6 @@ export class FlashMessage {
     setTimeout(() => {
       // Hide the message
       this.container.classList.add("remove-flash");
-      // Reset background
-      this.container.classList.remove("bg-error", "bg-warning", "bg-success");
     }, this.messageDelay)
   }
 }

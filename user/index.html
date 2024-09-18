@@ -13,79 +13,74 @@
 
 </head>
 
-<body class="main-div">
+<body>
   
-  <div class="logo-div">
-    <div>
-      <img src="../svgs/Han-coffee-logo.png" >
-    </div>
-  </div>
-
-  <div class="inputBg">
-    
-    <div class="username-div">
-      <div class="balance">
-        <p>IME</p>
+  <div class="main-div">
+    <div class="main-div">
+      <div class="logo-div">
+        <div>
+          <img src="../svgs/Han-coffee-logo.png" >
+        </div>
       </div>
-    </div>
-
-    <div class="balance-div">
-
-      <div class="legend">STANJE:</div>
-      <div class="balance">
-        <p>313215</p>
-      </div>
+      <div class="inputBg">
     
-    </div>
-
-    <div class="transactions-div">
-
-      <div class="legend">TRANSAKCIJE:</div>
-      <div class="transactions">
-        
-        <div class="column"> 
-          <div class="legend">ARTIKLI</div>
-          <div class="articles">
-            <p class="articles-text" id="border-bottom">3 koka kole</p>
-            <p class="articles-text" id="border-bottom">5 kafa, <span class="ellipsis">...</span>
-              <span class="more-info">3 kole, 4 ultre</span>
-            </p>
-
+        <div class="username-div">
+          <div class="balance">
+            <p id="name-container">IME</p>
           </div>
         </div>
-        
-        <div class="column" id="border">
-          <div class="legend">COINSI</div>
-          <div class="coins">
-            <p id="border-bottom">+10</p>
-            <p id="border-bottom">+24</p>
+        <div class="balance-div">
+          <div class="legend">STANJE:</div>
+          <div class="balance">
+            <p id="balance-container">313215</p>
           </div>
-        </div>
-
-        <div class="column">
-          <div class="legend">VREME</div>
-          <div class="time">
-            <p id="border-bottom">11/5 22:10</p>
-            <p id="border-bottom">23/7 14:25</p>
-          </div>
-        </div>
-  
-      </div>
     
+        </div>
+        <div class="transactions-div">
+          <div class="legend">TRANSAKCIJE:</div>
+          <div class="transactions">
+    
+            <div class="column">
+              <div class="legend">ARTIKLI</div>
+              <div class="articles" id="articles-container">
+                <p class="articles-text" id="border-bottom">3 koka kole</p>
+                <p class="articles-text" id="border-bottom">5 kafa, <span class="ellipsis">...</span>
+                  <span class="more-info">3 kole, 4 ultre</span>
+                </p>
+              </div>
+            </div>
+    
+            <div class="column" id="border">
+              <div class="legend">COINSI</div>
+              <div class="coins" id="coins-container">
+                <p id="border-bottom">+10</p>
+                <p id="border-bottom">+24</p>
+              </div>
+            </div>
+            <div class="column">
+              <div class="legend">VREME</div>
+              <div class="time" id="time-container">
+                <p id="border-bottom">11/5 22:10</p>
+                <p id="border-bottom">23/7 14:25</p>
+              </div>
+            </div>
+    
+          </div>
+    
+        </div>
     </div>
-
-    <!-- 404 -->
- <div class="container-404 hidden">
-    <h1>404</h1>
-    <p>Korisnik nije pronadjen, ukoliko ste skenirali qr code pokusajte opet ili kontaktirajte administratora</p>
+    </div>
   </div>
+<!-- 404 -->
+ <div class="container-404 hidden" id="404">
+  <h1>404</h1>
+  <p>Korisnik nije pronadjen, ukoliko ste skenirali qr code pokusajte opet ili kontaktirajte administratora</p>
+</div>
 
-  <!-- Flash message -->
-   <div class="flash-container remove-flash">
-    <p>Something</p>
-   </div>
-
-  </div>
+<!-- Flash message -->
+ <div id="flash">
+  <p></p>
+ </div>
 <script src="app.js" type="module"></script>
 </body>
 
