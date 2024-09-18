@@ -10,6 +10,11 @@
   width: 100vw;
   height: 100vh;
   border-bottom: 1px solid black;
+}
+
+/* PAGE 1 CSS */
+
+.page1 {
   display: flex;
   flex-direction: column;
 }
@@ -25,7 +30,7 @@
   padding: 0vh 4vw;
   font-weight: bolder;
 }
-.button {
+.confirm-button {
   margin-top: 5vh;
   width: 25vw;
   height: 4vh;
@@ -50,13 +55,89 @@
   margin: 3vh 0vw;
   margin-left: 2vw
 }
-.page2-logo {
-  flex: 1;
+
+/* PAGE2 CSS */
+
+.page2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
 }
-.page2-logo {
-  margin-top: -9vh;
-  margin-right: 2vw;
+
+.new-user {
+  grid-column-start: 4;
+  grid-column-end: 5;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  justify-self: center;
+  align-self: center;
+  column-gap: 0.8rem;
+}
+.legend {
+  color: var(--clr-font);
+  text-align: start;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  justify-self: center;
+  align-self: end;
+  padding-bottom: 2vh;
+}
+.new-user img {
+  width: 35px;
+  height: auto;
+}
+.users-div {
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  grid-column-start: 1;
+  grid-column-end: 5;
+  grid-row-start: 2;
+  grid-row-end: 7;
+  width: 95vw;
+  height: 90vh;
+  justify-self: center;
+  align-self: center;
+  /* why s1mple when i can go full astralis */
+  display: grid;
+  grid-template-columns: 1fr 10vw 10vw;
+  grid-template-rows: repeat(13, 5vh);
+  row-gap: 2vh;
+  justify-items: center;
+  align-items: center;
+  margin-bottom: 1vh;
+  overflow: auto;
+}
+.users-div p {
+  background-color: rgba(225, 225, 225, 0.3);
+  width: 80%;
+  height: 3vh;
+  font-weight: 700;
+  text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+.edit-button,
+.remove-button {
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+
+}
+.edit-button img,
+.remove-button img {
+  width: 20px;
+  height: auto;
 }
 
+/* PAGE3 CSS */
 
-
+.page3 {
+  display: grid;
+  /* grid-template-columns: ;
+  grid-template-rows: ; */
+}
