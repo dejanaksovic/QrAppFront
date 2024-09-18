@@ -1,3 +1,6 @@
+// Imports
+import { getUserIdFromUrl } from "../assets/helpers";
+
 // ELEMENTS
 // Pages
 const [all, workerPage] = document.querySelectorAll(".main-div");
@@ -66,9 +69,7 @@ const showFlash = (ok) => {
 }
 
 // GET ID FROM URL
-const query = window.location.href.split("?")[1];
-const params = query?.split("&");
-const id = params?.find(e => e.startsWith("id="))?.split("=")[1];
+const id = getUserIdFromUrl(window.location.search);
 // If id not found show-error
 if(!id) {
   console.log("No id");

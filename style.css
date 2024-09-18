@@ -1,106 +1,34 @@
 @import url("base.css");
 
-.main-div {
-  width: 100vw;
-  height: 100vh;
+body {
   background-color: var(--clr-bg-dark);
+}
+
+.button-container {
   display: flex;
-  align-content: flex-start;
+  color: white;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 5vh;
-  padding-top: 10vh;
-}
-.title {
-  text-align: center;
-  font-size: 2rem;
-  color: #ffffff;
-  font-optical-sizing: auto;
-  font-weight: bolder;
-  font-style: normal;
-  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
-  width: 100%;
-  height: 5vh;
-}
-.logo {
-  margin-top: -2vh;
-  width: 100%;
+  gap: 2rem;
+  padding: 0 2rem;
   text-align: center;
 }
-.logo img{
-  width: 40vw;
-  height: auto;
+
+.button-container > h1 {
+  font-size: 3rem;
 }
-.qr-example {
-  margin-top: -2vh;
-  text-align: center;
-  color: #ffffff;
-  width: 100%;
-  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
-}
-.qr-example img{
-  width: 25vw;
-  height: 10vh;
-  margin-top: 1vh;
-  background-color: white;
-  border-radius: 7px;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
-}
-.scan-qr {
-  width: 100%;
-  margin-top: -2vh;
-  background-color: #C18A2B;
-  font-size: 1rem;
-  font-weight: bolder;
-  text-shadow: 4px 4px 4px rgba(225, 225, 225, 0.3);
-  width: 22vw;
-  height: 4vh;
+
+button {
+  border: none;
   outline: none;
-  border: 0.3em solid rgba(193, 138, 43, 0.3);
-  border-radius: 7px;
-  color: #ffffff;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
-}
-.admin,
-.worker{
-  width: 100vw;
-  height: 10vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.admin-button,
-.worker-button {
-  width: 22vw;
-  height: 10vh;
-  background-color: #C18A2B;
-  border-radius: 7px;
-  border: none;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
-}
-.admin-button img,
-.worker-button img {
-  width: 20vw;
-  height: 8vh;
-}
-.icons {
-  width: 80vw;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
-.instagram,
-.web-site {
-  width: 17vw;
-  height: 7.5vh;
-  background-color: #C18A2B;
-  border: none;
-  border-radius: 7px;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
-}
-.instagram img,
-.web-site img {
-  width: 15vw;
-  height: 6vh;
+  font-size: 1rem;
+  background-color: var(--clr-accent-muted);
+  border-radius: .2rem;
+  font-size: 3rem;
+  color: white;
+  padding: 1rem 2rem;
+  width: 100%;
 }
 
