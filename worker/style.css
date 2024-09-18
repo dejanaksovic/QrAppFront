@@ -1,18 +1,4 @@
-/* INITIALS */
-:root {
-  /* Why do i have to hardcode colors everywhere, Rajko? */
-  --clr-bg-dark: #0B2E1C;
-  --clr-accent-muted: #C18A2B;
-  --shd-dark: 4px 4px 4px rgba(0, 0, 0, 0.3);
-}
-
-/* RESET */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Source Code Pro", monospace;
-}
+@import url("../base.css");
 
 .main-div {
   width: 100vw;
