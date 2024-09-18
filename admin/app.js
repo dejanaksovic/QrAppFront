@@ -1,5 +1,5 @@
 import { FlashMessage } from "../assets/Flash";
-import { showElement, hideElement, URL } from "../assets/helpers";
+import { URL } from "../assets/helpers";
 import { PageShifter } from "../assets/Pageshifter";
 // Page names
 const pageNames = ["login-page", "view-page", "500", "create page"];

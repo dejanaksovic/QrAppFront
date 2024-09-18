@@ -103,17 +103,13 @@
   font-size: 0.8rem;
 }
 .articles {
-  position: relative;
+  
 }
 .articles-text {
   display: inline-block;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow: auto;
   position: relative;
-}
-.ellipsis {
-  cursor: pointer;
 }
 .more-info {
   display: none;
@@ -125,7 +121,4 @@
   width: auto;
   z-index: 1;
   white-space: normal;
-}
-.ellipsis:hover + .more-info {
-  display: block;
 }
