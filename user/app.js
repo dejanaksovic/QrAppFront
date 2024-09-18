@@ -2,10 +2,12 @@ import { getUserIdFromUrl, hideElement, showElement, URL } from "../assets/helpe
 import { FlashMessage } from "../assets/Flash";
 
 // ELEMENTS
-
 // 404
 const notFoundPage = document.getElementById("404");
+// User page
 const userUi = document.querySelector(".main-div");
+// 500
+const serverErrorPage = document.getElementById("500");
 
 // Non transac
 const nameContainer = document.getElementById("name-container");
@@ -37,7 +39,9 @@ const getUser = async () => {
     data = await res.json();
   }
   catch(err) {
-    flashMessage.showMessage("Proverite konekciju sa internetom pa probajte opet, ako se problem nastavi kontaktirajte administratora", "error");
+    hideElement(userUi);
+    hideElement(notFoundPage);
+    showElement(serverErrorPage);
   }
   const { user, message } = data;
 
@@ -73,11 +77,19 @@ const getUser = async () => {
     })
     return;
   }
+  console.log(res.status);
   if(message) {
     // Handle error responses from server
     if(res.status === 404) {
       hideElement(userUi);
+      hideElement(serverErrorPage);
       showElement(notFoundPage);
+      return;
+    }
+    if(res.status === 500) {
+      hideElement(userUi);
+      hideElement(notFoundPage);
+      showElement(serverErrorPage);
       return;
     }
     return flashMessage.showMessage(message, "error");
