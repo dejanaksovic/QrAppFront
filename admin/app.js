@@ -6,12 +6,12 @@ const pageNames = ["login-page", "view-page", "500", "create-page", "edit-page"]
 // ELEMENTS
 const usersContainer = document.getElementById("user-container")
 const passwordInput = document.getElementById("password");
+const savePassword = document.getElementById("remember-password");
 
 const jumpToAdd = document.getElementById("add-user-button");
 const addButton = document.getElementById("create-confirm-button");
 
 const changeNameInput = document.getElementById("name-change");
-const changeBalanceInput = document.getElementById("balance-change");
 const changeConfirmButton = document.getElementById("change-confirm");
 const changeResetButton = document.getElementById("change-reset");
 
@@ -21,15 +21,14 @@ const addBalanceInput = document.getElementById("balance-add");
 const loginButton = document.getElementById("login-button");
 
 // Globals
-let password;
+let password = localStorage.getItem("password");
 let changeId = "";
 
-// 500
-const serverErrorPage = document.getElementById("500");
 // Flash
 const flashMessage = new FlashMessage("flash");
 // Setup page shifter
 const pageShifter = new PageShifter(pageNames, "login-page");
+
 
 // Populate users;
 const populateUsers = (users) => {
@@ -94,7 +93,12 @@ const populateUsers = (users) => {
 const requestUsersHandler = async (e) => {
   let res;
   let data;
-  password = passwordInput.value;
+  if(!password) {
+    password = passwordInput.value;
+    if(savePassword.checked) {
+      localStorage.setItem("password", password);
+    }
+  }
   try {
     res = await fetch(`${URL}/users`, {
       headers: {
@@ -119,6 +123,10 @@ const requestUsersHandler = async (e) => {
 
   if(res.status === 401 || res.status === 403) {
     flashMessage.showMessage("Pogresna sifra", "error");
+    pageShifter.showPageOnly("login-page");
+    // full reset password
+    password = "";
+    localStorage.clearItem("password");
     return;
   }
 
@@ -157,6 +165,9 @@ const handleAdd = async (e) => {
 
   await requestUsersHandler();
   pageShifter.showPageOnly("view-page");
+  // Reset add form
+  addNameInput.value = "";
+  addBalanceInput.value = "";
   
   if(res.ok) {
     return flashMessage.showMessage("Uspesno kreiranje korisnika", "success");
@@ -206,7 +217,9 @@ const requestChangeHandler = async (e) => {
 
   await requestUsersHandler();
   pageShifter.showPageOnly("view-page");
-  
+  // Reset change inputs
+  changeNameInput.value = "";
+
   if(message) {
     return flashMessage.showMessage(message, "error");
   }
@@ -222,3 +235,9 @@ jumpToAdd.addEventListener("click", e => {
   pageShifter.showPageOnly("create-page");
 })
 addButton.addEventListener("click", handleAdd);
+
+// Check for password and show view page if it's saved
+if(password) {
+  requestUsersHandler();
+  pageShifter.showPageOnly("view-page");
+}

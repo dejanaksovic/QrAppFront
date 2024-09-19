@@ -62,6 +62,15 @@ background-color: var(--clr-success) !important;
 .align-items-right {
   align-items: right;
 }
+.clr-light {
+  color: white;
+}
+.clr-accent {
+  color: var(--clr-accent-muted);
+}
+.clr-dark {
+  color: var(--clr-bg-dark);
+}
 
 .hidden {
   display: none !important; 
