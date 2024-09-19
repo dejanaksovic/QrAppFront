@@ -40,10 +40,11 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
+  row-gap: 3vh;
 }
 .helper-container {
-  grid-area: 1/1/3/5;
-  height: 40vh;
+  grid-area: 1/1/2/5;
+  height: 20vh;
   align-self: center;
 }
 .helper-container > p {
@@ -76,35 +77,110 @@
 .order {
   grid-area: 3/1/5/2;
   width: 100vw;
-  height: 45vh;
+  height: 55vh;
   align-self: center;
+  justify-self: center;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 5vh 1fr 1fr;
 }
 .order-header {
+  width: 95vw;
   padding: 0.5vh 0.5;
   display: grid;
   grid-template-columns: 1fr 15vw 15vw;
   grid-template-rows: 5vh;
+  justify-items: center;
+  align-items: center;
 }
-.order-header p {
-  height: 5vh;
+.order-header {
+  align-self: center;
+  justify-self: center;
+}
+.order-header div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 4vh;
   background-color: rgba(225, 225, 225, 0.3);
-
+  border-left: 1px solid rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
 .order-top {
   grid-area: 2/1/3/4;
-  height: -130%;
-  margin: 1vh 2vw;
+  justify-self: center;
+  align-items: center;
+  width: 95vw;
+  height: 100%;
   background-color: rgba(225, 225, 225, 0.3);
   display: grid;
   grid-template-columns: 1fr 15vw 15vw;
   grid-template-rows: repeat(5, 5vh);
-  padding: .5vh 0.5vw;
   overflow: auto;
+  justify-items: center;
+  align-items: center;
 }
-.order-top * {
+.order-top div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 4vh;
+  border-left: 1px solid rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
+.button-delete {
+  width: 5.5vw;
+  height: 2.5vh;
+  border-radius: 100%;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+
+.order-bottom {
+  grid-area: 3/1/4/4;
+  display: grid;
   justify-self: center;
+  align-self: end;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 20vh;
+}
+.in-total {
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  width: 60vw;
+  height: 15vh;
+  margin-left: 2vw;
+  background-color: rgba(225, 225, 225, 0.3);
   align-self: center;
+  justify-self: center;
+  display: grid;
+  justify-content: start;
+  align-items: center;
+  padding-left: 5vw;
+}
+.in-total p {
+  color: #FFFFFF;
+  font-weight: bolder;
+  font-size: 2rem;
+}
+.accept-button {
+  width: 30vw;
+  grid-area: 1/2/2/3;
+  height: 5vh;
+  margin-top: 4vh;
+  margin-left: 3vw;
+  font-weight: bolder;
+}
+.remove-button {
+  width: 30vw;
+  grid-area: 1/2/2/3;
+  height: 5vh;
+  margin-top: 5vh;
+  margin-left: 3vw;
+  align-self: center;
+  font-weight: bolder;
 }
