@@ -1,153 +1,252 @@
-// Imports
-import { getUserIdFromUrl } from "../assets/helpers";
 import { FlashMessage } from "../assets/Flash";
+import { PageShifter } from "../assets/Pageshifter";
+import { URL, getUserIdFromUrl } from "../assets/helpers";
+import { articleNames } from "../assets/helpers";
 
-// ELEMENTS
-// Pages
-const [all, workerPage] = document.querySelectorAll(".main-div");
-const loginPage = document.querySelector(".enterPass-div"); 
-const notFoundPage = document.querySelector(".container-404");
-// Inputs
-const passwordInput = document.querySelector("#password");
-const balanceInput = document.querySelector("#balance");
-// Buttons
-const confirmPassword = document.querySelector("#confirm-button");
-const addBalanceButton = document.querySelector(".addButton");
-const removeBalanceButton = document.querySelector(".removeButton");
-// Flash
-const flashContainer = document.querySelector(".flash-container");
-
-// ESSENTIALS
-const URL = "https://qrappback.onrender.com";
+//Initialize basket 
+const basket = [];
+articleNames.forEach(articleName => {
+  basket.push({
+    name: articleName,
+    quantity: 0,
+  })
+})
+// Init password
 let password;
-let balance = localStorage.getItem("password");
-let message;
+// Init id
+let id;
+console.log(basket);
+// Stup pages
+const pages = ["404", "500", "login-page", "main-page"];
+const pageShifter = new PageShifter(pages, "login-page");
 
+// Stup flash
+const flashMesage = new FlashMessage("flash");
 
-// UTILS
-// Pages
-const showWorkerPage = () => {
-  hide404();
-  hidePasswordPage();
-  workerPage.classList.remove("hidden");
-}
-const hideWorkerPage = () => {
-  workerPage.classList.add("hidden");
-}
-// Password
-const hidePasswordPage = () => {
-  loginPage.classList.add("hidden");
-}
-const showPasswordPage = () => {
-  hide404();
-  hideWorkerPage();
-  confirmPassword.classList.remove("hidden")
-}
-// 404
-const hide404 = () => {
-  notFoundPage.classList.add("hidden");
-}
-const show404 = () => {
-  // set message
-  notFoundPage.children[1].textContent = message;
-  hidePasswordPage();
-  hideWorkerPage();
-  notFoundPage.classList.remove("hidden");
-}
+// Elements
+const loginButton = document.getElementById("login-button");
+const loginInput = document.getElementById("password-input");
 
-// Flash
-const flashMessage = new FlashMessage("flash");
+const menuContainer = document.getElementById("menu-container");
+const basketElement = document.getElementById("basket");
 
-// GET ID FROM URL
-const id = getUserIdFromUrl(window.location.search);
-// If id not found show-error
-if(!id) {
-  console.log("No id");
-  message = "Korisnik nije pronadjen, ako ste skenirali qr code i dobili ovu stranu pokusajte ponovo ili kontaktirajte administratora";
-  show404();
-}
+const addOrderButton = document.getElementById("order-add");
+const chargeForOrderButton = document.getElementById("order-pay");
+// Could be god knows how meny articles, thats why async
+const addArticle = (name) => {
+  const elem = basket.find(e => e.name === name);
+  if(!elem)
+    throw Error("Item doesn't exist");
+  if(elem.quantity === 0) {
+    elem.quantity+=1;
+    // Craete elements neccessary;
+    const articleNameElement = document.createElement("div");
+    articleNameElement.classList.add("font-color");
+    articleNameElement.textContent = name.split("-").join(" ").toUpperCase();
+    const articleQuantityElement = document.createElement("div");
+    articleQuantityElement.classList.add("font-color");
+    articleQuantityElement.textContent = 1;
+    articleQuantityElement.setAttribute("quantity-for", name);
+    // button container
+    const buttonContainer = document.createElement("div");
+    const articleDeleteButton = document.createElement("button");
+    articleDeleteButton.textContent = "X";
+    articleDeleteButton.classList.add("button-delete", "bg-error", "default-box-shadow");
+    articleDeleteButton.addEventListener("click", e => {
+      // Count set to 0
+      elem.quantity = 0;
+      // Remove elements from dom;
+      buttonContainer.remove();
+      articleNameElement.remove();
+      articleQuantityElement.remove();
+      articleDeleteButton.remove();
+    })
+    buttonContainer.appendChild(articleDeleteButton);
+    // push elements inside DOM
+    basketElement.appendChild(articleNameElement);
+    basketElement.appendChild(articleQuantityElement);
+    basketElement.appendChild(buttonContainer);
 
-// HANDLING BALANCE
-// Validate balance
-const validateBalance = (balance) => {
-  isNaN(Number(balance)) || balance < 0 ? false : true
-}
-
-// Handle add
-const addBalanceHandler = (e) => {
-  // Check for invalid input
-  if(validateBalance(balanceInput.value)) {
-    return console.log("Invalid balance value");
+    return;
   }
-  balance = Number(balanceInput.value);
-  balanceInput.value = "";
+  elem.quantity += 1;
+  const elementToUpdateQuantity = document.querySelector(`[quantity-for=${name}]`);
+  elementToUpdateQuantity.textContent = elem.quantity;
+}
+const populateMenu = async () => {
+  articleNames.forEach(articleName => {
+    // Name transofrm
+    const nameToShow = articleName.toUpperCase().split("-").join(" ");
+    // Single article container
+    const container = document.createElement("div");
+    container.addEventListener("click", e => {
+      addArticle(articleName);
+    })
+    container.classList.add("default-box-shadow");
+    // Article image
+    const image = document.createElement("img");
+    image.src = `../svgs/${articleName}.svg`;
+    container.appendChild(image);
+    // Article name
+    const articleNameContainer = document.createElement("p");
+    articleNameContainer.textContent = nameToShow;
+    container.appendChild(articleNameContainer);
+    menuContainer.appendChild(container);
+  })
+}
+
+// Init password form local storage if exists;
+const handleLogin = async () => {
   if(!password) {
-    // Hide everything except password page
-    workerPage.classList.add("hidden");
-    loginPage.classList.remove("hidden");
+    password = loginInput.value;
+  }
+
+  let res;
+  let data;
+
+  try {
+    res = await fetch(`${URL}/users/login/worker`, {
+      method: "GET",
+      headers: {
+        "Content-Type" : "application/json",
+        "authorization" : password,
+      }
+    });
+  }
+  catch(err) {
+    // Refresh password
+    console.log(err);
+    localStorage.removeItem("passwork-worker");
+    password = ""
+    return pageShifter.showPageOnly("500");
+  }
+
+  if(res.ok) {
+    return pageShifter.showPageOnly("main-page");
+  }
+
+  if(res.status === 500) {
+    password = "";
+    return pageShifter.showPageOnly("500");
+  }
+
+  if(res.status === 401 || res.status === 403) {
+    password = "";
+    return flashMesage.showMessage("Pogresna sifra", "error");
   }
 }
+const handleAddOrder = async() => {
+  let res;
+  let data;
 
-// Handle remove
-const removeBalanceHandler = (e) => {
-  if(validateBalance(balanceInput.value)) {
-    return console.log("Invalid balance value");
+  try {
+    console.log(password);
+    res = await fetch(`${URL}/users/order/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type" : "application/json",
+        "authorization" : password,
+      },
+      body: JSON.stringify({articlesOrdered: basket}),
+    });
+    data = await res.json();
+    // Clear basket
+    basket.forEach( e => {
+      e.quantity = 0;
+    })
+    basketElement.textContent = "";
   }
-  balance = Number(balanceInput.value) * (-1);
-  balanceInput.value = "";
-  if(!password) {
-    // Hide everything except password page
-    workerPage.classList.add("hidden");
-    loginPage.classList.remove("hidden");
+  catch(err) {
+    // Clear basket
+    basket.forEach( e => {
+      e.quantity = 0;
+    })
+    basketElement.textContent = "";
+    password = "";
+    pageShifter.showPageOnly(500);
+    return;
   }
-  else {
-    doRequest(URL);
-  }
-}
 
-// PASSWORD HANDLING
-const handlePasswordInput = (e) => {
-  password = passwordInput.value;
-  handleRequest(URL);
-  passwordInput.value = ""
-  // Hide pass page
+  const { message } = data;
+
+  if(res.ok) {
+    return flashMesage.showMessage("Porudzbina uspesno dodata", "success");
+  }
+
+  if(res.status === 404) {
+    return pageShifter.showPageOnly("404");
+  }
+
+  if(message) {
+    return flashMesage.showMessage(message, "error")
+  }
+
+  if(res.status === 500) {
+    return pageShifter.showPageOnly("500");
+  }
+} 
+const handleChargeForOrder = async () => {
+  let res;
+  let data;
+
+  try {
+    console.log(password);
+    res = await fetch(`${URL}/users/buy/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type" : "application/json",
+        "authorization" : password,
+      },
+      body: JSON.stringify({articlesToBuy: basket}),
+    });
+    data = await res.json();
+    // Clear basket
+    basket.forEach( e => {
+      e.quantity = 0;
+    })
+    basketElement.textContent = "";
+  }
+  catch(err) {
+    // Clear basket
+    basket.forEach( e => {
+      e.quantity = 0;
+    })
+    basketElement.textContent = "";
+    password = "";
+    pageShifter.showPageOnly(500);
+    return;
+  }
+
+  const { message } = data;
+
+  if(res.ok) {
+    return flashMesage.showMessage("Porudzbina uspesno naplacena", "success");
+  }
+
+  if(res.status === 404) {
+    return pageShifter.showPageOnly("404");
+  }
+
+  if(message) {
+    return flashMesage.showMessage(message, "error")
+  }
+
+  if(res.status === 500) {
+    return pageShifter.showPageOnly("500");
+  }
 }
 
 // Connect handlers
-addBalanceButton.addEventListener("click", addBalanceHandler);
-removeBalanceButton.addEventListener("click", removeBalanceHandler);
-confirmPassword.addEventListener("click", handlePasswordInput);
+loginButton.addEventListener("click", handleLogin);
+addOrderButton.addEventListener("click", handleAddOrder);
+chargeForOrderButton.addEventListener("click", handleChargeForOrder);
 
-// Balance request handler
-const handleRequest = async (url) => {
-  let message;
-  try {
-    const res = await fetch(`${url}/users/${id}`, {
-      method: "POST",
-      body: JSON.stringify({ balance }),
-      headers: {
-        "authorization": password,
-        "Content-Type": "application/json",
-      }
-    });
-    const data = await res.json();
-    // Handle not found user
-    if(res.status == 404) {
-      return show404();
-    }
-    // Handle wrong password
-    if(res.status == 401 || res.status == 403) {
-      password = "";
-      localStorage.removeItem("password");
-    }
-    // Handle response
-    if(!res.ok) {
-      message = data?.message;
-      console.log(message);
-      return flashMessage.showMessage(message, "success");
-    }
-  }
-  catch(err) {
-    message = "Problem sa konekcijom, proverite internet i pokusajte opet"
-  }
+// Default behaviour
+id = getUserIdFromUrl(window.location.search);
+password = localStorage.getItem("password-worker");
+if(!id) {
+  pageShifter.showPageOnly("404");
+  throw Error("Not found user");
 }
+
+populateMenu();

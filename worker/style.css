@@ -44,7 +44,6 @@
 }
 .helper-container {
   grid-area: 1/1/2/5;
-  height: 20vh;
   align-self: center;
 }
 .helper-container > p {

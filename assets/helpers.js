@@ -1,9 +1,6 @@
 export const getUserIdFromUrl = (url) => {
-  console.log(url);
   const searchParams = new URLSearchParams(url);
-  console.log(searchParams);
   const id = searchParams.get("id");
-  console.log(id);
   return id;
 }
 
@@ -20,3 +17,5 @@ export const hideElement = (element) => {
 }
 
 export const URL = "http://localhost:3000";
+
+export const articleNames = new Set(["mala-kafa", "velika-kafa", "sok"]);

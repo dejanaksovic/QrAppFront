@@ -15,33 +15,21 @@
 
 <body>
 
-  <div class="page1 bg-dark">
+  <div class="page1 bg-dark" id="login-page">
 
     <div class="password bg-accent default-box-shadow">
-      <input type="password" id="password" placeholder="PASSWORD">
+      <input type="password" id="password-input" placeholderp="PASSWORD">
     </div>
 
-    <button class="button-confirm bg-success font-color default-box-shadow">POTVRDI</button>
+    <button class="button-confirm bg-success font-color default-box-shadow" id="login-button">POTVRDI</button>
 
   </div>
 
-  <div class="page2 bg-dark">
-
+  <div class="page2 bg-dark" id="main-page">
+    <p id="user-name"></p>
     <div class="helper-container bg-accent default-box-shadow">
       <p class="font-color text-center">ARTIKLI</p>
-      <div class="articles bg-accent text-center">
-        <div class="small-coffee default-box-shadow">
-          <img src="../svgs/mala-kafa.svg" alt="small-coffee"> 
-          <p>MALA KAFA</p>
-        </div>
-        <div class="large-coffee default-box-shadow">
-          <img src="../svgs/velika-kafa.svg" alt="large-coffee">
-          <p>VELIKA KAFA</p>
-        </div>
-        <div class="juice default-box-shadow">
-          <img src="../svgs/sokici.svg" alt="juice">
-          <p>SOK</p>
-        </div>
+      <div class="articles bg-accent text-center" id="menu-container">
       </div>
     </div>
 
@@ -55,56 +43,20 @@
 
       </div>
 
-      <div class="order-top default-box-shadow">
-
-        <div class="font-color">KAFA</div>
-        <div class="font-color">4</div>
-        <div>
-          <button class="button-delete bg-error default-box-shadow">X</button>
-        </div>
-        <div class="font-color">KAFA</div>
-        <div class="font-color">4</div>
-        <div>
-          <button class="button-delete bg-error default-box-shadow">X</button>
-        </div>
-        <div class="font-color">KAFA</div>
-        <div class="font-color">4</div>
-        <div>
-          <button class="button-delete bg-error default-box-shadow">X</button>
-        </div>
-        <div class="font-color">KAFA</div>
-        <div class="font-color">4</div>
-        <div>
-          <button class="button-delete bg-error default-box-shadow">X</button>
-        </div>
-        <div class=" font-color">KAFA</div>
-        <div class="font-color">4</div>
-        <div>
-          <button class="button-delete bg-error default-box-shadow">X</button>
-        </div>
-        <div class="font-color">KAFA</div>
-        <div class="font-color">4</div>
-        <div>
-          <button class="button-delete bg-error default-box-shadow">X</button>
-        </div>
-        <div class="font-color">KAFA</div>
-        <div class="font-color">4</div>
-        <div>
-          <button class="button-delete bg-error default-box-shadow">X</button>
-        </div>
+      <div class="order-top default-box-shadow" id="basket">
 
       </div>
 
       <div class="order-bottom">
 
         <div class="in-total default-box-shadow">
-          <p>Ukupno:</p>
-          <p>240<p>
+          <p></p>
+          <p><p>
         </div>
 
-        <button class="accept-button bg-success font-color default-box-shadow">PRIHVATI</button>
+        <button id="order-add" class="accept-button bg-success font-color default-box-shadow">DODAJ NA</button>
 
-        <button class="remove-button bg-error font-color default-box-shadow">ODUSTANI</button>
+        <button id="order-pay" class="remove-button bg-error font-color default-box-shadow">NAPLATI SA</button>
 
       </div>
 
@@ -113,14 +65,18 @@
   </div>
 
   <!-- 404 -->
-  <div class="container-404 hidden">
+  <div class="container-404" id="404">
     <h1>404</h1>
     <p>Korisnik nije pronadjen, ukoliko ste skenirali qr code pokusajte opet ili kontaktirajte administratora</p>
   </div>
 
+  <div class="container-404" id="500">
+    Unutrasnja greska ili greska sa konekcijom. Proverite vezu sa internetom pa probajte opet. Ako se problem nastavi kontaktirajte administratora
+  </div>
+
   <!-- Flash message -->
    <div id = "flash">
-    <p>Something</p>
+    <p></p>
    </div>
 
   <script src="app.js" type="module"></script>
