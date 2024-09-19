@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Oswald:wght@200..700&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <title>Document</title>
 
@@ -15,57 +15,101 @@
 
 <body>
 
-  <div class="main-div">
-    <!-- LOGIN -->
-    <div class="enterPass-div hidden">
+  <div class="page1 bg-dark">
 
-      <div class="logo">
-        <img id="passLogo" src="../svgs/Han-coffee-logo.png">
-      </div>
-      
-      <div class="password-input">
-        <legend class="pass-legend">enter password</legend>
-        <input type="password" placeholder="password" id="password">
-      </div>
-
-      <div class="confirm-button">
-        <button id="confirm-button">
-          CONFIRM
-        </button>
-      </div>
-
-    </div>
-    
-  <!-- BALANCE -->
-  <div class="main-div">
-
-    <div class="logo-div">
-      <div>
-        <img src="../svgs/Han-coffee-logo.png">
-      </div>
+    <div class="password bg-accent default-box-shadow">
+      <input type="password" id="password" placeholder="PASSWORD">
     </div>
 
-    <div class="addRemove-div">
-      <div>
-        <button class="addButton">
-          <div>add balance</div>
-        </button>
-      </div>
-      <div>
-        <button class="removeButton">
-          <div>remove balance</div>
-        </button>
+    <button class="button-confirm bg-success font-color default-box-shadow">POTVRDI</button>
+
+  </div>
+
+  <div class="page2 bg-dark">
+
+    <div class="helper-container bg-accent default-box-shadow">
+      <p class="font-color text-center">ARTIKLI</p>
+      <div class="articles bg-accent text-center">
+        <div class="small-coffee default-box-shadow">
+          <img src="../svgs/mala-kafa.svg" alt="small-coffee"> 
+          <p>MALA KAFA</p>
+        </div>
+        <div class="large-coffee default-box-shadow">
+          <img src="../svgs/velika-kafa.svg" alt="large-coffee">
+          <p>VELIKA KAFA</p>
+        </div>
+        <div class="juice default-box-shadow">
+          <img src="../svgs/sokici.svg" alt="juice">
+          <p>SOK</p>
+        </div>
       </div>
     </div>
 
-    <div class="inputBalance-div">
-      <div class="legend">
-        balance:
+    <div class="order bg-accent default-box-shadow">
+
+      <div class="order-header default-box-shadow">
+
+        <div class="font-color">ARTIKLI</div>
+        <div class="font-color">KOL.</div>
+        <div class="font-color">UKL.</div>
+
       </div>
-      <div>
-        <input type="number" min="0" max="5000" id="balance">
+
+      <div class="order-top default-box-shadow">
+
+        <div class="font-color">KAFA</div>
+        <div class="font-color">4</div>
+        <div>
+          <button class="button-delete bg-error default-box-shadow">X</button>
+        </div>
+        <div class="font-color">KAFA</div>
+        <div class="font-color">4</div>
+        <div>
+          <button class="button-delete bg-error default-box-shadow">X</button>
+        </div>
+        <div class="font-color">KAFA</div>
+        <div class="font-color">4</div>
+        <div>
+          <button class="button-delete bg-error default-box-shadow">X</button>
+        </div>
+        <div class="font-color">KAFA</div>
+        <div class="font-color">4</div>
+        <div>
+          <button class="button-delete bg-error default-box-shadow">X</button>
+        </div>
+        <div class=" font-color">KAFA</div>
+        <div class="font-color">4</div>
+        <div>
+          <button class="button-delete bg-error default-box-shadow">X</button>
+        </div>
+        <div class="font-color">KAFA</div>
+        <div class="font-color">4</div>
+        <div>
+          <button class="button-delete bg-error default-box-shadow">X</button>
+        </div>
+        <div class="font-color">KAFA</div>
+        <div class="font-color">4</div>
+        <div>
+          <button class="button-delete bg-error default-box-shadow">X</button>
+        </div>
+
       </div>
+
+      <div class="order-bottom">
+
+        <div class="in-total default-box-shadow">
+          <p>Ukupno:</p>
+          <p>240<p>
+        </div>
+
+        <button class="accept-button bg-success font-color default-box-shadow">PRIHVATI</button>
+
+        <button class="remove-button bg-error font-color default-box-shadow">ODUSTANI</button>
+
+      </div>
+
     </div>
+
   </div>
 
   <!-- 404 -->
