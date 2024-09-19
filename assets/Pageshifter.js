@@ -26,10 +26,10 @@ export class PageShifter {
     }
     // Show the page
     const pageToShow = this.pages.find(e => e.id === id);
-    console.log(typeof(pageToShow));
     if(!pageToShow) {
       throw Error("Page with given id not found");
     }
     pageToShow.element.classList.remove("hidden");
+    this.lastShownPage = pageToShow.element;
   }
 }
