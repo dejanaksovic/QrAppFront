@@ -119,3 +119,12 @@ background-color: var(--clr-success) !important;
   font-size: 1.5rem;
   text-align: center;
 }
+
+/* Input autofill default */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+  -webkit-box-shadow: 0 0 0 30px #CBA462 inset, 4px 4px 4px rgba(0, 0, 0, 0.3) !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+}
