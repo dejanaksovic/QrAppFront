@@ -1,7 +1,7 @@
-import { FlashMessage } from "../assets/Flash";
-import { PageShifter } from "../assets/Pageshifter";
-import { URL, getUserIdFromUrl } from "../assets/helpers";
-import { articleNames } from "../assets/helpers";
+import { FlashMessage } from "../assets/Flash.js";
+import { PageShifter } from "../assets/Pageshifter.js";
+import { URL, getUserIdFromUrl } from "../assets/helpers.js";
+import { articleNames } from "../assets/helpers.js";
 
 //Initialize basket 
 const basket = [];

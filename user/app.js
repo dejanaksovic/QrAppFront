@@ -1,5 +1,5 @@
-import { getUserIdFromUrl, hideElement, showElement, URL } from "../assets/helpers";
-import { FlashMessage } from "../assets/Flash";
+import { getUserIdFromUrl, URL } from "../assets/helpers.js";
+import { FlashMessage } from "../assets/Flash.js";
 
 // ELEMENTS
 // 404
