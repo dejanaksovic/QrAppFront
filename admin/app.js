@@ -1,6 +1,6 @@
-import { FlashMessage } from "../assets/Flash";
-import { URL } from "../assets/helpers";
-import { PageShifter } from "../assets/Pageshifter";
+import { FlashMessage } from "../assets/Flash.js";
+import { URL } from "../assets/helpers.js";
+import { PageShifter } from "../assets/Pageshifter.js";
 // Page names
 const pageNames = ["login-page", "view-page", "500", "create-page", "edit-page"];
 // ELEMENTS

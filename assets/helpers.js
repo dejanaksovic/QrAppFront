@@ -7,6 +7,3 @@ export const getUserIdFromUrl = (url) => {
 export const URL = "http://localhost:3000";
 
 export const articleNames = new Set(["mala-kafa", "velika-kafa", "sok"]);
-
-window.URL = URL;
-window.articleNames = articleNames;

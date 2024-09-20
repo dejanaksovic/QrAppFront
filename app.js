@@ -1,5 +1,5 @@
 // Essentials
-import { getUserIdFromUrl } from "./assets/helpers";
+import { getUserIdFromUrl } from "./assets/helpers.js";
 
 // Elements
 const [buttonWorker, buttonUser] = document.querySelectorAll("button");
