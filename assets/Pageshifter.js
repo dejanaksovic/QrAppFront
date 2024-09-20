@@ -5,7 +5,7 @@ export class PageShifter {
     ids.forEach(id => {
       const element = document.getElementById(id);
       if(!element || !(element instanceof HTMLElement)) {
-        throw Error("Uneti id ne postoji");
+        throw Error(`Id: ${id} doesn't exist`);
       }
       // Show only the default page
       if(id !== idToShow) {
