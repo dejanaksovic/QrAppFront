@@ -4,6 +4,6 @@ export const getUserIdFromUrl = (url) => {
   return id;
 }
 
-export const URL = "http://localhost:3000";
+export const URL = "https://qrappback.onrender.com";
 
 export const articleNames = new Set(["mala-kafa", "velika-kafa", "sok"]);
