@@ -1,14 +1,7 @@
 import { getUserIdFromUrl, URL } from "../assets/helpers.js";
 import { FlashMessage } from "../assets/Flash.js";
-
+import { PageShifter } from "../assets/Pageshifter.js";
 // ELEMENTS
-// 404
-const notFoundPage = document.getElementById("404");
-// User page
-const userUi = document.querySelector(".main-div");
-// 500
-const serverErrorPage = document.getElementById("500");
-
 // Non transac
 const nameContainer = document.getElementById("name-container");
 const balanceContainer = document.getElementById("balance-container");
@@ -20,13 +13,14 @@ const timeContainer = document.getElementById("time-container");
 
 // Flash setup
 const flashMessage = new FlashMessage("flash");
+// Shifter setup
+const pages = ["404", "500", "ui-page"];
+const pageShifter = new PageShifter(pages, "ui-page");
 
 // Check for non valid id
 const id = getUserIdFromUrl(window.location.search);
-console.log(id);
 if(!id) {
-  hideElement(userUi);
-  showElement(notFoundPage);
+  pageShifter.showPageOnly("")
   throw Error("Not found user");
 }
 
@@ -39,9 +33,7 @@ const getUser = async () => {
     data = await res.json();
   }
   catch(err) {
-    hideElement(userUi);
-    hideElement(notFoundPage);
-    showElement(serverErrorPage);
+    return pageShifter.showPageOnly("500");
   }
   const { user, message } = data;
 
@@ -77,20 +69,13 @@ const getUser = async () => {
     })
     return;
   }
-  console.log(res.status);
   if(message) {
     // Handle error responses from server
     if(res.status === 404) {
-      hideElement(userUi);
-      hideElement(serverErrorPage);
-      showElement(notFoundPage);
-      return;
+      return pageShifter.showPageOnly("404");
     }
     if(res.status === 500) {
-      hideElement(userUi);
-      hideElement(notFoundPage);
-      showElement(serverErrorPage);
-      return;
+      return pageShifter.showPageOnly("500");
     }
     return flashMessage.showMessage(message, "error");
   }
