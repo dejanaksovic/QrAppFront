@@ -45,6 +45,6 @@ if(option === "user") {
 if(option === "worker") {
   const locationArray = window.location.href.split("/");
   const indexHtml = locationArray.pop();
-  locationArray.push("user");
+  locationArray.push("worker");
   window.location.assign(`${locationArray.join("/")}/index.html?id=${id}`); 
 }
