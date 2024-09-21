@@ -6,6 +6,9 @@
   width: 100vw;
   height: 100vh;
 }
+
+/* Page no.1 Login (password) */
+
 .page1 {
   display: flex;
   flex-direction: column;
@@ -19,7 +22,7 @@
   justify-content: center;
   align-items: center;
 }
-#password {
+#password-input {
   width: 100%;
   height: 100%;
   background-color: var(--clr-accent-muted);
@@ -36,15 +39,46 @@
   border-radius: 16px;
 }
 
+/* Page 2  */
+
 .page2 {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
-  row-gap: 3vh;
 }
+.name-balance-div {
+  grid-area: 1/1/1/4;
+  justify-self: start;
+  align-self: start;
+  margin-top: 3vh;
+  display: grid;
+  justify-self: center;
+  grid-template-columns: 1fr 1fr ;
+  grid-template-rows: 1fr;
+  column-gap: 5vw;
+}
+.name,
+.balance {
+  width: 45vw;
+  height: 7vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.name p,
+.balance p {
+  width: 40vw;
+  height: 5vh;
+  background-color: rgba(225, 225, 225, 0.3);
+  padding-top: 1.5vh;
+  padding-left: 2vw;
+  overflow: auto;
+}
+
 .helper-container {
-  grid-area: 1/1/2/5;
-  align-self: center;
+  max-width: 100vw;
+  grid-area: 1/1/3/4;
+  align-self: end;
 }
 .helper-container > p {
   font-size: 1.5rem;
@@ -61,6 +95,7 @@
 }
 .articles > * {
   border-left: 1px solid rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   width: 100%;
   height: 100%;
   padding: 1.5rem;
@@ -74,6 +109,7 @@
   max-height: 100%;
 }
 .order {
+  padding-top: 1vh;
   grid-area: 3/1/5/2;
   width: 100vw;
   height: 55vh;
@@ -161,10 +197,13 @@
   align-items: center;
   padding-left: 5vw;
 }
-.in-total p {
-  color: #FFFFFF;
-  font-weight: bolder;
-  font-size: 2rem;
+.buy-div,
+.charge-div {
+  width: 50vw;
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  padding-left: 3vw;
 }
 .accept-button {
   width: 30vw;

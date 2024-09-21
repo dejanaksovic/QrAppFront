@@ -15,6 +15,8 @@
 
 <body>
 
+<!-- PAGE 1  login page-->
+
   <div class="page1 bg-dark" id="login-page">
 
     <div class="password bg-accent default-box-shadow">
@@ -25,11 +27,26 @@
 
   </div>
 
+  <!-- PAGE 2 working page-->
+  
   <div class="page2 bg-dark" id="main-page">
-    <p id="user-name"></p>
+
+      <div class="name-balance-div bg-accent default-box-shadow">
+
+        <div class="name bg-accent">
+          <p class="font-color default-box-shadow">IME: <span id="name-container"></span></p>
+        </div>
+        <div class="balance bg-accent">
+          <p class="font-color default-box-shadow">HAN COINS: <span id="balance-container"></span></p>
+        </div>
+
+      </div>
+
     <div class="helper-container bg-accent default-box-shadow">
+
       <p class="font-color text-center">ARTIKLI</p>
       <div class="articles bg-accent text-center" id="menu-container">
+
       </div>
     </div>
 
@@ -50,8 +67,15 @@
       <div class="order-bottom">
 
         <div class="in-total default-box-shadow">
-          <p></p>
-          <p><p>
+          
+          <div class="buy-div bg-accent font-color default-box-shadow">
+            <p>Dodaj: <span id="coins-add-value">0</span></p>
+          </div>
+          
+          <div class="charge-div bg-accent font-color default-box-shadow">
+            <p>Naplati: <span id="coins-remove-value">0</span></p>
+          </div>
+
         </div>
 
         <button id="order-add" class="accept-button bg-success font-color default-box-shadow">DODAJ NA</button>
@@ -71,6 +95,7 @@
   </div>
 
   <div class="container-404" id="500">
+    <h1>500</h1>
     Unutrasnja greska ili greska sa konekcijom. Proverite vezu sa internetom pa probajte opet. Ako se problem nastavi kontaktirajte administratora
   </div>
 

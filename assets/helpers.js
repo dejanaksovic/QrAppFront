@@ -6,4 +6,18 @@ export const getUserIdFromUrl = (url) => {
 
 export const URL = "https://qrappback.onrender.com";
 
-export const articleNames = new Set(["mala-kafa", "velika-kafa", "sok"]);
+export const articleNames = new Set([{
+  name: "mala-kafa",
+  price: 1,
+  buyPrice: 15,
+},
+{
+  name: "sok",
+  price: 2,
+  buyPrice: 25,
+},
+{
+  name: "velika-kafa",
+  price: 3,
+  buyPrice: 30,
+}]);
