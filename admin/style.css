@@ -197,3 +197,15 @@
   border-radius: 100%; 
   font-weight: bold;
 }
+.admin-page-inputs {
+  background-color: rgba(225, 225, 225, 0.3);
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+  
+}
+.admin-page-inputs:focus-within {
+  background-color: rgba(225, 225, 225, 0.3);
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+  accent-color: orange;
+}
