@@ -56,16 +56,13 @@
   border-radius: 5px;
   display: flex;
   justify-content: center;
+  overflow: auto;
 }
 .column {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-#border {
-  border-right: 1px solid rgba(0, 0, 0, 0.3);
-  border-left: 1px solid rgba(0, 0, 0, 0.3); 
 }
 .articles,
 .coins,
@@ -102,9 +99,7 @@
 .balance p {
   font-size: 0.8rem;
 }
-.articles {
-  
-}
+
 .articles-text {
   display: inline-block;
   white-space: nowrap;
