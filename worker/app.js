@@ -62,8 +62,8 @@ const addArticle = (name) => {
   const elem = basket.find(e => e.name === name);
   if(!elem)
     throw Error(`Item ${name} doesn't exist`);
-  if(elem.quantity === 0) {
-    elem.quantity+=1;
+  elem.quantity+=1;
+  if(elem.quantity-1 === 0) {
     // Craete elements neccessary;
     const articleNameElement = document.createElement("div");
     articleNameElement.classList.add("font-color");
@@ -95,8 +95,8 @@ const addArticle = (name) => {
     updatePriceStatus();
     return;
   }
-  elem.quantity += 1;
-  const elementToUpdateQuantity = document.querySelector(`[quantity-for=${name}]`);
+  const quantityElement = document.querySelector(`[quantity-for=${name}]`);
+  quantityElement.textContent = elem.quantity;
   updatePriceStatus();
 }
 const populateMenu = async () => {
@@ -148,7 +148,6 @@ const handleLogin = async () => {
 
   if(res.ok) {
     await handleGetUser();
-    return pageShifter.showPageOnly("main-page");
   }
 
   if(res.status === 500) {
@@ -183,11 +182,14 @@ const handleGetUser = async () => {
   if(res.ok) {
     nameContainer.textContent = user.Name;
     coinsContainer.textContent = user.Coins;
-    return pageShifter.showPageOnly("main-page");
+    pageShifter.showPageOnly("main-page");
+    return;
   }
 
   if(res.status === 404) {
-    return pageShifter.showPageOnly("404");
+    console.log("Hey not found");
+    pageShifter.showPageOnly("404");
+    return
   }
   
   if(res.status === 500) {
