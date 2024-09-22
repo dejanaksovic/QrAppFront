@@ -203,14 +203,20 @@ const handleAddOrder = async() => {
   let data;
 
   try {
-    console.log(password);
+    console.log("Hey im in");
+    const articlesOrdered = basket.reduce((acc, e) => {
+      if(e.quantity === 0)
+        return acc;
+      acc.push(e);
+      return acc;
+    }, []);
     res = await fetch(`${URL}/users/order/${id}`, {
       method: "POST",
       headers: {
         "Content-Type" : "application/json",
         "authorization" : password,
       },
-      body: JSON.stringify({articlesOrdered: basket}),
+      body: JSON.stringify({articlesOrdered}),
     });
     data = await res.json();
     // Clear basket
@@ -255,14 +261,19 @@ const handleChargeForOrder = async () => {
   let data;
 
   try {
-    console.log(password);
+    const articlesToBuy = basket.reduce((acc, e) => {
+      if(e.quantity === 0)
+        return acc;
+      acc.push(e);
+      return acc;
+    }, [])
     res = await fetch(`${URL}/users/buy/${id}`, {
       method: "POST",
       headers: {
         "Content-Type" : "application/json",
         "authorization" : password,
       },
-      body: JSON.stringify({articlesToBuy: basket}),
+      body: JSON.stringify({articlesToBuy}),
     });
     data = await res.json();
     // Clear basket
