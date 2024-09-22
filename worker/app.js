@@ -147,7 +147,7 @@ const handleLogin = async () => {
   }
 
   if(res.ok) {
-    await handleGetUser();
+    return await handleGetUser();
   }
 
   if(res.status === 500) {
