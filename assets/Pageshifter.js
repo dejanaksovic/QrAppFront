@@ -26,7 +26,7 @@ export class PageShifter {
     }
     // Show the page
     const pageToShow = this.pages.find(e => e.id === id);
-    if(!pageToShow) {
+    if(!pageToShow.element) {
       throw Error("Page with given id not found");
     }
     pageToShow.element.classList.remove("hidden");
