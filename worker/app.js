@@ -7,7 +7,7 @@ import { articleNames } from "../assets/helpers.js";
 const basket = [];
 articleNames.forEach(articleName => {
   basket.push({
-    name: articleName,
+    name: articleName.name,
     quantity: 0,
   })
 })
@@ -27,18 +27,43 @@ const flashMesage = new FlashMessage("flash");
 const loginButton = document.getElementById("login-button");
 const loginInput = document.getElementById("password-input");
 
+const nameContainer = document.getElementById("name-container");
+const coinsContainer = document.getElementById("balance-container");
+
+const toAddContainer = document.getElementById("coins-add-value");
+const toRemoveCointainer = document.getElementById("coins-remove-value");
+
 const menuContainer = document.getElementById("menu-container");
 const basketElement = document.getElementById("basket");
 
 const addOrderButton = document.getElementById("order-add");
 const chargeForOrderButton = document.getElementById("order-pay");
 // Could be god knows how meny articles, thats why async
+// Update price status
+const updatePriceStatus = () => {
+  let initAdd = 0;
+  let initRemove = 0;
+  basket.forEach(e => {
+    let itemBase;
+    for(let item of articleNames) {
+      if(item.name === e.name)
+        itemBase = item;
+    }
+    if(!itemBase) {
+      throw Error(`Item ${e.name} not found in base articles`);
+    }
+    initAdd += e.quantity * itemBase.price;
+    initRemove += e.quantity * itemBase.buyPrice;
+  })
+  toAddContainer.textContent = initAdd;
+  toRemoveCointainer.textContent = initRemove;
+}
 const addArticle = (name) => {
   const elem = basket.find(e => e.name === name);
   if(!elem)
-    throw Error("Item doesn't exist");
-  if(elem.quantity === 0) {
-    elem.quantity+=1;
+    throw Error(`Item ${name} doesn't exist`);
+  elem.quantity+=1;
+  if(elem.quantity-1 === 0) {
     // Craete elements neccessary;
     const articleNameElement = document.createElement("div");
     articleNameElement.classList.add("font-color");
@@ -60,32 +85,33 @@ const addArticle = (name) => {
       articleNameElement.remove();
       articleQuantityElement.remove();
       articleDeleteButton.remove();
+      updatePriceStatus();
     })
     buttonContainer.appendChild(articleDeleteButton);
     // push elements inside DOM
     basketElement.appendChild(articleNameElement);
     basketElement.appendChild(articleQuantityElement);
     basketElement.appendChild(buttonContainer);
-
+    updatePriceStatus();
     return;
   }
-  elem.quantity += 1;
-  const elementToUpdateQuantity = document.querySelector(`[quantity-for=${name}]`);
-  elementToUpdateQuantity.textContent = elem.quantity;
+  const quantityElement = document.querySelector(`[quantity-for=${name}]`);
+  quantityElement.textContent = elem.quantity;
+  updatePriceStatus();
 }
 const populateMenu = async () => {
   articleNames.forEach(articleName => {
     // Name transofrm
-    const nameToShow = articleName.toUpperCase().split("-").join(" ");
+    const nameToShow = articleName.name.toUpperCase().split("-").join(" ");
     // Single article container
     const container = document.createElement("div");
     container.addEventListener("click", e => {
-      addArticle(articleName);
+      addArticle(articleName.name);
     })
     container.classList.add("default-box-shadow");
     // Article image
     const image = document.createElement("img");
-    image.src = `../svgs/${articleName}.svg`;
+    image.src = `../svgs/${articleName.name}.svg`;
     container.appendChild(image);
     // Article name
     const articleNameContainer = document.createElement("p");
@@ -115,14 +141,13 @@ const handleLogin = async () => {
   }
   catch(err) {
     // Refresh password
-    console.log(err);
     localStorage.removeItem("passwork-worker");
     password = ""
     return pageShifter.showPageOnly("500");
   }
 
   if(res.ok) {
-    return pageShifter.showPageOnly("main-page");
+    await handleGetUser();
   }
 
   if(res.status === 500) {
@@ -135,19 +160,63 @@ const handleLogin = async () => {
     return flashMesage.showMessage("Pogresna sifra", "error");
   }
 }
+const handleGetUser = async () => {
+  let res;
+  let data;
+  try {
+    res = await fetch(`${URL}/users/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type" : "application/json",
+        "authorization" : `${password}`,
+      }
+    });
+    data = await res.json();
+  }
+  catch(err) {
+    return pageShifter.showPageOnly("500");
+  }
+
+  const { message, user } = data;
+
+  if(res.ok) {
+    nameContainer.textContent = user.Name;
+    coinsContainer.textContent = user.Coins;
+    pageShifter.showPageOnly("main-page");
+    return;
+  }
+
+  if(res.status === 404) {
+    console.log("Hey not found");
+    pageShifter.showPageOnly("404");
+    return
+  }
+  
+  if(res.status === 500) {
+    return pageShifter.showPageOnly("500");
+  }
+
+  return flashMesage.showMessage(message, "error");
+}
 const handleAddOrder = async() => {
   let res;
   let data;
 
   try {
-    console.log(password);
+    console.log("Hey im in");
+    const articlesOrdered = basket.reduce((acc, e) => {
+      if(e.quantity === 0)
+        return acc;
+      acc.push(e);
+      return acc;
+    }, []);
     res = await fetch(`${URL}/users/order/${id}`, {
       method: "POST",
       headers: {
         "Content-Type" : "application/json",
         "authorization" : password,
       },
-      body: JSON.stringify({articlesOrdered: basket}),
+      body: JSON.stringify({articlesOrdered}),
     });
     data = await res.json();
     // Clear basket
@@ -155,6 +224,7 @@ const handleAddOrder = async() => {
       e.quantity = 0;
     })
     basketElement.textContent = "";
+    updatePriceStatus();
   }
   catch(err) {
     // Clear basket
@@ -170,6 +240,7 @@ const handleAddOrder = async() => {
   const { message } = data;
 
   if(res.ok) {
+    handleGetUser();
     return flashMesage.showMessage("Porudzbina uspesno dodata", "success");
   }
 
@@ -190,14 +261,19 @@ const handleChargeForOrder = async () => {
   let data;
 
   try {
-    console.log(password);
+    const articlesToBuy = basket.reduce((acc, e) => {
+      if(e.quantity === 0)
+        return acc;
+      acc.push(e);
+      return acc;
+    }, [])
     res = await fetch(`${URL}/users/buy/${id}`, {
       method: "POST",
       headers: {
         "Content-Type" : "application/json",
         "authorization" : password,
       },
-      body: JSON.stringify({articlesToBuy: basket}),
+      body: JSON.stringify({articlesToBuy}),
     });
     data = await res.json();
     // Clear basket
@@ -205,6 +281,7 @@ const handleChargeForOrder = async () => {
       e.quantity = 0;
     })
     basketElement.textContent = "";
+    updatePriceStatus();
   }
   catch(err) {
     // Clear basket
@@ -220,6 +297,7 @@ const handleChargeForOrder = async () => {
   const { message } = data;
 
   if(res.ok) {
+    handleGetUser();
     return flashMesage.showMessage("Porudzbina uspesno naplacena", "success");
   }
 
