@@ -1,6 +1,5 @@
 // Essentials
 import { getUserIdFromUrl } from "./assets/helpers.js";
-
 // Elements
 const [buttonWorker, buttonUser] = document.querySelectorAll("button");
 const rememberCheckbox = document.querySelector("#remember-option");

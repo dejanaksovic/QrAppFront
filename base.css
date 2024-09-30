@@ -78,19 +78,21 @@ background-color: var(--clr-success) !important;
 
 /* Util for flash message */
 .flash-container {
-  min-height: 2vh;
+  top: 1rem;
+  left: 1rem;
+  position: absolute;
   background-color: transparent;
   color: white;
-  position: absolute;
-  left: 1rem;
-  top: 1rem;
-  padding: .5rem 1rem;
+  pointer-events: none;
+}
+
+.flash-message {
+  position: sticky;
   border-radius: .2rem;
-
-  display:flex;
-
-  transition: transform .1s linear;
-  transform-origin: left;
+  min-width: 30vw;
+  padding: .5rem 1rem;
+  transition: all .1s linear;
+  transform-origin: left; 
 }
 
 .remove-flash {
