@@ -1,0 +1,37 @@
+@import url(../base.css);
+
+
+.loading-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--clr-bg-dark);
+  min-height: 100%;
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loading-page img {
+  animation: fly-in 3s linear, pulsing 1s infinite;
+}
+@keyframes fly-in {
+  0% {
+    transform: scaleX(0);
+    justify-content: start;
+  }
+  100% {
+    transform: scaleX(1);
+    justify-content: center;
+  }
+}
+@keyframes pulsing {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.7;
+  }
+}
