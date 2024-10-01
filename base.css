@@ -18,10 +18,15 @@
   font-family: "Roboto", sans-serif;
 }
 
+a {
+  text-decoration: none;
+}
+
 button {
   display: block;
   outline: none;
   border: none;
+  background: none;
 }
 input {
   outline: none;
