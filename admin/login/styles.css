@@ -1,0 +1,151 @@
+* {
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #0B3E26;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    background-color: var(--clr-bg-dark);
+    min-width: min(500px, 90%);
+    height: 90%;
+    padding: 80px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: white;
+    border: 1px solid var(--clr-warning);
+    display: flex;
+    justify-content: center;
+
+
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    gap: 7rem;
+    justify-content: center;
+    width: fit-content;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: fit-content;
+}
+
+h1 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.input-field {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid var(--clr-warning);
+    background-color: var(--clr-bg-dark);
+    color: white;
+    font-size: 1rem;
+}
+
+.input-field input[type="password"]::placeholder {
+    color: #bbb;
+}
+
+.input-field .toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    margin-bottom: 20px;
+    width: fit-content;
+}
+
+.checkbox-container input {
+    margin-right: 10px;
+}
+
+.checkbox {
+    background-color: var(--clr-bg-dark);
+    border: 1px solid var(--clr-warning);
+    accent-color: var(--clr-accent-muted);
+}
+
+.login-btn {
+    background-color: #D78F43;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+}
+
+.login-btn:hover {
+    background-color: #E09F57;
+}
+
+.admin {
+    font-weight: 900;
+    font-size: 4rem;
+}
+
+.zdravo {
+    font-weight: 300;
+    font-size: 2.4rem;
+}
+
+.svg {
+    width: 30px;
+}
+
+.svghantchake {
+    width: 130px;
+    margin: 0 auto;
+}
+
+@media screen and (min-width: 1200px) {
+    .login-container {
+        
+       
+        padding: 0%;
+
+    }
+    .admin{
+        font-size: 5rem;
+    }
+    
+
+}
