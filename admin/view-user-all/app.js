@@ -4,6 +4,7 @@ import { Router } from "../../assets/PagePaths";
 import { PageShifter } from "../../assets/Pageshifter";
 // Elements
 const usersContainer = document.getElementById("users-container");
+const addButton = document.getElementById("add-button");
 
 // pages-setup
 const pages = ["main-page", "500"];
@@ -86,6 +87,12 @@ const handleGetUsers = async () => {
     return;
 }
 }
+const handleAddRedirect = () => {
+  window.location.assign(Router.adminAdd);
+}
+
+// Connect handlers
+addButton.addEventListener("click", handleAddRedirect);
 
 // Default behaviour
 const adminPassword = sessionStorage.getItem("adminPassword");
