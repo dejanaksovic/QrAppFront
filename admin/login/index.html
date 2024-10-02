@@ -11,30 +11,33 @@
 
 <body>
 
-    <div class="login-container">
+    <div class="login-container" id="main-page">
         <div class="content">
             <div class="title">
                 <h1 class="zdravo">Zdravo opet</h1>
                 <h2 class="admin">ADMIN</h2>
-                <img src="../../svgs/hantchake.svg"  class="svghantchake">
+                <img src="../../svgs/handshake.svg"  class="svghantchake">
             </div>
             <div class="form">
                 <div class="input-field">
                     <input type="password" placeholder="Šifra" id="password">
-                    <span class="toggle-password"><img src="../../svgs/openeye.svg"  class="svg"></span>
+                    <span class="toggle-password"><img src="../../svgs/openeye.svg" class="svg" id="toggle-pass"></span>
                 </div>
 
                 <div class="checkbox-container">
-                    <input type="checkbox" class="checkbox">
+                    <input type="checkbox" class="checkbox" id="remember-me">
                     <label for="remember-me">Zapamti me</label>
                 </div>
             </div>
 
-            <button class="login-btn">Uloguj se</button>
+            <button class="login-btn" id="login-btn">Uloguj se</button>
         </div>
     </div>
-
-
+    <div class="404-container" id="500">
+        <h1>500</h1>
+        <p>Greska. Proverite konekciju pa probajte opet. Ako se greska nastavi kontaktirajte administratora</p>
+    </div>
+    <script src="app.js" type="module"></script>
 </body>
 
 </html>
