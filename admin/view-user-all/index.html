@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
+
+</head>
+
+<body>
+  
+  <main class="bg-dark" id="main-page">
+    
+<!-- RIGHT (HIDDEN) NAV -->
+
+    <label for="checkbox" class="menu-button">
+      <img src="../../svgs/menu-button.svg" alt="menu-button">
+    </label>
+    
+    <input id="checkbox" type="checkbox">
+    
+    <div class="right-nav">
+      
+      <label for="checkbox" class="return-button">
+        <img src="../../svgs/return-button.svg" alt="return-button">
+      </label>
+
+      <div class="links">
+        <p>Korisnici</p>
+        <p id="bottom-border">i</p>
+        <p>Artikli</p>
+        <p id="bottom-border">i</p>
+        <p>Transakcije</p>
+        <p id="bottom-border">i</p>
+      </div>
+
+    </div>
+
+<!-- SEARCH AND ADD BUTTON -->
+
+    <div class="search-and-add-button">  
+      <div class="search-input">
+        <img src="../../svgs/magnifying-glass.svg" alt="magnifying-glass">
+        <div id="border">i</div>
+        <input type="search" id="search" placeholder="Pretrazite po imenu...">
+      </div>   
+
+      <button class="add-button">DODAJ</button>
+    </div>
+    
+<!-- USERS CONTAINER -->
+    <div class="all-users" id="users-container">
+
+<!-- USER EXAMPLE -->
+
+      <div class="user">
+        <img src="../../svgs/user-pfp.svg" alt="user-pfp">
+        <div class="name-and-coins">
+          <p id="name">Ime</p>
+          <p id="coins">Coinsi</p>
+          <p id="status">Status</p>
+        </div>
+        <button class="remove-button">OBRISI</button>
+        <button class="manage-button">IZMENI</button>
+      </div>
+
+    </div>
+
+<!-- USER CARD DISPLAY (ONLY DESKTOP VERSION) -->
+
+    <div class="user-card">
+      <div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <div class="404-container" id="500">
+    <h1>500</h1>
+    <p>Greska. Proverite konekciju pa pokusajte ponovo. Ako se problem nastavi kontaktirajte administratora</p>
+  </div>
+  <script src="app.js" type="module"></script>
+</body>
+
+</html>

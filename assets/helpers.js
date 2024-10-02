@@ -4,6 +4,13 @@ export const getUserIdFromUrl = (url) => {
   return id;
 }
 
+export const getBasePath = () => {
+  const path = window.location.href;
+  const pathBySlash = path.split("/");
+  const basePath = pathBySlash.slice(0, 3).join("/");
+    return `${basePath}`;
+}
+
 export const URL = "http://localhost:3000";
 
 export const articleNames = new Set([{

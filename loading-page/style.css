@@ -1,0 +1,63 @@
+@import url(../base.css);
+
+
+.loading-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--clr-bg-dark);
+  min-height: 100%;
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loading-page svg {
+  max-width: 40%;
+  height: auto;
+  animation: appear 0.3s linear;
+  transform-origin: left;
+}
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+/* @keyframes pulsing {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.7;
+  }
+} */
+@keyframes falling {
+  0% {
+    transform: translateY(-200%) 
+    }
+  100% {
+    transform: translate(0);
+  }
+  }
+  
+#H {
+  animation: falling 0.3s linear;
+  animation-fill-mode: both;
+  animation-delay: 0.3s;
+
+}
+#A {
+  animation: falling 0.3s linear;
+  animation-delay: 0.6s;
+  animation-fill-mode: both;
+}
+#N {
+  animation: falling 0.3s linear;
+  animation-delay: 0.9s; 
+  animation-fill-mode: both;
+}
