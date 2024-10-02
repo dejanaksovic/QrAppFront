@@ -22,6 +22,7 @@ const handleChange = async () => {
   let data;
   try {
     res = await fetch(`${URL}/users/${id}`, {
+      method: "PATCH",
       headers: {
         "Content-Type" : "application/json",
         "authorization" : `${adminPassword}`,
@@ -34,6 +35,7 @@ const handleChange = async () => {
     data = await res.json();
   }
   catch(err) {
+    console.log(err);
     return pageShifter.showPageOnly("500");
   }
 
@@ -60,6 +62,7 @@ const handleChange = async () => {
 
 // ASSIGN HANDLERS
 cancelButton.addEventListener("click", handleCancel);
+confirmButton.addEventListener("click", handleChange);
 
 // DEFAULT BEHAVIOUR
 const id = getUserIdFromUrl(window.location.search);

@@ -1,5 +1,6 @@
 import { FlashMessage } from "../../assets/Flash";
 import { getBasePath, URL } from "../../assets/helpers";
+import { Router } from "../../assets/PagePaths";
 import { PageShifter } from "../../assets/Pageshifter";
 // Elements
 const usersContainer = document.getElementById("users-container");
@@ -44,6 +45,7 @@ const addUser = (user) => {
   usersContainer.appendChild(userContainer);
 }
 
+// Handlers
 const handleGetUsers = async () => {
   let res;
   let data; 
@@ -51,7 +53,7 @@ const handleGetUsers = async () => {
     res = await fetch(`${URL}/users`, {
       headers: {
         "Content-Type" : "application/json",
-        "authorization": "Hx",
+        "authorization": adminPassword,
       }
     });
     data = await res.json();
@@ -85,4 +87,10 @@ const handleGetUsers = async () => {
 }
 }
 
+// Default behaviour
+const adminPassword = sessionStorage.getItem("adminPassword");
+if(!adminPassword) {
+  window.location.assign(Router.adminLogin);
+}
+// Set on load
 window.onload = handleGetUsers();

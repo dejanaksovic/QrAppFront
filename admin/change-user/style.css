@@ -42,6 +42,7 @@ p {
   margin-bottom: 2.5rem;
 }
 input {
+  color: var(--clr-font);
   border: 1px solid var(--clr-accent-muted);
   background: none;
   font-size: 1rem;
