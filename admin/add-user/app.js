@@ -19,7 +19,7 @@ const flashMessage = new FlashMessage();
 
 // Handlers
 const handleCancel = () => {
-  return window.location.assign(Router.adminViewAll);
+  return window.location.assign(Router.adminViewAllUsers);
 }
 
 const handleAddUser = async () => {
@@ -39,13 +39,20 @@ const handleAddUser = async () => {
     data = await res.json();
   }
   catch(err) {
-    pageShifter.showPageOnly("500");
+    return pageShifter.showPageOnly("500");
   }
 
   const { user, message } = data;
 
   if(res.ok) {
-    return window.location.assign(Router.adminViewAll);
+    return window.location.assign(Router.adminViewAllUsers);
+  }
+
+  if(res.status === 401 || res.status === 403) {
+    // Clear reset passwords
+    sessionStorage.removeItem("adminPassword");
+    localStorage.removeItem("adminPassword");
+    return window.location.assign(Router.adminLogin);
   }
 
   if(res.status === 500) {

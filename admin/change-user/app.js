@@ -15,7 +15,7 @@ const pageShifter = new PageShifter(pages, "main-container");
 
 // HANDLERS 
 const handleCancel = () => {
-  window.location.assign(`${getBasePath()}/admin/view-user-all/index.html`);
+  window.location.assign(Router.adminViewAllUsers);
 }
 const handleChange = async () => {
   let res;
