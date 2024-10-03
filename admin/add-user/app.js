@@ -45,6 +45,7 @@ const handleAddUser = async () => {
   const { user, message } = data;
 
   if(res.ok) {
+    flashMessage.leaveMessage("Korisnik uspešno kreiran", "success");
     return window.location.assign(Router.adminViewAllUsers);
   }
 
