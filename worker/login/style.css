@@ -8,7 +8,7 @@
 
 .main-container {
   min-height: min(80vh, 1000px);
-  width: min(100vw, 450px);
+  width: min(90vw, 450px);
   padding: 4rem 2rem;
   text-align: center;
   border: 1px solid var(--clr-accent-muted);

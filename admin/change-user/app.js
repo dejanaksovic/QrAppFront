@@ -1,6 +1,7 @@
 import { getBasePath, getUserIdFromUrl, URL } from "../../assets/helpers";
 import { PageShifter } from "../../assets/Pageshifter";
 import { Router } from "../../assets/PagePaths";
+import { FlashMessage } from "../../assets/Flash";
 
 // ELEMENTS
 const nameInput = document.getElementById("name-input");
@@ -12,6 +13,8 @@ const cancelButton = document.getElementById("cancel-button");
 // Pages setup
 const pages = ["main-container", "404", "500"]
 const pageShifter = new PageShifter(pages, "main-container");
+// Flash
+const flashMessage = new FlashMessage();
 
 // HANDLERS 
 const handleCancel = () => {
@@ -42,6 +45,7 @@ const handleChange = async () => {
   const { user, message } = data;
 
   if(res.ok) {
+    flashMessage.leaveMessage("Korisnik uspešno izmenjen", "success");
     return window.location.assign(Router.adminViewAllUsers);
   }
 
@@ -57,6 +61,10 @@ const handleChange = async () => {
 
   if(res.status === 500) {
     return pageShifter.showPageOnly("500");
+  }
+
+  if(message) {
+    return flashMessage.showMessage(message, "error");
   }
 }
 
