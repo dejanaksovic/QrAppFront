@@ -5,4 +5,6 @@ export const Router ={
   adminViewAllUsers : `${getBasePath()}/admin/view-user-all/index.html`,
   adminChangeUser : `${getBasePath()}/admin/change-user/index.html`,
   adminAdd: `${getBasePath()}/admin/add-user/index.html`,
+
+  workerLogin: `${getBasePath()}/worker/login/index.html`,
 }
