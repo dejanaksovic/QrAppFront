@@ -42,7 +42,7 @@ const handleChange = async () => {
   const { user, message } = data;
 
   if(res.ok) {
-    return window.location.assign(Router.adminViewAll);
+    return window.location.assign(Router.adminViewAllUsers);
   }
 
   if(res.status === 401 || res.status === 403) {

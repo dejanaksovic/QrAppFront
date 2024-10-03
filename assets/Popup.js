@@ -37,7 +37,8 @@ export class Popup {
 
   showPopup(message, path, handler) {
     this.confirmButton.addEventListener("click", (e) => {
-      handler(e);
+      console.log("hello!");
+      handler();
       this.mainContainer.classList.add("hidden");
     }, {once: true});
     this.messageElement.textContent = message;

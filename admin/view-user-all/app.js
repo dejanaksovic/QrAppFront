@@ -2,6 +2,7 @@ import { FlashMessage } from "../../assets/Flash";
 import { getBasePath, URL } from "../../assets/helpers";
 import { Router } from "../../assets/PagePaths";
 import { PageShifter } from "../../assets/Pageshifter";
+import { Popup } from "../../assets/Popup";
 // Elements
 const usersContainer = document.getElementById("users-container");
 const addButton = document.getElementById("add-button");
@@ -37,14 +38,22 @@ const addUser = (user) => {
   const delButton = document.createElement("button");
   delButton.classList.add("remove-button");
   delButton.textContent = "OBRISI";
+  delButton.setAttribute("user-id", user._id);
+  delButton.addEventListener("click", handleDelete);
+  // Change
   const changeButton = document.createElement("button");
   changeButton.classList.add("manage-button");
   changeButton.textContent = "IZMENI";
+  changeButton.setAttribute("user-id", user._id);
+  changeButton.addEventListener("click", handleChangeRedirect);
   userContainer.appendChild(delButton);
   userContainer.appendChild(changeButton);
   // Add to main container
   usersContainer.appendChild(userContainer);
 }
+let adminPassword;
+// Setup popup
+const popup = new Popup();
 
 // Handlers
 const handleGetUsers = async () => {
@@ -90,12 +99,47 @@ const handleGetUsers = async () => {
 const handleAddRedirect = () => {
   window.location.assign(Router.adminAdd);
 }
+const handleChangeRedirect = (e) => {
+  const id = e.target.getAttribute("user-id");
+  return window.location.assign(`${Router.adminChangeUser}?id=${id}`);
+}
+const handleDelete = async (e) => {
+  let res, data;
+  const id = e.target.getAttribute("user-id");
+  try {
+    res = await fetch(`${URL}/users/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type" : "application/json",
+        "authorization": adminPassword,
+      }
+    })
+    data = await res.json();
+  }
+  catch(err) {
+    return pageShifter.showPageOnly("500");
+  }
+  const { user, message } = data;
+  if(res.ok) {
+    e.target.parentElement.remove();
+    return flashMessage.showMessage("Korisnik uspesno obrisan", "success");
+  }
+  if(res.status === 500) {
+    return pageShifter.showPageOnly("500");
+  }
+  if(res.status === 401 || res.status === 403) {
+    return window.location.assign(Router.adminLogin);
+  }
+  if(message) {
+    return flashMessage.showMessage(message, "error");
+  }
+}
 
 // Connect handlers
 addButton.addEventListener("click", handleAddRedirect);
 
 // Default behaviour
-const adminPassword = sessionStorage.getItem("adminPassword");
+adminPassword = sessionStorage.getItem("adminPassword");
 if(!adminPassword) {
   window.location.assign(Router.adminLogin);
 }
