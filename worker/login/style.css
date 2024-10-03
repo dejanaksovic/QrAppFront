@@ -53,6 +53,12 @@ h1 {
   max-width: 1.8rem;
 }
 
+.password-container > img:hover,
+label:hover,
+input[type="checkbox"]:hover {
+  cursor: pointer;
+}
+
 input {
   color: var(--clr-font);
   background: none;
@@ -114,6 +120,12 @@ button {
   border-radius: .8rem;
   font-weight: 900;
   margin: 0 auto;
+}
+
+button:hover {
+  border: 1px solid var(--clr-accent-muted);
+  background-color: var(--clr-font);
+  color: var(--clr-accent-muted);
 }
 
 @media screen and (min-width: 1024px) {

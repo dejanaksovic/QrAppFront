@@ -50,7 +50,7 @@ const handleLogin = async () => {
 }
 const handleTogglePasswordVisibility = () => {
   showPassword = !showPassword;
-  showPassButton.src = showPassword ? "../../svgs/openeye.svg" : "../../svgs/eye-closed.svg";
+  showPassButton.src = showPassword ? "../../svgs/eye-closed.svg" : "../../svgs/openeye.svg";
   passwordInput.type = showPassword ? "text" : "password";
 }
 // connect handlers
