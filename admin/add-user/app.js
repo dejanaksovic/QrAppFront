@@ -17,6 +17,9 @@ const pageShifter = new PageShifter(pages, "main-container");
 // flash setup
 const flashMessage = new FlashMessage();
 
+// request setup
+
+
 // Handlers
 const handleCancel = () => {
   return window.location.assign(Router.adminViewAllUsers);

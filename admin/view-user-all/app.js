@@ -97,7 +97,7 @@ const handleGetUsers = async () => {
 }
 }
 const handleAddRedirect = () => {
-  window.location.assign(Router.adminAdd);
+  window.location.assign(Router.adminAddUser);
 }
 const handleChangeRedirect = (e) => {
   const id = e.target.getAttribute("user-id");

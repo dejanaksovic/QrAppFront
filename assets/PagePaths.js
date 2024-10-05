@@ -1,4 +1,4 @@
-import { getBasePath } from "./helpers";
+import { getBasePath } from "./helpers.js";
 
 export const Router ={
   adminLogin : `${getBasePath()}/admin/login/index.html`,
