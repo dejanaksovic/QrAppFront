@@ -12,8 +12,6 @@ export class RequestHandler {
       throw Error("Page shifter must be given");
     if(!(shifter instanceof PageShifter))
       throw Error("Shifter is not of instane page shifter");
-    if(!successRedirect)
-      throw Error("Success redirect must be given")
     // Checks pass
     this.role = role;
     this.shifter = shifter;
@@ -53,16 +51,19 @@ export class RequestHandler {
     const message = data?.message;
 
     if(res.ok) {
-      if(successMessage) {
+      if(successMessage && this.successRedirect) {
         this.flash.leaveMessage(successMessage, "success");
         return window.location.assign(this.successRedirect);
+      }
+      if(successMessage) {
+        this.flash.leaveMessage(successMessage, "success");
       }      
     }
     if(res.status === 500) {
       return this.shifter.showPageOnly("500");
     }
     if(res.status === 401 || res.status === 403) {
-      switch(role) {
+      switch(this.role) {
         case "admin": {
           return window.location.assign(Router.adminLogin);
         }

@@ -176,6 +176,10 @@
     grid-template-columns: 3fr 1fr;
     gap: 2rem;
   }
+
+  .article-single-view {
+    flex-direction: column;
+  }
   /* SELECTED */
   .article-selected-container {
     display: block;

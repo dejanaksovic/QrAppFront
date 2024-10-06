@@ -1,12 +1,15 @@
 import { getBasePath } from "./helpers.js";
 
-export const Router ={
-  adminLogin : `${getBasePath()}/admin/login/index.html`,
-  adminViewAllUsers : `${getBasePath()}/admin/view-user-all/index.html`,
-  adminChangeUser : `${getBasePath()}/admin/change-user/index.html`,
-  adminAddUser: `${getBasePath()}/admin/add-user/index.html`,
-  adminViewAllArticles: `${getBasePath()}/admin/view-articles-all/index.html`,
-  
+const basePath = getBasePath();
 
-  workerLogin: `${getBasePath()}/worker/login/index.html`,
+export const Router ={
+  adminLogin : `${basePath}/admin/login/index.html`,
+  adminViewAllUsers : `${basePath}/admin/view-user-all/index.html`,
+  adminChangeUser : `${basePath}/admin/change-user/index.html`,
+  adminAddUser: `${basePath}/admin/add-user/index.html`,
+  adminViewAllArticles: `${basePath}/admin/view-articles-all/index.html`,
+  adminAddArticle: `${basePath}/admin/add-article/index.html`,
+  adminChangeArticle: `${basePath}/admin/change-article/index.html`,
+
+  workerLogin: `${basePath}/worker/login/index.html`,
 }

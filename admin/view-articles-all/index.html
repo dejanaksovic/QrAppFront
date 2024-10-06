@@ -7,7 +7,7 @@
   <title>Document</title>
 </head>
 <body class="bg-dark">
-  <div class="main-container">
+  <div class="main-container" id="main-container">
     <!-- ARTICLES SINGLE, ALL ARTICLES + SEARCH-->
     <div class="articles-container">
       <!-- MENU FOR PHONE -->
@@ -19,12 +19,12 @@
           <p class="vertical">i</p>
           <input placeholder="Pretrazi po imenu..." type="text">
         </div>
-        <button class="bg-success">DODAJ</button>
+        <button class="bg-success" id="button-add">DODAJ</button>
       </div>
       <!-- SINGLE AND ALL -->
       <div class="articles-wrapper">
         <!-- ALL ARTICLES -->
-        <div class="articles-view-container">
+        <div class="articles-view-container" id="all-articles">
           <!-- SAMPLE IN ALL -->
            <div class="article-single-view">
             <div class="info">
@@ -38,52 +38,6 @@
               <button>OBRIŠI</button>
               <button>IZMENI</button>
             </div>
-           </div>
-           <div class="article-single-view">
-            <div class="info">
-              <img src="../../svgs/user-pfp.svg" alt="">
-              <div class="name-price-container">
-                <h2>Karamel Makijato</h2>
-                <p>260</p>
-              </div>
-            </div>
-            <div class="article-action">
-              <button>OBRIŠI</button>
-              <button>IZMENI</button>
-            </div>
-           </div>
-           <div class="article-single-view">
-            <div class="info">
-              <img src="../../svgs/user-pfp.svg" alt="">
-              <div class="name-price-container">
-                <h2>Karamel Makijato</h2>
-                <p>260</p>
-              </div>
-            </div>
-            <div class="article-action">
-              <button>OBRIŠI</button>
-              <button>IZMENI</button>
-            </div>
-           </div>
-           <div class="article-single-view">
-            <div class="info">
-              <img src="../../svgs/user-pfp.svg" alt="">
-              <div class="name-price-container">
-                <h2>Karamel Makijato</h2>
-                <p>260</p>
-              </div>
-            </div>
-            <div class="article-action">
-              <button>OBRIŠI</button>
-              <button>IZMENI</button>
-            </div>
-           </div>
-           <div class="pagination-container">
-            <p class="active">1</p>
-            <p>2</p>
-            <p>3</p>
-            <p>4</p>
-            <p>5</p>
            </div>
         </div>
         <!-- SELECTED ARTICLE -->
@@ -111,6 +65,10 @@
       </nav>
     </div>
   </div>
-  <script src=""></script>
+  <div class="404-container" id="500">
+    <h1>500</h1>
+    <p>Greška pri konekciji. Proverite konekciju sa internetom pa pokušajte opet. Ako se problem nastavi kontaktirajte administratora</p>
+  </div>
+  <script src="app.js" type="module"></script>
 </body>
 </html>

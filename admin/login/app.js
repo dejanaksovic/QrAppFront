@@ -1,7 +1,7 @@
-import { FlashMessage } from "../../assets/Flash";
-import { URL } from "../../assets/helpers";
-import { Router } from "../../assets/PagePaths";
-import { PageShifter } from "../../assets/Pageshifter";
+import { FlashMessage } from "../../assets/Flash.js";
+import { URL } from "../../assets/helpers.js";
+import { Router } from "../../assets/PagePaths.js";
+import { PageShifter } from "../../assets/Pageshifter.js";
 
 // ELEMENTS
 const passwordInput = document.getElementById("password");
