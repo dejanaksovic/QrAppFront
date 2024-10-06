@@ -80,8 +80,9 @@ const handleDelete = async (e) => {
     method: "DELETE",
     password: adminPassword,
   }
-  const { user } = requestHandler.doRequest(requestOptions, "Uspesno obrisan korisnika") ?? { user: null };
-  if(user) {
+  const { article } =  await requestHandler.doRequest(requestOptions, "Uspesno obrisan korisnika") ?? { article: null };
+  console.log(e.target.parentElement.parentElement);
+  if(article) {
     e.target.parentElement.parentElement.remove();
   }
 }
@@ -91,4 +92,8 @@ const handleDelete = async (e) => {
 addButton.addEventListener("click", handleRedirectAdd);
 
 // Default behaviour
+adminPassword = sessionStorage.getItem("adminPassword");
+if(!adminPassword) {
+  window.location.assign(Router.adminLogin);
+}
 handleGetAll();

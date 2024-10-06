@@ -56,7 +56,7 @@ export class RequestHandler {
         return window.location.assign(this.successRedirect);
       }
       if(successMessage) {
-        this.flash.leaveMessage(successMessage, "success");
+        this.flash.showMessage(successMessage, "success");
       }      
     }
     if(res.status === 500) {
