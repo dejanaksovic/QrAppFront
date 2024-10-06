@@ -47,10 +47,10 @@ const handleConfirm = async () => {
     url: `${URL}/articles/${id}`,
     method: "PATCH",
     password: adminPassword,
-    body: JSON.stringify({
+    body: {
       name: nameInput.value,
       price: priceInput.value,
-    })
+    }
   }
 
   console.log(requestOptions.url);

@@ -1,8 +1,8 @@
-import { FlashMessage } from "../../assets/Flash";
-import { getBasePath, URL } from "../../assets/helpers";
-import { Router } from "../../assets/PagePaths";
-import { PageShifter } from "../../assets/Pageshifter";
-import { Popup } from "../../assets/Popup";
+import { FlashMessage } from "../../assets/Flash.js";
+import { getBasePath, URL } from "../../assets/helpers.js";
+import { Router } from "../../assets/PagePaths.js";
+import { PageShifter } from "../../assets/Pageshifter.js";
+import { Popup } from "../../assets/Popup.js";
 // Elements
 const usersContainer = document.getElementById("users-container");
 const addButton = document.getElementById("add-button");

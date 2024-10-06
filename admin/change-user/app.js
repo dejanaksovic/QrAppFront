@@ -1,7 +1,7 @@
-import { getBasePath, getUserIdFromUrl, URL } from "../../assets/helpers";
-import { PageShifter } from "../../assets/Pageshifter";
-import { Router } from "../../assets/PagePaths";
-import { FlashMessage } from "../../assets/Flash";
+import { getUserIdFromUrl, URL } from "../../assets/helpers.js";
+import { PageShifter } from "../../assets/Pageshifter.js";
+import { Router } from "../../assets/PagePaths.js";
+import { RequestHandler } from "../../assets/RequestHandler.js";
 
 // ELEMENTS
 const nameInput = document.getElementById("name-input");
@@ -16,8 +16,8 @@ const cancelButton = document.getElementById("cancel-button");
 // Pages setup
 const pages = ["main-container", "404", "500"]
 const pageShifter = new PageShifter(pages, "main-container");
-// Flash
-const flashMessage = new FlashMessage();
+// request handler
+const requestHandler = new RequestHandler(pageShifter, Router.adminViewAllUsers, "admin");
 // utils
 let id, adminPassword;
 // HANDLERS 
@@ -25,87 +25,32 @@ const handleCancel = () => {
   window.location.assign(Router.adminViewAllUsers);
 }
 const handleChange = async () => {
-  let res;
-  let data;
-  try {
-    res = await fetch(`${URL}/users/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type" : "application/json",
-        "authorization" : `${adminPassword}`,
-      },
-      body: JSON.stringify({
-        name: nameInput.value,
-        balance: balanceInput.value
-      })
-    });
-    data = await res.json();
-  }
-  catch(err) {
-    console.log(err);
-    return pageShifter.showPageOnly("500");
+  const requestOptions = {
+    url: `${URL}/users/${id}`,
+    method: "PATCH",
+    password: adminPassword,
+    body: {
+      name: nameInput.value,
+      coins: balanceInput.value,
+    }
   }
 
-  const { user, message } = data;
-
-  if(res.ok) {
-    flashMessage.leaveMessage("Korisnik uspešno izmenjen", "success");
-    return window.location.assign(Router.adminViewAllUsers);
-  }
-
-  if(res.status === 401 || res.status === 403) {
-    sessionStorage.removeItem("adminPassword");
-    localStorage.removeItem("adminPassword");
-    return window.location.assign(Router.adminLogin);
-  }
-
-  if(res.status === 404) {
-    return pageShifter.showPageOnly("404");
-  }
-
-  if(res.status === 500) {
-    return pageShifter.showPageOnly("500");
-  }
-
-  if(message) {
-    return flashMessage.showMessage(message, "error");
-  }
+  await requestHandler.doRequest(requestOptions, "Korisnik uspešno izmenjen");
 }
 const handleGetUser = async () => {
-  let res, data;
-  try {
-    res = await fetch(`${URL}/users/${id}`);
-    data = await res.json();
-  }
-  catch(err) {
-    return pageShifter.showPageOnly("500");
+  const requestOptions = {
+    url: `${URL}/users/${id}`,
+    method: "GET",
   }
 
-  const { user, message } = data; 
+  const { user } = await requestHandler.doRequest(requestOptions) ?? { user: undefined };
 
-  if(res.ok) {
+  if(user) {
     nameElement.textContent = user.Name;
     coinsElement.textContent = user.Coins;
-    return;
   }
-
-  if(res.status === 500) {
-    return pageShifter.showPageOnly("500");
-  }
-
-  if(res.status === 401 || res.status === 403) {
-    return window.location.assign(Router.adminLogin);
-  }
-
-  if(res.status === 404) {
-    return pageShifter.showPageOnly("404");
-  }
-
-  if(message) {
-    return flashMessage.showMessage(message, "error");
-  }
-  
 }
+
 
 
 // ASSIGN HANDLERS
