@@ -53,7 +53,6 @@ const addArticle = ({Name, Price, _id}) => {
 
 // handlers
 const handleGetAll = async () => {
-  console.log("hello!");
   const requestOptions = {
     url: `${URL}/articles`,
     method: "GET",
@@ -81,7 +80,6 @@ const handleDelete = async (e) => {
     password: adminPassword,
   }
   const { article } =  await requestHandler.doRequest(requestOptions, "Uspesno obrisan korisnika") ?? { article: null };
-  console.log(e.target.parentElement.parentElement);
   if(article) {
     e.target.parentElement.parentElement.remove();
   }
