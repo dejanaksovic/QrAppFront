@@ -56,7 +56,7 @@ h2 {
     margin-bottom: 20px;
 }
 
-input[type="password"] {
+.password-input {
     width: 100%;
     padding: 10px;
     border-radius: 5px;
@@ -66,7 +66,7 @@ input[type="password"] {
     font-size: 1rem;
 }
 
-.input-field input[type="password"]::placeholder {
+.input-field .password-input ::placeholder {
     color: #bbb;
 }
 
@@ -80,10 +80,9 @@ input[type="password"] {
 
 .checkbox-container {
     display: flex;
-    align-items: center;
+    align-items: left;
     justify-content: start;
     margin-bottom: 20px;
-    width: fit-content;
 }
 
 .checkbox-container input {
@@ -91,9 +90,28 @@ input[type="password"] {
 }
 
 .checkbox {
+    position:relative;
+    width: 25px;
+    height: 25px;
+    aspect-ratio: 1/1;
+}
+.checkbox::after {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
     background-color: var(--clr-bg-dark);
-    border: 1px solid var(--clr-warning);
-    accent-color: var(--clr-accent-muted);
+    border: 1px solid var(--clr-accent-muted);
+}
+.checkbox:checked::after {
+    content: "✔";
+    font-weight: 900;
+    font-size: 0.85rem;
+    display: grid;
+    place-items: center;
+    position: absolute;
+    color: var(--clr-bg-dark);
+    background-color: var(--clr-accent-muted);
 }
 
 .login-btn {

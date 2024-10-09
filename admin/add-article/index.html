@@ -7,14 +7,17 @@
   <title>Document</title>
 </head>
 <body>
-  <main class="bg-dark" id="main-container">
+  <main class="bg-dark main-container" id="main-container">
     <div class="form-container">
       <img src="../../svgs/user-pfp.svg" alt="">
-      <h1 id="name">Sample name</h1>
-      <p id="coins">35c</p>
       <div class="input-container">
-        <input placeholder="Ime za promenu" id="name-input" type="text">
-        <input placeholder="Novo stanje" id="balance-input" type="number">
+        <input placeholder="Ime artikla" id="name-input" type="text">
+        <input placeholder="cena" id="price-input" type="number">
+        <select name="" id="category-input">
+          <option value="coffee">Kafa</option>
+          <option value="juice">Sok</option>
+          <option value="cake">Kolac</option>
+        </select>
       </div>
       <div class="action-container">
         <button id="confirm-button">POTVRDI</button>
@@ -22,14 +25,11 @@
       </div>
     </div>
   </main>
-  <div class="404" id="404">
-    <h1>404</h1>
-    <p>Korisnik kojeg ste tražili nije pronađen</p>
-  </div>
   <div class="404" id="500">
     <h1>500</h1>
     <p>Unutrašnja greška kontaktirajte administratora</p>
   </div>
+  
   <script src="app.js" type="module"></script>
 </body>
 </html>

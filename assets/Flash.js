@@ -8,6 +8,15 @@ export class FlashMessage {
     this.container.classList.add("flash-container");
     document.body.prepend(this.container);
     this.messageDelay = messageDelay;
+
+    // Check for message left from last page
+    const messageFromLastPage = sessionStorage.getItem("flashMessage");
+    if(messageFromLastPage) {
+      const { message, severity } = JSON.parse(messageFromLastPage);
+      this.showMessage(message, severity);
+    }
+    // cleanup
+    sessionStorage.removeItem("flashMessage");
   }
 
   showMessage(message, severity) {
@@ -46,5 +55,9 @@ export class FlashMessage {
       this.container.removeChild(messageContainer);
       });
     }, this.messageDelay);
+  }
+
+  leaveMessage(message, severity) {
+    sessionStorage.setItem("flashMessage", JSON.stringify({message, severity}));
   }
 }

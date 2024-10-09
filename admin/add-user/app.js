@@ -1,7 +1,8 @@
-import { FlashMessage } from "../../assets/Flash";
-import { URL } from "../../assets/helpers";
-import { Router } from "../../assets/PagePaths";
-import { PageShifter } from "../../assets/Pageshifter";
+import { FlashMessage } from "../../assets/Flash.js";
+import { URL } from "../../assets/helpers.js";
+import { Router } from "../../assets/PagePaths.js";
+import { PageShifter } from "../../assets/Pageshifter.js";
+import { RequestHandler } from "../../assets/RequestHandler.js";
 
 // ELEMENTS
 const inputName = document.getElementById("name-input");
@@ -17,42 +18,26 @@ const pageShifter = new PageShifter(pages, "main-container");
 // flash setup
 const flashMessage = new FlashMessage();
 
+// request setup
+const requestHandler = new RequestHandler(pageShifter, Router.adminViewAllUsers, "admin");
+
+
 // Handlers
 const handleCancel = () => {
-  return window.location.assign(Router.adminViewAll);
+  return window.location.assign(Router.adminViewAllUsers);
 }
 
 const handleAddUser = async () => {
-  let res, data;
-  try {
-    res = await fetch(`${URL}/users/`,{
-      method: "POST",
-      headers: {
-        "Content-Type" : "application/json",
-        "authorization" : adminPassword,
-      },
-      body: JSON.stringify({
-        name: inputName.value,
-        coins: balanceInput.value,
-      })
-    })
-    data = await res.json();
+  const requestOptions = {
+    url: `${URL}/users/`,
+    method: "POST",
+    password: adminPassword,
+    body: {
+      name: inputName.value,
+      coins: balanceInput.value,
+    }
   }
-  catch(err) {
-    pageShifter.showPageOnly("500");
-  }
-
-  const { user, message } = data;
-
-  if(res.ok) {
-    return window.location.assign(Router.adminViewAll);
-  }
-
-  if(res.status === 500) {
-    return pageShifter.showPageOnly("500");
-  }
-
-  return flashMessage.showMessage(message, "error");
+  const { user } = await requestHandler.doRequest(requestOptions, "Korisnik uspesno kreiran") ?? {user:undefined};
 }
 
 // Connect handlers

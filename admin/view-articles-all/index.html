@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body class="bg-dark">
+  <div class="main-container" id="main-container">
+    <!-- ARTICLES SINGLE, ALL ARTICLES + SEARCH-->
+    <div class="articles-container">
+      <!-- MENU FOR PHONE -->
+      <img src="../../svgs/menu-button.svg" alt="">
+      <!-- SEARCH -->
+      <div class="search-container">
+        <div class="search-item">
+          <img src="../../svgs/magnifying-glass.svg" alt="">
+          <p class="vertical">i</p>
+          <input placeholder="Pretrazi po imenu..." type="text">
+        </div>
+        <button class="bg-success" id="button-add">DODAJ</button>
+      </div>
+      <!-- SINGLE AND ALL -->
+      <div class="articles-wrapper">
+        <!-- ALL ARTICLES -->
+        <div class="articles-view-container" id="all-articles">
+          <!-- SAMPLE IN ALL -->
+           <!-- <div class="article-single-view">
+            <div class="info">
+              <img src="../../svgs/user-pfp.svg" alt="">
+              <div class="name-price-container">
+                <h2>Karamel Makijato</h2>
+                <p>260</p>
+              </div>
+            </div>
+            <div class="article-action">
+              <button>OBRIŠI</button>
+              <button>IZMENI</button>
+            </div>
+           </div> -->
+        </div>
+        <!-- SELECTED ARTICLE -->
+        <!-- SAMPLE CONTAINER -->
+        <div class="article-selected-container">
+           <img src="../../svgs/user-pfp.svg" alt="">
+           <h1>Karamel makijato</h1>
+           <p>260</p>
+           <div class="action-container">
+            <button>OBRIŠI</button>
+            <button>IZMENI</button>
+           </div>
+        </div>
+      </div>
+    </div>
+    <!-- NAVIGATION -->
+    <div class="nav-container">
+      <nav>
+        <a href="../view-user-all/index.html">Korisnici</a>
+        <a href="../view-articles-all/index.html">Artikli</a>
+        <a href="../view-transationcs-all/index.html">Transakcije</a>
+      </nav>
+    </div>
+  </div>
+  <div class="404-container" id="500">
+    <h1>500</h1>
+    <p>Greška pri konekciji. Proverite konekciju sa internetom pa pokušajte opet. Ako se problem nastavi kontaktirajte administratora</p>
+  </div>
+  <script src="app.js" type="module"></script>
+</body>
+</html>

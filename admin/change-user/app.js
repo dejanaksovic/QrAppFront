@@ -1,10 +1,14 @@
-import { getBasePath, getUserIdFromUrl, URL } from "../../assets/helpers";
-import { PageShifter } from "../../assets/Pageshifter";
-import { Router } from "../../assets/PagePaths";
+import { getUserIdFromUrl, URL } from "../../assets/helpers.js";
+import { PageShifter } from "../../assets/Pageshifter.js";
+import { Router } from "../../assets/PagePaths.js";
+import { RequestHandler } from "../../assets/RequestHandler.js";
 
 // ELEMENTS
 const nameInput = document.getElementById("name-input");
 const balanceInput = document.getElementById("balance-input");
+
+const nameElement = document.getElementById("name");
+const coinsElement = document.getElementById("coins");
 
 const confirmButton = document.getElementById("confirm-button");
 const cancelButton = document.getElementById("cancel-button");
@@ -12,66 +16,57 @@ const cancelButton = document.getElementById("cancel-button");
 // Pages setup
 const pages = ["main-container", "404", "500"]
 const pageShifter = new PageShifter(pages, "main-container");
-
+// request handler
+const requestHandler = new RequestHandler(pageShifter, Router.adminViewAllUsers, "admin");
+// utils
+let id, adminPassword;
 // HANDLERS 
 const handleCancel = () => {
-  window.location.assign(`${getBasePath()}/admin/view-user-all/index.html`);
+  window.location.assign(Router.adminViewAllUsers);
 }
 const handleChange = async () => {
-  let res;
-  let data;
-  try {
-    res = await fetch(`${URL}/users/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type" : "application/json",
-        "authorization" : `${adminPassword}`,
-      },
-      body: JSON.stringify({
-        name: nameInput.value,
-        balance: balanceInput.value
-      })
-    });
-    data = await res.json();
-  }
-  catch(err) {
-    console.log(err);
-    return pageShifter.showPageOnly("500");
+  const requestOptions = {
+    url: `${URL}/users/${id}`,
+    method: "PATCH",
+    password: adminPassword,
+    body: {
+      name: nameInput.value,
+      coins: balanceInput.value,
+    }
   }
 
-  const { user, message } = data;
-
-  if(res.ok) {
-    return window.location.assign(Router.adminViewAll);
+  await requestHandler.doRequest(requestOptions, "Korisnik uspešno izmenjen");
+}
+const handleGetUser = async () => {
+  const requestOptions = {
+    url: `${URL}/users/${id}`,
+    method: "GET",
   }
 
-  if(res.status === 401 || res.status === 403) {
-    sessionStorage.removeItem("adminPassword");
-    localStorage.removeItem("adminPassword");
-    return window.location.assign(Router.adminLogin);
-  }
+  const { user } = await requestHandler.doRequest(requestOptions) ?? { user: undefined };
 
-  if(res.status === 404) {
-    return pageShifter.showPageOnly("404");
-  }
-
-  if(res.status === 500) {
-    return pageShifter.showPageOnly("500");
+  if(user) {
+    nameElement.textContent = user.Name;
+    coinsElement.textContent = user.Coins;
   }
 }
+
+
 
 // ASSIGN HANDLERS
 cancelButton.addEventListener("click", handleCancel);
 confirmButton.addEventListener("click", handleChange);
 
 // DEFAULT BEHAVIOUR
-const id = getUserIdFromUrl(window.location.search);
+id = getUserIdFromUrl(window.location.search);
 if(!id) {
   pageShifter.showPageOnly("404");
   throw Error("User not found");
 }
 
-const adminPassword = sessionStorage.getItem("adminPassword");
+adminPassword = sessionStorage.getItem("adminPassword");
 if(!adminPassword) {
   window.location.assign(Router.adminLogin);
 }
+
+handleGetUser();
