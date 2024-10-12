@@ -1,7 +1,7 @@
-import { FlashMessage } from "../../assets/Flash";
 import { URL } from "../../assets/helpers";
 import { Router } from "../../assets/PagePaths";
 import { PageShifter } from "../../assets/Pageshifter";
+import { RequestHandler } from "../../assets/RequestHandler";
 
 // ELEMENTS
 const nameInput = document.getElementById("name-input");
@@ -17,50 +17,22 @@ let adminPassword;
 const pages = ["main-container", "500"];
 const pageShifter = new PageShifter(pages, "main-container");
 
-// flash message
-const flashMessage = new FlashMessage();
+// fetchHandler
+const fetchHandler = new RequestHandler(pageShifter, Router.adminViewAllArticles, "admin");
 
 // HANDLERS
 const handleConfirm = async (e) => {
-  let res, data;
-  try {
-    res = await fetch(`${URL}/articles/`,{
-      method: "POST",
-      headers: {
-        "Content-Type" : "application/json",
-        "authorization" : adminPassword,
-      },
-      body: JSON.stringify({
-        name: nameInput.value,
-        price: priceInput.value,
-      })
-    })
-    data = await res.json();
-  }
-  catch(err) {
-    return pageShifter.showPageOnly("500");
+  const options = {
+    method: "POST",
+    url: `${URL}/articles`,
+    password: adminPassword,
+    body: {
+      name: nameInput.value,
+      price: priceInput.value,
+    }
   }
 
-  const { user, message } = data;
-
-  // Handle ok
-  if(res.ok) {
-    flashMessage.leaveMessage("Artikal uspešno kreiran", "success");
-    return window.location.assign(Router.adminViewAllArticles);    
-  }
-
-  if(res.status === 401 || res.status === 403) {
-    flashMessage.leaveMessage("Neautorizovana akcija", "error");
-    return window.location.assign(Router.adminLogin);
-  }
-
-  if(res.status === 500) {
-    return pageShifter.showPageOnly("500");
-  }
-
-  if(message) {
-    return flashMessage.showMessage(message, "error");
-  }
+  await fetchHandler.doRequest(options, "Uspesno kreiran artikal");
 }
 const handleCancel = () => {
   return window.location.assign(Router.adminViewAllArticles);

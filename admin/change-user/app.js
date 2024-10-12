@@ -43,7 +43,7 @@ const handleGetUser = async () => {
     method: "GET",
   }
 
-  const { user } = await requestHandler.doRequest(requestOptions) ?? { user: undefined };
+  const user = await requestHandler.doRequest(requestOptions) ?? { user: undefined };
 
   if(user) {
     nameElement.textContent = user.Name;

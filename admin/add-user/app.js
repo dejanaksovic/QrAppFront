@@ -37,7 +37,7 @@ const handleAddUser = async () => {
       coins: balanceInput.value,
     }
   }
-  const { user } = await requestHandler.doRequest(requestOptions, "Korisnik uspesno kreiran") ?? {user:undefined};
+  const user = await requestHandler.doRequest(requestOptions, "Korisnik uspesno kreiran");
 }
 
 // Connect handlers

@@ -73,6 +73,9 @@
   padding: .25rem 1rem;
   color: var(--clr-font);
 }
+.article-single-view:hover {
+  cursor: pointer;
+}
 .article-single-view img {
   max-width: 3rem;
 }

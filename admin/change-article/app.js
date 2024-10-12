@@ -32,8 +32,7 @@ const handleGet = async () => {
     password: adminPassword,
   }
 
-
-  const { article } = await requestHandler.doRequest(requestOptions) ?? { article: undefined };
+  const article = await requestHandler.doRequest(requestOptions);
 
   if(article) {
     nameElement.textContent = article.Name;
@@ -53,9 +52,7 @@ const handleConfirm = async () => {
     }
   }
 
-  console.log(requestOptions.url);
-
-  const user = await requestHandler.doRequest(requestOptions, "Artikal uspesno kreiran");
+  const article = await requestHandler.doRequest(requestOptions, "Artikal uspesno kreiran");
   return;
 }
 
