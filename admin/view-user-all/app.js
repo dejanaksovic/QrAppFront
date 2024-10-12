@@ -1,15 +1,19 @@
 import { FlashMessage } from "../../assets/Flash.js";
-import { getBasePath, URL } from "../../assets/helpers.js";
+import { URL } from "../../assets/helpers.js";
 import { Router } from "../../assets/PagePaths.js";
 import { PageShifter } from "../../assets/Pageshifter.js";
-import { Popup } from "../../assets/Popup.js";
+import { RequestHandler } from "../../assets/RequestHandler.js";
 // Elements
 const usersContainer = document.getElementById("users-container");
 const addButton = document.getElementById("add-button");
 
 // pages-setup
-const pages = ["main-page", "500"];
+const pages = ["main-page", "500", "404"];
 const pageShifter = new PageShifter(pages, "main-page");
+
+// handler
+const fetchHandler = new RequestHandler(pageShifter, undefined, "admin");
+
 
 // Flash message
 const flashMessage = new FlashMessage();
@@ -52,49 +56,20 @@ const addUser = (user) => {
   usersContainer.appendChild(userContainer);
 }
 let adminPassword;
-// Setup popup
-const popup = new Popup();
 
 // Handlers
 const handleGetUsers = async () => {
-  let res;
-  let data; 
-  try {
-    res = await fetch(`${URL}/users`, {
-      headers: {
-        "Content-Type" : "application/json",
-        "authorization": adminPassword,
-      }
-    });
-    data = await res.json();
-    console.log(data);
-  }
-  catch(err) {
-    pageShifter.showPageOnly("500");
+  const options = {
+    url: `${URL}/users`,
+    method: "GET",
+    password: adminPassword,
   }
 
-  const { users, message } = data;
-
-  // Handle erros
-  if(res.status === 401 || res.status === 403) {
-    return window.location.assign(`${getBasePath()}/admin/login/index.html`);
-  }
-
-  if(res.status === 500) {
-    return pageShifter.showPageOnly("500");
-  }
-
-  if(message) {
-    return flashMessage.showMessage(message, "error");
-  }
+  const users = await fetchHandler.doRequest(options);
   
-  if(res.ok) {
-    // If success populate users
-    for (let user of users) {
-      addUser(user);
-    }
-    return;
-}
+  for (let user of users) {
+    addUser(user);
+  }
 }
 const handleAddRedirect = () => {
   window.location.assign(Router.adminAddUser);
@@ -104,34 +79,19 @@ const handleChangeRedirect = (e) => {
   return window.location.assign(`${Router.adminChangeUser}?id=${id}`);
 }
 const handleDelete = async (e) => {
-  let res, data;
-  const id = e.target.getAttribute("user-id");
-  try {
-    res = await fetch(`${URL}/users/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type" : "application/json",
-        "authorization": adminPassword,
-      }
-    })
-    data = await res.json();
+  const userId = e.target.getAttribute("user-id");
+  const userContainer = e.target.closest('.user');
+
+  const options = {
+    url: `${URL}/users/${userId}`,
+    method: "DELETE",
+    password: adminPassword,
   }
-  catch(err) {
-    return pageShifter.showPageOnly("500");
-  }
-  const { user, message } = data;
-  if(res.ok) {
-    e.target.parentElement.remove();
-    return flashMessage.showMessage("Korisnik uspesno obrisan", "success");
-  }
-  if(res.status === 500) {
-    return pageShifter.showPageOnly("500");
-  }
-  if(res.status === 401 || res.status === 403) {
-    return window.location.assign(Router.adminLogin);
-  }
-  if(message) {
-    return flashMessage.showMessage(message, "error");
+
+  const deletedUser = await fetchHandler.doRequest(options, "Uspesno obrisan korisnik");
+  // Delete on screen
+  if(deletedUser?._id) {
+    userContainer.remove();
   }
 }
 

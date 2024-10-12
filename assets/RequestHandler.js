@@ -80,6 +80,6 @@ export class RequestHandler {
       return this.flash.showMessage(message, "error");
     }
 
-    return data;
+    return data.res;
   }
 }
