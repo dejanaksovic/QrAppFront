@@ -6,6 +6,7 @@ import { RequestHandler } from "../../assets/RequestHandler";
 // ELEMENTS
 const nameInput = document.getElementById("name-input");
 const priceInput = document.getElementById("price-input");
+const selectElement = document.getElementById("category-input");
 
 const confirmButton = document.getElementById("confirm-button");
 const cancelButton = document.getElementById("cancel-button");
@@ -20,6 +21,15 @@ const pageShifter = new PageShifter(pages, "main-container");
 // fetchHandler
 const fetchHandler = new RequestHandler(pageShifter, Router.adminViewAllArticles, "admin");
 
+// Assets
+const addCategory = (category) => {
+  const categoryOption = document.createElement("option");
+  categoryOption.textContent = category.Name;
+  categoryOption.value = category._id;
+
+  selectElement.appendChild(categoryOption);
+}
+
 // HANDLERS
 const handleConfirm = async (e) => {
   const options = {
@@ -29,6 +39,7 @@ const handleConfirm = async (e) => {
     body: {
       name: nameInput.value,
       price: priceInput.value,
+      categoryId: selectElement.value,
     }
   }
 
@@ -36,6 +47,21 @@ const handleConfirm = async (e) => {
 }
 const handleCancel = () => {
   return window.location.assign(Router.adminViewAllArticles);
+}
+const handleGetCategories = async () => {
+  const options = {
+    url: `${URL}/categories`,
+    method: "GET",
+    password: adminPassword,
+  }
+
+  const categories = await fetchHandler.doRequest(options);
+
+  console.log(categories);
+
+  for(let category of categories) {
+    addCategory(category);
+  }
 }
 
 // connect handlers
@@ -46,3 +72,5 @@ cancelButton.addEventListener("click", handleCancel);
 adminPassword = sessionStorage.getItem("adminPassword");
 if(!adminPassword)
   window.location.assign(Router.adminLogin);
+
+handleGetCategories();
