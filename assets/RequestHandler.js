@@ -20,15 +20,38 @@ export class RequestHandler {
     this.flash = new FlashMessage();
   }
 
-  async doRequest(options, successMessage) {
-    const { url, method, password, body } = options;
+  #checkRequestValidity(options) {
+    const { url, method, queryParams } = options;
     if(!url)
-      throw Error("Url must be given");
+      throw Error("Base url must be given");
     if(!method)
       throw Error("Method must be given");
+    
+    if(!queryParams) {
+      return url;
+    }    
+
+    console.log(queryParams);
+    // Itterate over query params
+    let queryString = "";
+    for(let [key, value] of Object.entries(queryParams)) {
+      if(!(typeof(value) === "string") && !(typeof(value)==="number")) {
+        throw Error(`Invalid value type: ${value}`);
+      }
+      queryString += `${key}=${value}&`;
+      console.log(queryString);
+    }
+    return `${url}?${queryString}`
+  }
+
+  async doRequest(options, successMessage) {
+    const { method, password, body } = options;
+
+    const fullUrl = this.#checkRequestValidity(options);
+   
     let res, data;
     try {
-      res = await fetch(url, {
+      res = await fetch(fullUrl, {
         method: method || "GET",
         headers: {
           "Content-Type" : "application/json",

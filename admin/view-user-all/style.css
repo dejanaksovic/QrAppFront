@@ -30,8 +30,12 @@ main {
   border-radius: .3rem;
 
 }
+
 .search-input img {
   padding: 0.5rem;
+}
+.search-input:hover {
+  cursor: pointer;
 }
 #search {
   width: 9.5rem;
