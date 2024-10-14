@@ -68,8 +68,6 @@ const handleGet = async () => {
 
 }
 
-
-
 const handleConfirm = async () => {
   const requestOptions = {
     url: `${URL}/articles/${id}`,
