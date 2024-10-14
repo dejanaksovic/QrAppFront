@@ -1,4 +1,3 @@
-import { FlashMessage } from "../../assets/Flash.js";
 import { URL } from "../../assets/helpers.js";
 import { Router } from "../../assets/PagePaths.js";
 import { PageShifter } from "../../assets/Pageshifter.js";
@@ -6,7 +5,8 @@ import { RequestHandler } from "../../assets/RequestHandler.js";
 // Elements
 const usersContainer = document.getElementById("users-container");
 const addButton = document.getElementById("add-button");
-
+const searchInput = document.getElementById("search");
+const searchButton = document.getElementById("search-button");
 // pages-setup
 const pages = ["main-page", "500", "404"];
 const pageShifter = new PageShifter(pages, "main-page");
@@ -15,8 +15,6 @@ const pageShifter = new PageShifter(pages, "main-page");
 const fetchHandler = new RequestHandler(pageShifter, undefined, "admin");
 
 
-// Flash message
-const flashMessage = new FlashMessage();
 // Assets
 const addUser = (user) => {
   // user container
@@ -54,6 +52,9 @@ const addUser = (user) => {
   userContainer.appendChild(changeButton);
   // Add to main container
   usersContainer.appendChild(userContainer);
+}
+const clearUserContainer = () => {
+  usersContainer.textContent = "";
 }
 let adminPassword;
 
@@ -94,9 +95,28 @@ const handleDelete = async (e) => {
     userContainer.remove();
   }
 }
+const handleSearchByName = async(e) => {
+  const options = {
+    url: `${URL}/users`,
+    method: "GET",
+    password: adminPassword,
+    queryParams: {
+      nameFilter: searchInput.value,
+    }
+  }
+
+  const users = await fetchHandler.doRequest(options);
+
+  clearUserContainer();
+
+  for(let user of users) {
+    addUser(user);
+  }
+}
 
 // Connect handlers
 addButton.addEventListener("click", handleAddRedirect);
+searchButton.addEventListener("click", handleSearchByName);
 
 // Default behaviour
 adminPassword = sessionStorage.getItem("adminPassword");
