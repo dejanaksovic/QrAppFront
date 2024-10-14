@@ -6,6 +6,7 @@ import { RequestHandler } from "../../assets/RequestHandler.js";
 // ELEMENTS
 const nameInput = document.getElementById("name-input");
 const priceInput = document.getElementById("price-input");
+const categorySelect = document.getElementById("category-input");
 
 const confirmButton = document.getElementById("confirm-button");
 const cancelButton = document.getElementById("cancel-button");
@@ -24,7 +25,31 @@ const pageShifter = new PageShifter(pages, "main-container");
 // handler setup
 const requestHandler = new RequestHandler(pageShifter, Router.adminViewAllArticles, "admin");
 
+// assets
+const populateCategory = (category) => {
+  const categoryElement = document.createElement("option");
+  categoryElement.textContent = category.Name;
+  categoryElement.value = category._id;
+
+  categorySelect.appendChild(categoryElement);
+}
+
 // HANDLERS
+
+const handleGetCategories = async () => {
+  const options = {
+    url: `${URL}/categories`,
+    method: "GET",
+    password: adminPassword,
+  }
+
+  const categories = await requestHandler.doRequest(options);
+
+  for (let category of categories) {
+    populateCategory(category);
+  }
+}
+
 const handleGet = async () => {
   const requestOptions = {
     url: `${URL}/articles/${id}`,
@@ -33,13 +58,17 @@ const handleGet = async () => {
   }
 
   const article = await requestHandler.doRequest(requestOptions);
+  handleGetCategories();
 
   if(article) {
     nameElement.textContent = article.Name;
     priceElement.textContent = article.Price;
     return;
   }
+
 }
+
+
 
 const handleConfirm = async () => {
   const requestOptions = {
@@ -49,10 +78,11 @@ const handleConfirm = async () => {
     body: {
       name: nameInput.value,
       price: priceInput.value,
+      categoryId: categorySelect.value,
     }
   }
 
-  const article = await requestHandler.doRequest(requestOptions, "Artikal uspesno kreiran");
+  const article = await requestHandler.doRequest(requestOptions, "Artikal uspesno promenjen");
   return;
 }
 
