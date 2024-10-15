@@ -25,10 +25,10 @@ const pageShifter = new PageShifter(pages, "main-page");
 // handler
 const fetchHandler = new RequestHandler(pageShifter, undefined, "admin");
 
-
 // Assets
 let usersGlobal = [];
 let adminPassword;
+let pageStart = 0;
 
 const addUser = (user) => {
   // user container
@@ -109,8 +109,8 @@ const handleGetUsers = async () => {
     method: "GET",
     password: adminPassword,
     queryParams: {
-      ps: 0,
-      pc: 30,
+      ps: pageStart,
+      pc: 24,
     }
   }
 
@@ -131,7 +131,6 @@ const handleChangeRedirect = (e) => {
 const handleDelete = async (e) => {
   const userId = e.target.getAttribute("user-id");
   const userContainer = document.querySelector(`.user[user-id="${userId}"]`)
-  console.log(userContainer);
 
   const options = {
     url: `${URL}/users/${userId}`,
@@ -152,6 +151,8 @@ const handleSearchByName = async(e) => {
     password: adminPassword,
     queryParams: {
       nameFilter: searchInput.value,
+      ps: pageStart,
+      pc: 24,
     }
   }
 

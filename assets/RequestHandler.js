@@ -31,6 +31,7 @@ export class RequestHandler {
       return url;
     }    
 
+    console.log(queryParams);
     // Itterate over query params
     let queryString = "";
     for(let [key, value] of Object.entries(queryParams)) {
@@ -46,7 +47,7 @@ export class RequestHandler {
     const { method, password, body } = options;
 
     const fullUrl = this.#checkRequestValidity(options);
-   
+    console.log(fullUrl);
     let res, data;
     try {
       res = await fetch(fullUrl, {
