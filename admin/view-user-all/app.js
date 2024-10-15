@@ -18,6 +18,8 @@ const seeLess = document.getElementById("see-less");
 
 const transactionsContainer = document.getElementById("transactions-container");
 
+const paginationButtons = document.querySelectorAll(".page-number-button");
+
 // pages-setup
 const pages = ["main-page", "500", "404"];
 const pageShifter = new PageShifter(pages, "main-page");
@@ -116,7 +118,8 @@ const handleGetUsers = async () => {
 
   const users = await fetchHandler.doRequest(options);
   usersGlobal = users;
-  
+  // RESET
+  usersContainer.textContent = "";
   for (let user of users) {
     addUser(user);
   }
@@ -198,6 +201,11 @@ const handleSeeLess = () => {
   seeMore.classList.remove("hidden");
   seeLess.classList.add("hidden");
 }
+const handlePaginate = (e) => {
+  pageStart = Number(e.currentTarget.textContent) - 1;
+
+  handleGetUsers();
+}
 
 // Connect handlers
 addButton.addEventListener("click", handleAddRedirect);
@@ -208,8 +216,10 @@ changeSelectButton.addEventListener("click", handleChangeRedirect);
 delSelectButton.addEventListener("click", e => {
   handleDelete(e);
   selectedContainer.classList.add("hidden");
-
 });
+for(let button of paginationButtons) {
+  button.addEventListener("click", handlePaginate);
+}
 // Default behaviour
 adminPassword = sessionStorage.getItem("adminPassword");
 if(!adminPassword) {
