@@ -64,6 +64,10 @@ const handleGetUsers = async () => {
     url: `${URL}/users`,
     method: "GET",
     password: adminPassword,
+    queryParams: {
+      ps: 0,
+      pc: 30,
+    }
   }
 
   const users = await fetchHandler.doRequest(options);

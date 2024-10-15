@@ -6,6 +6,7 @@ import { RequestHandler } from "../../assets/RequestHandler.js";
 // ELEMENTS
 const allArticlesContainer = document.getElementById("all-articles");
 const selectedArticleContainer = document.getElementById("selected-article");
+const helperContainer = document.querySelector(".helper");
 
 const addButton = document.getElementById("button-add");
 const delSelectedButton = document.querySelector("#selected-article button:nth-child(1)");
@@ -65,10 +66,15 @@ const handleGetAll = async () => {
   const requestOptions = {
     url: `${URL}/articles`,
     method: "GET",
+    queryParams: {
+      ps: 0,
+      pc: 30,
+    }
   }
 
   const articles = await requestHandler.doRequest(requestOptions) ?? {articles: null};
 
+  console.log(articles);
 
   for (let article of articles) {
     addArticle(article);
@@ -100,7 +106,7 @@ const handleDelete = async (e) => {
 }
 const handleSelect = (article, container) => {
   selectedElement = container;
-  selectedArticleContainer.classList.remove("hidden");
+  helperContainer.classList.remove("hidden");
   const selectedName = document.querySelector("#selected-article h1");
   selectedName.textContent = article.Name;
   const selectedPrice = document.querySelector("#selected-article p");
@@ -115,7 +121,7 @@ const handleSelect = (article, container) => {
 addButton.addEventListener("click", handleRedirectAdd);
 delSelectedButton.addEventListener("click", e => {
   handleDelete(e);
-  selectedArticleContainer.classList.add("hidden");
+  helperContainer.classList.add("hidden");
 });
 changeSelectedButton.addEventListener("click", handleChange);
 
