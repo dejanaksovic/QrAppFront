@@ -82,6 +82,11 @@ main {
   grid-template-rows: 1fr;
   align-items: center;
 }
+
+.user:hover {
+  cursor: pointer;
+}
+
 .user-selected {
   background-color: var(--clr-accent-muted);
 }

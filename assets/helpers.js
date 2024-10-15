@@ -11,20 +11,8 @@ export const getBasePath = () => {
     return `${basePath}`;
 }
 
-export const URL = "http://localhost:3000";
+export const getTransactionTime = (date) => {
+  return `${date.getDay()}.${date.getMonth()} ${date.getHours()}:${date.getMinutes()}`
+}
 
-export const articleNames = new Set([{
-  name: "mala-kafa",
-  price: 1,
-  buyPrice: 15,
-},
-{
-  name: "sok",
-  price: 2,
-  buyPrice: 25,
-},
-{
-  name: "velika-kafa",
-  price: 3,
-  buyPrice: 30,
-}]);
+export const URL = "http://localhost:3000";

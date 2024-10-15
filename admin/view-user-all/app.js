@@ -1,4 +1,4 @@
-import { URL } from "../../assets/helpers.js";
+import { getTransactionTime, URL } from "../../assets/helpers.js";
 import { Router } from "../../assets/PagePaths.js";
 import { PageShifter } from "../../assets/Pageshifter.js";
 import { RequestHandler } from "../../assets/RequestHandler.js";
@@ -7,6 +7,17 @@ const usersContainer = document.getElementById("users-container");
 const addButton = document.getElementById("add-button");
 const searchInput = document.getElementById("search");
 const searchButton = document.getElementById("search-button");
+
+const selectedContainer = document.querySelector(".user-card");
+const selectedUserName = document.getElementById("user-card-name");
+const selectedUserCoins = document.getElementById("user-card-coins");
+const changeSelectButton = document.querySelector(".user-card-manage-button");
+const delSelectButton = document.querySelector(".user-card-remove-button");
+const seeMore = document.getElementById("see-more");
+const seeLess = document.getElementById("see-less");
+
+const transactionsContainer = document.getElementById("transactions-container");
+
 // pages-setup
 const pages = ["main-page", "500", "404"];
 const pageShifter = new PageShifter(pages, "main-page");
@@ -16,10 +27,15 @@ const fetchHandler = new RequestHandler(pageShifter, undefined, "admin");
 
 
 // Assets
+let usersGlobal = [];
+let adminPassword;
+
 const addUser = (user) => {
   // user container
   const userContainer = document.createElement("div");
+  userContainer.setAttribute("user-id", user._id);
   userContainer.classList.add("user");
+  userContainer.addEventListener("click", handleSelect, {capture: true});
   // icon
   const icon = document.createElement("img");
   icon.src = "../../svgs/user-pfp.svg";
@@ -56,7 +72,35 @@ const addUser = (user) => {
 const clearUserContainer = () => {
   usersContainer.textContent = "";
 }
-let adminPassword;
+
+const updateSelectedStatus = (user) => {
+  const { Name, Coins, _id } = user;
+
+  selectedUserCoins.textContent = Coins;
+  selectedUserName.textContent = Name;
+
+  seeMore.setAttribute("user-id", _id);
+  changeSelectButton.setAttribute("user-id", _id);
+  delSelectButton.setAttribute("user-id", _id);
+}
+
+const addTransaction = (transaction) => {
+  const { createdAt, Coins } = transaction;
+
+  const orderElement = document.createElement("p");
+  const coinsElement = document.createElement("p");
+  const dateElement = document.createElement("p");
+  // populate
+  for(let { Article, Quantity } of transaction.Order) {
+    orderElement.textContent+= `${Article.Name} ${Quantity}, `;
+  }
+
+  coinsElement.textContent = Coins;
+  dateElement.textContent = getTransactionTime(new Date(createdAt));
+
+  transactionsContainer.append(orderElement, coinsElement, dateElement);
+}
+
 
 // Handlers
 const handleGetUsers = async () => {
@@ -71,6 +115,7 @@ const handleGetUsers = async () => {
   }
 
   const users = await fetchHandler.doRequest(options);
+  usersGlobal = users;
   
   for (let user of users) {
     addUser(user);
@@ -85,7 +130,8 @@ const handleChangeRedirect = (e) => {
 }
 const handleDelete = async (e) => {
   const userId = e.target.getAttribute("user-id");
-  const userContainer = e.target.closest('.user');
+  const userContainer = document.querySelector(`.user[user-id="${userId}"]`)
+  console.log(userContainer);
 
   const options = {
     url: `${URL}/users/${userId}`,
@@ -117,11 +163,52 @@ const handleSearchByName = async(e) => {
     addUser(user);
   }
 }
+const handleSelect = (e) => {
+  const id = e.currentTarget.getAttribute("user-id");
+
+  const selectedUserNew = usersGlobal?.find(e => e._id === id);
+  // Reset transactions
+  handleSeeLess();
+  updateSelectedStatus(selectedUserNew);
+  // Show
+  selectedContainer.classList.remove("hidden");
+}
+const handleGetUserTransactions = async (e) => {
+  const options = {
+    url: `${URL}/transactions/${e.currentTarget.getAttribute("user-id")}`,
+    method: "GET",
+    password: adminPassword,
+  }
+
+  const transactions = await fetchHandler.doRequest(options);
+
+  // Refresh
+  transactionsContainer.textContent = "";
+  for(let transaction of transactions) {
+    addTransaction(transaction);
+  }
+
+  transactionsContainer.classList.remove("hidden");
+  seeLess.classList.remove("hidden");
+  seeMore.classList.add("hidden");
+}
+const handleSeeLess = () => {
+  transactionsContainer.classList.add("hidden");
+  seeMore.classList.remove("hidden");
+  seeLess.classList.add("hidden");
+}
 
 // Connect handlers
 addButton.addEventListener("click", handleAddRedirect);
 searchButton.addEventListener("click", handleSearchByName);
+seeMore.addEventListener("click", handleGetUserTransactions);
+seeLess.addEventListener("click", handleSeeLess);
+changeSelectButton.addEventListener("click", handleChangeRedirect);
+delSelectButton.addEventListener("click", e => {
+  handleDelete(e);
+  selectedContainer.classList.add("hidden");
 
+});
 // Default behaviour
 adminPassword = sessionStorage.getItem("adminPassword");
 if(!adminPassword) {

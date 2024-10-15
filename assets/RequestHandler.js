@@ -31,7 +31,6 @@ export class RequestHandler {
       return url;
     }    
 
-    console.log(queryParams);
     // Itterate over query params
     let queryString = "";
     for(let [key, value] of Object.entries(queryParams)) {
@@ -39,7 +38,6 @@ export class RequestHandler {
         throw Error(`Invalid value type: ${value}`);
       }
       queryString += `${key}=${value}&`;
-      console.log(queryString);
     }
     return `${url}?${queryString}`
   }
@@ -80,7 +78,8 @@ export class RequestHandler {
       }
       if(successMessage) {
         this.flash.showMessage(successMessage, "success");
-      }      
+      }
+      
     }
     if(res.status === 500) {
       return this.shifter.showPageOnly("500");
@@ -102,7 +101,6 @@ export class RequestHandler {
     if(message) {
       return this.flash.showMessage(message, "error");
     }
-
     return data.res;
   }
 }
