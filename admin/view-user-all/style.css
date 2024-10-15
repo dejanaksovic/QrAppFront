@@ -71,7 +71,8 @@ main {
   padding: .7rem;
   overflow: auto;
 }
-.user {
+.user,
+.user-selected {
   border: 1px solid var(--clr-accent-muted);
   border-radius: .3rem;
   padding: .4rem;
@@ -81,8 +82,16 @@ main {
   grid-template-rows: 1fr;
   align-items: center;
 }
+.user-selected {
+  background-color: var(--clr-accent-muted);
+}
+.user-selected svg path{
+  fill: var(--clr-bg-dark);
+}
 .user img,
-.user svg {
+.user-selected img,
+.user svg
+.user-selected svg {
   max-width: 50px;
   height: auto;
   grid-area: 1/1/1/2;
@@ -99,20 +108,34 @@ main {
   padding: .3rem;
   border-radius: 3px;
 }
-.manage-button {
+.manage-button,
+.manage-button-selected {
   grid-area: 1/4/1/5;
-  color: var(--clr-accent-muted);
-  border: 1px solid var(--clr-accent-muted);
   border-radius: 3px;
   padding: .2rem;
 }
-.manage-button:hover {
+.manage-button {
+  color: var(--clr-accent-muted);
+  border: 1px solid var(--clr-accent-muted);
+}
+.manage-button-selected{
+  color: var(--clr-bg-dark);
+  background-color: var(--clr-accent-muted);
+  border: 1px solid var(--clr-bg-dark);
+}
+.manage-button:hover,
+.manage-button-selected:hover {
   background-color: white;
+  color: var(--clr-accent-muted);
+  border: 1px solid var(--clr-accent-muted);
 }
 .user img,
+.user-selected img,
 .user svg,
+.user-selected svg,
 .remove-button,
-.manage-button {
+.manage-button,
+.manage-button-selected {
   align-self: center;
   justify-self: center;
 }
@@ -204,7 +227,9 @@ main {
     padding: .5rem;
   }
   .user img,
-  .user svg {
+  .user-selected img,
+  .user svg,
+  .user-selected svg {
     width: 50px;
     height: auto;
   }
@@ -220,7 +245,8 @@ main {
     padding: .4rem;
     border-radius: .4rem;
   }
-  .manage-button {
+  .manage-button,
+  .manage-button-selected {
     font-size: 1.2rem;
     padding: .4rem;
     border-radius: .4rem;
@@ -283,14 +309,16 @@ main {
     column-gap: 1.2rem;
 
   }
-  .user {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 2fr;
-    justify-content: center;
+  .user,
+  .user-selected {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
   }
   .user img,
-  .user svg {
+  .user-selected img,
+  .user svg,
+  .user-selected svg {
     width: 2.2rem;
     height: auto;
     grid-area: 1/1/2/1;
@@ -319,10 +347,9 @@ main {
     opacity: 70%;
     font-size: 0.8rem;
   }
-  .remove-button {
-    display: none;
-  }
-  .manage-button {
+  .remove-button,
+  .manage-button,
+  .manage-button-selected {
     display: none;
   }
   .user-card {
@@ -332,7 +359,7 @@ main {
     grid-row-start: 2 !important;
     grid-row: span 2;
     width: 100%;
-    height: 90vh;
+    min-height: fit-content;
     border: 2px solid var(--clr-accent-muted);
     display: flex;
     flex-direction: column;
@@ -408,15 +435,18 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+
   }
   .transactions {
     margin-top: 1rem;
     background-color: var(--clr-accent-muted);
     width: 100%;
+    max-height: 58vh;
     display: grid;
     grid-template-columns: 5fr 1.5fr 3.5fr;
     grid-template-rows: repeat(auto, 1fr);
-    overflow: scroll;
+    overflow-y: scroll;
+    scrollbar-width: none;
   }
   .transactions p {
     overflow: hidden;
@@ -465,14 +495,28 @@ main {
     align-items: start;
     justify-content: space-evenly;
   }
-  .page-number-button {
+  .page-number-button,
+  .page-number-button-selected {
     font-size: .8rem;
     width: 1.7rem;
     height: 1.7rem;
+  }
+  .page-number-button {
     color: var(--clr-font);
     border: 1px solid var(--clr-accent-muted);
   }
+  .page-number-button-selected {
+    border: 1px solid var(--clr-accent-muted);
+    color: var(--clr-bg-dark);
+    background-color: var(--clr-accent-muted);
+    font-weight: bolder;
+  }
   .page-number-button:hover {
+    color: var(--clr-bg-dark);
+    background-color: var(--clr-accent-muted);
+    font-weight: bolder;
+  }
+  .page-number-button::selection {
     color: var(--clr-bg-dark);
     background-color: var(--clr-accent-muted);
     font-weight: bolder;
