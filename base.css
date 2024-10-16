@@ -25,6 +25,11 @@
 a {
   text-decoration: none;
   color: var(--clr-font);
+  display: block;
+}
+
+img {
+  display: block;
 }
 
 button {

@@ -112,7 +112,7 @@ const handleGetUsers = async () => {
     password: adminPassword,
     queryParams: {
       ps: pageStart,
-      pc: 24,
+      pc: 20,
     }
   }
 
@@ -155,7 +155,7 @@ const handleSearchByName = async(e) => {
     queryParams: {
       nameFilter: searchInput.value,
       ps: pageStart,
-      pc: 24,
+      pc: 20,
     }
   }
 
@@ -169,6 +169,7 @@ const handleSearchByName = async(e) => {
 }
 const handleSelect = (e) => {
   const id = e.currentTarget.getAttribute("user-id");
+  e.currentTarget.classList.toggle("selected");
 
   const selectedUserNew = usersGlobal?.find(e => e._id === id);
   // Reset transactions
