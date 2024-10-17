@@ -162,10 +162,12 @@ const handleSearchByName = async(e) => {
     queryParams: {
       nameFilter: searchInput.value,
       ps: pageStart,
-      pc: 20,
+      pc: pageCount,
     }
   }
 
+  // Reset search
+  searchInput.value = "";
   const users = await fetchHandler.doRequest(options);
 
   clearUserContainer();
