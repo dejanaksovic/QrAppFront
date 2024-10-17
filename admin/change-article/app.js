@@ -85,7 +85,7 @@ const handleConfirm = async () => {
 }
 
 const handleCancel = () =>{
-  return window.location.assign(Router.adminViewAllArticles);
+  return Router.adminViewAllArticles();
 }
 // connect handlers
 confirmButton.addEventListener("click", handleConfirm);

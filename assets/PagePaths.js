@@ -3,13 +3,32 @@ import { getBasePath } from "./helpers.js";
 const basePath = getBasePath();
 
 export const Router ={
-  adminLogin : `${basePath}/admin/login/index.html`,
-  adminViewAllUsers : `${basePath}/admin/view-user-all/index.html`,
-  adminChangeUser : `${basePath}/admin/change-user/index.html`,
-  adminAddUser: `${basePath}/admin/add-user/index.html`,
-  adminViewAllArticles: `${basePath}/admin/view-articles-all/index.html`,
-  adminAddArticle: `${basePath}/admin/add-article/index.html`,
-  adminChangeArticle: `${basePath}/admin/change-article/index.html`,
+  // ADMIN
+  adminLogin : () => {
+    window.location.assign(`${basePath}/admin/login/index.html`);
+  },
+  adminViewAllUsers : () => {
+    window.location.assign(`${basePath}/admin/view-user-all/index.html`);
+  },
+  adminChangeUser : (id) => {
+    window.location.assign(`${basePath}/admin/change-user/index.html?id=${id}`);
+  },
+  adminAddUser: () => {
+    window.location.assign(`${basePath}/admin/add-user/index.html`);
+  },
 
-  workerLogin: `${basePath}/worker/login/index.html`,
+  adminViewAllArticles: () => {
+    window.location.assign(`${basePath}/admin/view-articles-all/index.html`);
+  },
+  adminAddArticle: () => {
+    window.location.assign(`${basePath}/admin/add-article/index.html`);
+  },
+  adminChangeArticle: (id) => {
+    window.location.assign(`${basePath}/admin/change-article/index.html?id=${id}`);
+  },
+
+  // WORKER
+  workerLogin: () => {
+    window.location.assign(`${basePath}/worker/login/index.html`);
+  },
 }

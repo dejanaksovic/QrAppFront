@@ -125,16 +125,15 @@ const handleGetUsers = async () => {
   }
 }
 const handleAddRedirect = () => {
-  window.location.assign(Router.adminAddUser);
+  return Router.adminAddUser();
 }
 const handleChangeRedirect = (e) => {
   const id = e.target.getAttribute("user-id");
-  return window.location.assign(`${Router.adminChangeUser}?id=${id}`);
+  return Router.adminChangeUser(id);
 }
 const handleDelete = async (e) => {
   const userId = e.target.getAttribute("user-id");
   const userContainer = document.querySelector(`.user[user-id="${userId}"]`)
-
   const options = {
     url: `${URL}/users/${userId}`,
     method: "DELETE",
@@ -143,9 +142,7 @@ const handleDelete = async (e) => {
 
   const deletedUser = await fetchHandler.doRequest(options, "Uspesno obrisan korisnik");
   // Delete on screen
-  if(deletedUser?._id) {
-    userContainer.remove();
-  }
+  userContainer.remove();
 }
 const handleSearchByName = async(e) => {
   const options = {
@@ -169,7 +166,8 @@ const handleSearchByName = async(e) => {
 }
 const handleSelect = (e) => {
   const id = e.currentTarget.getAttribute("user-id");
-  e.currentTarget.classList.toggle("selected");
+  // If its on mobile redirect
+
 
   const selectedUserNew = usersGlobal?.find(e => e._id === id);
   // Reset transactions

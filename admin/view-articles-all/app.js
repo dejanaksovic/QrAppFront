@@ -92,11 +92,11 @@ const handleGetAll = async () => {
   }
 }
 const handleRedirectAdd = async () => {
-  return window.location.assign(Router.adminAddArticle);
+  return Router.adminAddArticle();
 }
 const handleChange = (e) => {
   const id = e.target.getAttribute("article-id");
-  return window.location.assign(`${Router.adminChangeArticle}?id=${id}`);
+  return Router.adminChangeArticle(id);
 }
 const handleDelete = async (e) => {
   const id = e.target.getAttribute("article-id");

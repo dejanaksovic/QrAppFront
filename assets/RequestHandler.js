@@ -66,7 +66,6 @@ export class RequestHandler {
       }
     }
     catch(err) {
-      console.log(err);
       return this.shifter.showPageOnly("500");
     }
 
@@ -75,10 +74,10 @@ export class RequestHandler {
     if(res.ok) {
       if(successMessage && this.successRedirect) {
         this.flash.leaveMessage(successMessage, "success");
-        return window.location.assign(this.successRedirect);
+        return this.successRedirect();
       }
       if(successMessage) {
-        this.flash.showMessage(successMessage, "success");
+        return this.flash.showMessage(successMessage, "success");
       }
       
     }
@@ -88,10 +87,10 @@ export class RequestHandler {
     if(res.status === 401 || res.status === 403) {
       switch(this.role) {
         case "admin": {
-          return window.location.assign(Router.adminLogin);
+          return Router.adminLogin();
         }
         case "worker": {
-          return window.location.assign(Router.workerLogin);
+          return Router.workerLogin();
         }
       }
       return
