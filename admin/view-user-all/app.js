@@ -175,11 +175,13 @@ const handleSearchByName = async(e) => {
   }
 }
 const handleSelect = (e) => {
+  // Check for mobile and redirect
   const id = e.currentTarget.getAttribute("user-id");
-  // If its on mobile redirect
+    if(window.innerWidth <= 1024) {
+      return Router.adminViewSelectedUser(id);
+    }
 
-
-  const selectedUserNew = usersGlobal?.find(e => e._id === id);
+    const selectedUserNew = usersGlobal?.find(e => e._id === id);
   // Reset transactions
   handleSeeLess();
   updateSelectedStatus(selectedUserNew);

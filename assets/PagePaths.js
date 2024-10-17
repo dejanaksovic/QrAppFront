@@ -16,6 +16,9 @@ export const Router ={
   adminAddUser: () => {
     window.location.assign(`${basePath}/admin/add-user/index.html`);
   },
+  adminViewSelectedUser: (id) => {
+    window.location.assign(`${basePath}/admin/view-user-all/mobile-view/index.html?id=${id}`);
+  },
 
   adminViewAllArticles: () => {
     window.location.assign(`${basePath}/admin/view-articles-all/index.html`);
