@@ -12,6 +12,8 @@ const addButton = document.getElementById("button-add");
 const delSelectedButton = document.querySelector("#selected-article button:nth-child(1)");
 const changeSelectedButton = document.querySelector("#selected-article button:nth-child(2)");
 
+const selectContainer = document.querySelector("select");
+
 let selectedElement;
 
 // setup pages
@@ -61,12 +63,20 @@ const addArticle = ({Name, Price, _id}) => {
   allArticlesContainer.appendChild(articleContainer);
 }
 
+const populateCategories = (category) => {
+  const categoryOption = document.createElement("option");
+  categoryOption.textContent = category.Name;
+  categoryOption.value = category._id;
+  selectContainer.appendChild(categoryOption);
+}
+
 // handlers
 const handleGetAll = async () => {
   const requestOptions = {
     url: `${URL}/articles`,
     method: "GET",
     queryParams: {
+      categoryId: selectContainer.value,
       ps: 0,
       pc: 30,
     }
@@ -74,7 +84,8 @@ const handleGetAll = async () => {
 
   const articles = await requestHandler.doRequest(requestOptions) ?? {articles: null};
 
-  console.log(articles);
+  // Refresh
+  allArticlesContainer.textContent = "";
 
   for (let article of articles) {
     addArticle(article);
@@ -114,8 +125,18 @@ const handleSelect = (article, container) => {
   delSelectedButton.setAttribute("article-id", article._id);
   changeSelectedButton.setAttribute("article-id", article._id);
 }
-
-
+const handleGetCategories = async (e) => {
+  const options = {
+    url: `${URL}/categories`,
+    method: "GET",
+    password: adminPassword,
+  }
+  
+  const categories = await requestHandler.doRequest(options);
+  for(let category of categories) {
+    populateCategories(category);
+  }
+}
 
 // Connect handlers
 addButton.addEventListener("click", handleRedirectAdd);
@@ -124,6 +145,7 @@ delSelectedButton.addEventListener("click", e => {
   helperContainer.classList.add("hidden");
 });
 changeSelectedButton.addEventListener("click", handleChange);
+selectContainer.addEventListener("change", handleGetAll);
 
 // Default behaviour
 adminPassword = sessionStorage.getItem("adminPassword");
@@ -131,3 +153,4 @@ if(!adminPassword) {
   window.location.assign(Router.adminLogin);
 }
 handleGetAll();
+handleGetCategories();
