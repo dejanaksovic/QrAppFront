@@ -13,12 +13,13 @@ const selectedUserName = document.getElementById("user-card-name");
 const selectedUserCoins = document.getElementById("user-card-coins");
 const changeSelectButton = document.querySelector(".user-card-manage-button");
 const delSelectButton = document.querySelector(".user-card-remove-button");
+
 const seeMore = document.getElementById("see-more");
 const seeLess = document.getElementById("see-less");
 
 const transactionsContainer = document.getElementById("transactions-container");
 
-const paginationButtons = document.querySelectorAll(".page-number-button");
+const [pageLeft, pageRight] = document.querySelectorAll(".pagination button");
 
 // pages-setup
 const pages = ["main-page", "500", "404"];
@@ -30,7 +31,10 @@ const fetchHandler = new RequestHandler(pageShifter, undefined, "admin");
 // Assets
 let usersGlobal = [];
 let adminPassword;
+
 let pageStart = 0;
+let pageCount = 20;
+let pageMaxReached = false;
 
 const addUser = (user) => {
   // user container
@@ -112,12 +116,18 @@ const handleGetUsers = async () => {
     password: adminPassword,
     queryParams: {
       ps: pageStart,
-      pc: 20,
+      pc: pageCount,
     }
   }
 
   const users = await fetchHandler.doRequest(options);
   usersGlobal = users;
+  if(users.length < pageCount) {
+    pageMaxReached = true;
+  }
+  else {
+    pageMaxReached = false;
+  }
   // RESET
   usersContainer.textContent = "";
   for (let user of users) {
@@ -200,9 +210,19 @@ const handleSeeLess = () => {
   seeMore.classList.remove("hidden");
   seeLess.classList.add("hidden");
 }
-const handlePaginate = (e) => {
-  pageStart = Number(e.currentTarget.textContent) - 1;
+const handlePageLess = (e) => {
+  if(!pageStart) {
+    return
+  }
+  pageStart-= 1;
+  handleGetUsers();
+}
 
+const handlePageMore = (e) => {
+  if(pageMaxReached) {
+    return
+  }
+  pageStart +=1;
   handleGetUsers();
 }
 
@@ -216,9 +236,8 @@ delSelectButton.addEventListener("click", e => {
   handleDelete(e);
   selectedContainer.classList.add("hidden");
 });
-for(let button of paginationButtons) {
-  button.addEventListener("click", handlePaginate);
-}
+pageLeft.addEventListener("click", handlePageLess);
+pageRight.addEventListener("click", handlePageMore);
 // Default behaviour
 adminPassword = sessionStorage.getItem("adminPassword");
 if(!adminPassword) {
