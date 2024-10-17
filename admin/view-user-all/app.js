@@ -13,12 +13,13 @@ const selectedUserName = document.getElementById("user-card-name");
 const selectedUserCoins = document.getElementById("user-card-coins");
 const changeSelectButton = document.querySelector(".user-card-manage-button");
 const delSelectButton = document.querySelector(".user-card-remove-button");
+
 const seeMore = document.getElementById("see-more");
 const seeLess = document.getElementById("see-less");
 
 const transactionsContainer = document.getElementById("transactions-container");
 
-const paginationButtons = document.querySelectorAll(".page-number-button");
+const [pageLeft, pageRight] = document.querySelectorAll(".pagination button");
 
 // pages-setup
 const pages = ["main-page", "500", "404"];
@@ -30,7 +31,10 @@ const fetchHandler = new RequestHandler(pageShifter, undefined, "admin");
 // Assets
 let usersGlobal = [];
 let adminPassword;
+
 let pageStart = 0;
+let pageCount = 20;
+let pageMaxReached = false;
 
 const addUser = (user) => {
   // user container
@@ -112,12 +116,18 @@ const handleGetUsers = async () => {
     password: adminPassword,
     queryParams: {
       ps: pageStart,
-      pc: 20,
+      pc: pageCount,
     }
   }
 
   const users = await fetchHandler.doRequest(options);
   usersGlobal = users;
+  if(users.length < pageCount) {
+    pageMaxReached = true;
+  }
+  else {
+    pageMaxReached = false;
+  }
   // RESET
   usersContainer.textContent = "";
   for (let user of users) {
@@ -125,16 +135,15 @@ const handleGetUsers = async () => {
   }
 }
 const handleAddRedirect = () => {
-  window.location.assign(Router.adminAddUser);
+  return Router.adminAddUser();
 }
 const handleChangeRedirect = (e) => {
   const id = e.target.getAttribute("user-id");
-  return window.location.assign(`${Router.adminChangeUser}?id=${id}`);
+  return Router.adminChangeUser(id);
 }
 const handleDelete = async (e) => {
   const userId = e.target.getAttribute("user-id");
   const userContainer = document.querySelector(`.user[user-id="${userId}"]`)
-
   const options = {
     url: `${URL}/users/${userId}`,
     method: "DELETE",
@@ -143,9 +152,7 @@ const handleDelete = async (e) => {
 
   const deletedUser = await fetchHandler.doRequest(options, "Uspesno obrisan korisnik");
   // Delete on screen
-  if(deletedUser?._id) {
-    userContainer.remove();
-  }
+  userContainer.remove();
 }
 const handleSearchByName = async(e) => {
   const options = {
@@ -155,10 +162,12 @@ const handleSearchByName = async(e) => {
     queryParams: {
       nameFilter: searchInput.value,
       ps: pageStart,
-      pc: 20,
+      pc: pageCount,
     }
   }
 
+  // Reset search
+  searchInput.value = "";
   const users = await fetchHandler.doRequest(options);
 
   clearUserContainer();
@@ -168,10 +177,13 @@ const handleSearchByName = async(e) => {
   }
 }
 const handleSelect = (e) => {
+  // Check for mobile and redirect
   const id = e.currentTarget.getAttribute("user-id");
-  e.currentTarget.classList.toggle("selected");
+    if(window.innerWidth <= 1024) {
+      return Router.adminViewSelectedUser(id);
+    }
 
-  const selectedUserNew = usersGlobal?.find(e => e._id === id);
+    const selectedUserNew = usersGlobal?.find(e => e._id === id);
   // Reset transactions
   handleSeeLess();
   updateSelectedStatus(selectedUserNew);
@@ -202,9 +214,19 @@ const handleSeeLess = () => {
   seeMore.classList.remove("hidden");
   seeLess.classList.add("hidden");
 }
-const handlePaginate = (e) => {
-  pageStart = Number(e.currentTarget.textContent) - 1;
+const handlePageLess = (e) => {
+  if(!pageStart) {
+    return
+  }
+  pageStart-= 1;
+  handleGetUsers();
+}
 
+const handlePageMore = (e) => {
+  if(pageMaxReached) {
+    return
+  }
+  pageStart +=1;
   handleGetUsers();
 }
 
@@ -218,9 +240,8 @@ delSelectButton.addEventListener("click", e => {
   handleDelete(e);
   selectedContainer.classList.add("hidden");
 });
-for(let button of paginationButtons) {
-  button.addEventListener("click", handlePaginate);
-}
+pageLeft.addEventListener("click", handlePageLess);
+pageRight.addEventListener("click", handlePageMore);
 // Default behaviour
 adminPassword = sessionStorage.getItem("adminPassword");
 if(!adminPassword) {

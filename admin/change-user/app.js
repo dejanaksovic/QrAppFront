@@ -22,7 +22,7 @@ const requestHandler = new RequestHandler(pageShifter, Router.adminViewAllUsers,
 let id, adminPassword;
 // HANDLERS 
 const handleCancel = () => {
-  window.location.assign(Router.adminViewAllUsers);
+  return Router.adminViewAllUsers();
 }
 const handleChange = async () => {
   const requestOptions = {

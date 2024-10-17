@@ -46,7 +46,7 @@ const handleConfirm = async (e) => {
   await fetchHandler.doRequest(options, "Uspesno kreiran artikal");
 }
 const handleCancel = () => {
-  return window.location.assign(Router.adminViewAllArticles);
+  Router.adminViewAllArticles();
 }
 const handleGetCategories = async () => {
   const options = {
@@ -56,8 +56,6 @@ const handleGetCategories = async () => {
   }
 
   const categories = await fetchHandler.doRequest(options);
-
-  console.log(categories);
 
   for(let category of categories) {
     addCategory(category);
