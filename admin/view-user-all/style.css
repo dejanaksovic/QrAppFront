@@ -135,20 +135,9 @@ main {
   transform: translateX(0);
 }
 
-.links {
-  margin-top: 1rem;
-}
-.links p {
-  text-align: center;
-  color: var(--clr-font);
-  font-size: 1.7rem;
-}
-.links p:hover {
-  font-weight: bolder;
-}
-#bottom-border {
-  color: var(--clr-bg-dark);
-  border-top: 2px solid var(--clr-accent-muted);
+.links a{
+  padding: 2rem 0 .5rem 0;
+  border-bottom: 2px solid var(--clr-accent-muted);
 }
 .user-card {
   display: none;
@@ -326,8 +315,10 @@ main {
     height: auto;
   }
   .user-card-name-and-coins p {
+    margin-inline: auto;
     padding: 0 .2rem;
     margin-bottom: .5rem;
+    max-width: 12ch;
     text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
