@@ -13,71 +13,29 @@
 
 </head>
 
-<body>
-  <div class="main-div" id="ui-page">
-    <div class="main-div">
-      <div class="logo-div">
-        <div>
-          <img src="../svgs/Han-coffee-logo.png" >
-        </div>
+<body class="bg-dark">
+  <div class="main-container" id="main">
+    <div class="user-info">
+      <img src="../svgs/user-pfp.svg" alt="">
+      <h1 id="name">Sample name</h1>
+      <p id="coins">35c</p>
+    </div>
+    <div class="transactions">
+      <div class="single-trans">
+        <p>Ime i kolicina</p>
+        <p>Cena</p>
+        <p>Vreme</p>
       </div>
-      <div class="inputBg">
-    
-        <div class="username-div">
-          <div class="balance">
-            <p id="name-container">IME</p>
-          </div>
-        </div>
-        <div class="balance-div">
-          <div class="legend">STANJE:</div>
-          <div class="balance">
-            <p id="balance-container">313215</p>
-          </div>
-    
-        </div>
-        <div class="transactions-div">
-          <div class="legend">TRANSAKCIJE:</div>
-          <div class="transactions">
-    
-            <div class="column">
-              <div class="legend">ARTIKLI</div>
-              <div class="articles" id="articles-container">
-              </div>
-            </div>
-    
-            <div class="column" id="border">
-              <div class="legend">COINSI</div>
-              <div class="coins" id="coins-container">
-              </div>
-            </div>
-            <div class="column">
-              <div class="legend">VREME</div>
-              <div class="time" id="time-container">
-              </div>
-            </div>
-    
-          </div>
-    
-        </div>
-    </div>
     </div>
   </div>
-<!-- 404 -->
- <div class="container-404 hidden" id="404">
-  <h1>404</h1>
-  <p>Korisnik nije pronadjen, ukoliko ste skenirali qr code pokusajte opet ili kontaktirajte administratora</p>
-</div>
-
-<!-- 500 -->
-  <div class="container-404 hidden" id="500">
+  <div class="404-container" id="404">
+    <h1>404</h1>
+    <p>Korisnik nije pronadjen</p>
+  </div>
+  <div class="404-container" id="500">
     <h1>500</h1>
-    <p>Greska sa strane servera ili konekcijom. Pokusajte opet, ako se nastavi kontaktirajte administratora</p>
+    <p>Unutrasnja greska</p>
   </div>
-
-<!-- Flash message -->
- <div id="flash">
-  <p></p>
- </div>
 <script src="app.js" type="module"></script>
 </body>
 

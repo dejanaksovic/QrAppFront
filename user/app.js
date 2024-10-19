@@ -1,84 +1,73 @@
-import { getUserIdFromUrl, URL } from "../assets/helpers.js";
-import { FlashMessage } from "../assets/Flash.js";
-import { PageShifter } from "../assets/Pageshifter.js";
-// ELEMENTS
-// Non transac
-const nameContainer = document.getElementById("name-container");
-const balanceContainer = document.getElementById("balance-container");
+import { getTransactionTime, getUserIdFromUrl, URL } from "../assets/helpers";
+import { PageShifter } from "../assets/Pageshifter";
+import { RequestHandler } from "../assets/RequestHandler";
 
-// Transac
-const articlesContainer = document.getElementById("articles-container");
-const coinsContainer = document.getElementById("coins-container");
-const timeContainer = document.getElementById("time-container");
+// Elements
+const nameElement = document.querySelector("#name");
+const coinsElement = document.querySelector("#coins");
 
-// Flash setup
-const flashMessage = new FlashMessage("flash");
-// Shifter setup
-const pages = ["404", "500", "ui-page"];
-const pageShifter = new PageShifter(pages, "ui-page");
+const transactionsElement = document.querySelector(".transactions");
 
-// Check for non valid id
-const id = getUserIdFromUrl(window.location.search);
+// Page setup
+const pages = ["main", "404", "500"];
+const shifter = new PageShifter(pages, "main");
+// request handler
+const handler = new RequestHandler(shifter, null, "user");
+// assets
+let id;
+const addTransaction = (transaction) => {
+  const { Order, createdAt, Coins } = transaction;
+
+  const transactionContainer = document.createElement("div");
+  transactionContainer.classList.add("single-trans");
+  const transactionItems = document.createElement("p");
+  for(let order of Order) {
+    transactionItems.textContent += `${order.Quantity} ${order.Article.Name}`;
+  }
+  const coinsItem = document.createElement("p");
+  coinsItem.textContent = Coins;
+  const dateItem = document.createElement("p");
+  dateItem.textContent = getTransactionTime(new Date(createdAt));
+  transactionContainer.append(transactionItems, coinsItem, dateItem);
+
+  transactionsElement.appendChild(transactionContainer);
+}
+
+// Handlers
+const handleGetUser = async () => {
+  const options = {
+    url: `${URL}/users/${id}`,
+    method: "GET",
+  }
+
+  const user = await handler.doRequest(options);
+
+  nameElement.textContent = user.Name;
+  coinsElement.textContent = user.Coins;
+}
+const handleGetTransactions = async () => {
+  const options = {
+    url: `${URL}/transactions/${id}`,
+    method: "GET",
+    queryParams: {
+      ps: 0,
+      pc: 10,
+    }
+  }
+
+  const transactions = await handler.doRequest(options);
+  
+  for(let transaction of transactions) {
+    console.log(transaction)
+    addTransaction(transaction);
+  }
+}
+
+// Default
+id = getUserIdFromUrl(window.location.search);
 if(!id) {
-  pageShifter.showPageOnly("")
-  throw Error("Not found user");
+  shifter.showPageOnly("404");
+  throw Error("User not found");
 }
-
-// request
-const getUser = async () => {
-  let res;
-  let data;
-  try {
-    res = await fetch(`${URL}/users/${id}`);
-    data = await res.json();
-  }
-  catch(err) {
-    return pageShifter.showPageOnly("500");
-  }
-  const { user, message } = data;
-
-  if(user) {
-    nameContainer.textContent = user?.Name;
-    balanceContainer.textContent = user?.Coins;
-      
-    user?.Transactions?.forEach(({ Articles, Coins, Date: date, Quantities }) => {
-      // Setup element for articles
-      const articleElement = document.createElement("p");
-      articleElement.classList.add("articles-text");
-      // Setup inner text
-      let innerText = "";
-      Articles.forEach((e, i) => {
-        innerText+=` ${Quantities[i]} ${e},`
-      })
-      articleElement.textContent = innerText;
-      articleElement.id = "border-bottom";
-      articlesContainer.appendChild(articleElement);
-      
-      // Setup for coins
-      const coinsElement = document.createElement("p");
-      coinsElement.textContent = Coins;
-      coinsElement.id = "border-bottom";
-      coinsContainer.appendChild(coinsElement);
-      
-      // Setup time
-      const timeElement = document.createElement("p");
-      const dateAsDate = new Date(date);
-      timeElement.textContent = `${dateAsDate.getMonth()}/${dateAsDate.getDay()} ${dateAsDate.getHours()}:${dateAsDate.getMinutes()}`;
-      timeElement.id = "border-bottom";
-      timeContainer.appendChild(timeElement);
-    })
-    return;
-  }
-  if(message) {
-    // Handle error responses from server
-    if(res.status === 404) {
-      return pageShifter.showPageOnly("404");
-    }
-    if(res.status === 500) {
-      return pageShifter.showPageOnly("500");
-    }
-    return flashMessage.showMessage(message, "error");
-  }
-}
-
-getUser();
+handleGetUser();
+handleGetTransactions();
