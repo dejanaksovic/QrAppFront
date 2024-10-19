@@ -39,13 +39,13 @@ export const Router ={
     window.location.assign(`${basePath}/worker/login/index.html`);
   },
   workerAdd: (id) => {
-    window.location.assign(`${basePath}/worker/add-order/index.html?${id}`);
+    window.location.assign(`${basePath}/worker/add-order/index.html?id=${id}`);
   },
   workerCharge: (id) => {
-    window.location.assign(`${basePath}/worker/charge-order/index.html?${id}`);
+    window.location.assign(`${basePath}/worker/charge-order/index.html?id=${id}`);
   },
   workerChoose: (id) => {
-    window.location.assign(`${basePath}/worker/choose/index.html?${id}`);
+    window.location.assign(`${basePath}/worker/choose/index.html?id=${id}`);
   },
 
   // USER
