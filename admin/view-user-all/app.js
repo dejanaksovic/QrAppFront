@@ -245,7 +245,7 @@ pageRight.addEventListener("click", handlePageMore);
 // Default behaviour
 adminPassword = sessionStorage.getItem("adminPassword");
 if(!adminPassword) {
-  window.location.assign(Router.adminLogin);
+  Router.adminLogin();
 }
 // Set on load
 window.onload = handleGetUsers();
