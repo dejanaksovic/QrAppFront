@@ -105,6 +105,14 @@ export class Basket {
     this.#createAndAppend(article);
   }
 
+  reset() {
+    this.basket = [];
+    for (let item of this.#domElems) {
+      item.elem.remove();
+    }
+    this.#domElems = [];
+  }
+
   get basket() {
     return this.basket;
   }

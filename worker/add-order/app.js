@@ -1,5 +1,5 @@
 import { Basket } from "../../assets/Basket";
-import { URL } from "../../assets/helpers";
+import { getUserIdFromUrl, URL } from "../../assets/helpers";
 import { PageShifter } from "../../assets/Pageshifter";
 import { RequestHandler } from "../../assets/RequestHandler";
 
@@ -13,6 +13,8 @@ const basketContainer = document.querySelector(".basket-container");
 const fullValueContainer = document.querySelector(".comulative p:nth-child(2)")
 
 const selectItem = document.querySelector("select");
+
+const confirmButton = document.querySelector("#confirm");
 
 // Setup pages
 const pages = ["main-container", "500"];
@@ -29,6 +31,8 @@ let workerPassword = window.sessionStorage.getItem("workerPassword");
 let pageStart = 0;
 let pageCount = 20;
 let globalArticles;
+let userId;
+
 const addArticle = (article) => {
   const articleItem = document.createElement("div");
   articleItem.classList.add("article");
@@ -87,7 +91,6 @@ const handleGetArticles = async () => {
   const articles = await handler.doRequest(options);
   globalArticles = articles;
 
-
   for(let article of articles) {
     addArticle(article);
   }
@@ -114,6 +117,20 @@ const handleAddToBasket = async (e) => {
   basket.addArticle(globalArticles.find(e => e._id === id));
   fullValueContainer.textContent = basket.price;
 }
+const handleConfirmOrder = async (e) => {
+  const options = {
+    url: `${URL}/transactions?type=add`,
+    method: "POST",
+    password: workerPassword,
+    body: {
+      orderToAdd: basket.basket,
+      userId: userId,
+    }
+  }
+
+  const res = await handler.doRequest(options, "Uspesno dodata porudzbina");
+  basket.reset();
+}
 
 // Connect handlers
 articlesActivateBtn.addEventListener("click", handleShowArticles);
@@ -123,7 +140,9 @@ selectItem.addEventListener("change", () => {
   articleContainer.textContent = "";
   handleGetArticles();
 });
+confirmButton.addEventListener("click", handleConfirmOrder);
 
 // Default
+userId = getUserIdFromUrl(window.location.search);
 handleGetArticles();
 handleGetCategories();
