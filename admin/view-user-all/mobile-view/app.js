@@ -1,4 +1,5 @@
 import { getTransactionTime, getUserIdFromUrl, URL } from "../../../assets/helpers";
+import { Router } from "../../../assets/PagePaths";
 import { PageShifter } from "../../../assets/Pageshifter";
 import { RequestHandler } from "../../../assets/RequestHandler";
 
@@ -15,7 +16,7 @@ const transactionContainer = document.getElementById("transactions-container");
 const pages = ["main-container", "500", "404"]
 const shifter = new PageShifter(pages, "main-container");
 // Setup fetch handler
-const fetchHandler = new RequestHandler(shifter, undefined, "admin");
+const fetchHandler = new RequestHandler(shifter, Router.adminViewAllUsers, "admin");
 
 // Assets
 let adminPassword = "";
@@ -51,8 +52,7 @@ const handleGetUserInfo = async (e) => {
   nameElement.textContent = user.Name;
   coinsElement.textContent = user.Coins;
 
-  // Setup ids
-  
+  // Setup ids  
 
   handleGetUserTransactions();
 }
@@ -73,20 +73,39 @@ const handleGetUserTransactions = async(e) => {
   }
 }
 
-const handleOpenNav = async => {
+const handleOpenNav = () => {
   const nav = document.querySelector("nav");
 
   nav.classList.remove("hidden");
 }
+const handleChangeRedirect = () => {
+  Router.adminChangeUser(userId);
+}
+const handleDelete = async () => {
+  const options = {
+    url: `${URL}/users/${userId}`,
+    method: "DELETE",
+    password: adminPassword,
+  }
+
+  const user = await fetchHandler.doRequest(options, "Korisnik uspesno obrisan");
+
+  return Router.adminViewAllUsers();
+}
+
 
 // Connect handlers
 navButton.addEventListener("click", handleOpenNav);
-
+delButton.addEventListener("click", handleDelete);
+changeButton.addEventListener("click", handleChangeRedirect);
 // Default behaviour
 userId = getUserIdFromUrl(window.location.search);
 if(!userId) {
   shifter.showPageOnly(404);
 }
 adminPassword = sessionStorage.getItem("adminPassword");
+if(!adminPassword) {
+  Router.adminLogin();
+}
 
 handleGetUserInfo();

@@ -41,6 +41,12 @@ export class Basket {
     })
 
     // Logic
+    // Cech if it exists
+    const existsArticle = this.basket.find(e => e.articleId === article._id);
+    console.log(existsArticle);
+    if(existsArticle) {
+      return existsArticle.quantity += 1;
+    }
     this.basket.push({
       articleId: article._id,
       quantity: 1,
@@ -93,10 +99,18 @@ export class Basket {
   addArticle(article) {
     this.price += article.Price;
     this.updateFunc(this);
-    if(this.basket.find(e => e.articleId === article._id)) {
+    if(this.basket.find(e => e.articleId === article._id)?.quantity > 0) {
       return this.#incrementArticle(article);
     }
     this.#createAndAppend(article);
+  }
+
+  reset() {
+    this.basket = [];
+    for (let item of this.#domElems) {
+      item.elem.remove();
+    }
+    this.#domElems = [];
   }
 
   get basket() {

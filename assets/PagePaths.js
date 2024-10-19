@@ -3,7 +3,11 @@ import { getBasePath } from "./helpers.js";
 const basePath = getBasePath();
 
 export const Router ={
-  // ADMIN
+  // BASE
+  base: () => {
+    window.location.assign(`${basePath}/index.html`);
+  },
+// ADMIN
   adminLogin : () => {
     window.location.assign(`${basePath}/admin/login/index.html`);
   },
@@ -34,7 +38,18 @@ export const Router ={
   workerLogin: () => {
     window.location.assign(`${basePath}/worker/login/index.html`);
   },
-  workerAdd: () => {
-    window.location.assign(`${basePath}/worker/add-order/index.html`);
+  workerAdd: (id) => {
+    window.location.assign(`${basePath}/worker/add-order/index.html?id=${id}`);
+  },
+  workerCharge: (id) => {
+    window.location.assign(`${basePath}/worker/charge-order/index.html?id=${id}`);
+  },
+  workerChoose: (id) => {
+    window.location.assign(`${basePath}/worker/choose/index.html?id=${id}`);
+  },
+
+  // USER
+  userView: (id) => {
+    window.location.assign(`${basePath}/user/index.html?id=${id}`);
   }
 }

@@ -101,6 +101,7 @@ background-color: var(--clr-success) !important;
   top: 1rem;
   left: 1rem;
   position: absolute;
+  z-index: 1;
   background-color: transparent;
   color: white;
   pointer-events: none;

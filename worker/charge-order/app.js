@@ -119,7 +119,7 @@ const handleAddToBasket = async (e) => {
 }
 const handleConfirmOrder = async (e) => {
   const options = {
-    url: `${URL}/transactions?type=add`,
+    url: `${URL}/transactions?type=remove`,
     method: "POST",
     password: workerPassword,
     body: {
@@ -144,5 +144,9 @@ confirmButton.addEventListener("click", handleConfirmOrder);
 
 // Default
 userId = getUserIdFromUrl(window.location.search);
+if(!userId) {
+  shifter.showPageOnly("404");
+  throw Error("User not found");
+}
 handleGetArticles();
 handleGetCategories();
