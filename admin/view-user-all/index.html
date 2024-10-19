@@ -11,106 +11,97 @@
 
 <body>
   
-  <main class="bg-dark" id="main-page">
-    
-<!-- RIGHT (HIDDEN) NAV -->
 
-    <label for="checkbox" class="menu-button">
-      <img src="../../svgs/menu-button.svg" alt="menu-button">
+  <main id="main-page">
+  <!-- MENU BUTTON FOR PHONE AND TABLET ONLY -->
+    <label for="checkbox">
+      <svg width="29" height="29" viewBox="0 0 29 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M27.9643 24.8571H1.03571C0.761026 24.8571 0.497588 24.9663 0.303354 25.1605C0.10912 25.3547 0 25.6182 0 25.8929L0 27.9643C0 28.239 0.10912 28.5024 0.303354 28.6966C0.497588 28.8909 0.761026 29 1.03571 29H27.9643C28.239 29 28.5024 28.8909 28.6966 28.6966C28.8909 28.5024 29 28.239 29 27.9643V25.8929C29 25.6182 28.8909 25.3547 28.6966 25.1605C28.5024 24.9663 28.239 24.8571 27.9643 24.8571ZM27.9643 16.5714H1.03571C0.761026 16.5714 0.497588 16.6805 0.303354 16.8748C0.10912 17.069 0 17.3325 0 17.6071L0 19.6786C0 19.9533 0.10912 20.2167 0.303354 20.4109C0.497588 20.6052 0.761026 20.7143 1.03571 20.7143H27.9643C28.239 20.7143 28.5024 20.6052 28.6966 20.4109C28.8909 20.2167 29 19.9533 29 19.6786V17.6071C29 17.3325 28.8909 17.069 28.6966 16.8748C28.5024 16.6805 28.239 16.5714 27.9643 16.5714ZM27.9643 8.28571H1.03571C0.761026 8.28571 0.497588 8.39483 0.303354 8.58907C0.10912 8.7833 0 9.04674 0 9.32143L0 11.3929C0 11.6675 0.10912 11.931 0.303354 12.1252C0.497588 12.3195 0.761026 12.4286 1.03571 12.4286H27.9643C28.239 12.4286 28.5024 12.3195 28.6966 12.1252C28.8909 11.931 29 11.6675 29 11.3929V9.32143C29 9.04674 28.8909 8.7833 28.6966 8.58907C28.5024 8.39483 28.239 8.28571 27.9643 8.28571ZM27.9643 0H1.03571C0.761026 0 0.497588 0.10912 0.303354 0.303354C0.10912 0.497588 0 0.761026 0 1.03571L0 3.10714C0 3.38183 0.10912 3.64527 0.303354 3.8395C0.497588 4.03374 0.761026 4.14286 1.03571 4.14286H27.9643C28.239 4.14286 28.5024 4.03374 28.6966 3.8395C28.8909 3.64527 29 3.38183 29 3.10714V1.03571C29 0.761026 28.8909 0.497588 28.6966 0.303354C28.5024 0.10912 28.239 0 27.9643 0Z" fill="#C18A2B"/>
+      </svg>          
     </label>
-    
-    <input id="checkbox" type="checkbox">
-    
+    <input type="checkbox" id="checkbox">
+    <!-- RIGHT NAVIGATION -->
     <div class="right-nav">
-      
-      <label for="checkbox" class="return-button">
-        <img src="../../svgs/return-button.svg" alt="return-button">
-      </label>
-
-      <div class="links">
-        <a href="../view-articles-all/index.html">Korisnici</a>
-        <a href="../view-articles-all/index.html">Artikli</a>
-        <a href="../view-transactions-all/index.html">Transakcije</a>
-      </div>
-
-    </div>
-
-<!-- SEARCH AND ADD BUTTON -->
-
-    <div class="search-and-add-button">  
-      <div class="search-input">
-        <img src="../../svgs/magnifying-glass.svg" alt="magnifying-glass" id="search-button">
-        <input type="search" id="search" placeholder="Pretrazite po imenu...">
-      </div>   
-
-      <button class="add-button" id="add-button">DODAJ</button>
-    </div>
-    
-<!-- USERS CONTAINER -->
-    <div class="all-users" id="users-container">
-
-<!-- SELECTED USER EXAMPLE -->
-      
-<!-- USER EXAMPLE -->
-      
-    </div>
-
-<!-- USER CARD DISPLAY (DESKTOP ONLY !!!) -->
-
-    <div class="user-card hidden">
-
-      <img src="../../svgs/user-pfp.svg" alt="user-pfp">
-        
-      <div class="user-card-name-and-coins">
-        <p id="user-card-name">Ime</p>
-        <p id="user-card-coins">Coins</p>
-      </div>
-
-      <div class="manage-and-remove-buttons">
-        <button class="user-card-manage-button">IZMENI</button>
-        <button class="user-card-remove-button">OBRISI</button>
-      </div>
-
-      <div class="show-more">
-        <img src="../../svgs/arrow-down.svg" alt="user-pfp">
-        <p id="see-more">Vidi transakcije</p>
-      </div>
-
-<!-- THIS IS TRANSACTION PART (DESKTOP ONLY!!!) -->
-
-      <div class="transactions-div">
-        <div class="transactions" id="transactions-container">
-
-<!-- EXAMPLE !!! -->
-          
-        
-        </div>
-        <div class="show-less hidden" id="see-less">
-          <img src="../../svgs/arrow-up.svg" alt="arrow-up">
-          <p >Smanji pregled</p>
-        </div>
-      </div>
-
-    </div>
-
-<!-- PAGINATION (DESKTOP ONLY!!!) -->
-
-    <div class="pagination">
-<!-- SELECTED BUTTON -->
-      <button>
-        <svg width="11" height="16" viewBox="0 0 11 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0.773559 7.27478L7.41418 0.634155C7.87317 0.175171 8.61536 0.175171 9.06946 0.634155L10.173 1.73767C10.632 2.19666 10.632 2.93884 10.173 3.39294L5.46594 8.09998L10.173 12.807C10.632 13.266 10.632 14.0082 10.173 14.4623L9.06946 15.5658C8.61047 16.0248 7.86829 16.0248 7.41418 15.5658L0.773559 8.92517C0.314575 8.47595 0.314575 7.73376 0.773559 7.27478Z" fill="#C18A2B"/>
-        </svg></button>
-
-<!-- NORMAL BUTTON -->
-      <button>
-        <svg width="11" height="16" viewBox="0 0 11 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M10.6528 8.93713L4.01221 15.5778C3.55322 16.0367 2.81103 16.0367 2.35693 15.5778L1.25342 14.4742C0.794434 14.0153 0.794434 13.2731 1.25342 12.819L5.96045 8.11194L1.25342 3.40491C0.794434 2.94592 0.794434 2.20374 1.25342 1.74963L2.35693 0.646119C2.81592 0.187135 3.55811 0.187135 4.01221 0.646119L10.6528 7.28674C11.1118 7.73596 11.1118 8.47815 10.6528 8.93713Z" fill="#C18A2B"/>
+      <label for="checkbox">
+        <svg width="16" height="22" viewBox="0 0 16 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15.625 0.586359L15.625 21.2895C15.625 21.6118 15.3613 21.8754 15.0391 21.8754H12.6953C12.373 21.8754 12.1094 21.6118 12.1094 21.2895L12.1094 12.6762L2.56348 21.5141C1.55762 22.3491 0 21.6508 0 20.3129L0 1.56292C0 0.225031 1.55762 -0.473211 2.56348 0.36175L12.1094 9.14593L12.1094 0.586359C12.1094 0.264093 12.373 0.000421524 12.6953 0.000421524H15.0391C15.3613 0.000421524 15.625 0.264093 15.625 0.586359Z" fill="#C18A2B"/>
         </svg>
-      </button>
-
+      </label>
+      <a href="#">Korisnici</a>
+      <a href="#">Artikli</a>
+      <a href="#">Transakcije</a>
     </div>
-
+   <!-- SEARCH AND ADD BUTTON -->
+    <div class="search-and-add-button">
+      <div class="search-div">
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12.8232 11.2393L10.2916 8.70813C10.1773 8.59389 10.0224 8.53042 9.8599 8.53042H9.446C10.1468 7.63422 10.5633 6.50698 10.5633 5.28073C10.5633 2.36364 8.19923 0 5.28164 0C2.36404 0 0 2.36364 0 5.28073C0 8.19783 2.36404 10.5615 5.28164 10.5615C6.50809 10.5615 7.63552 10.1451 8.53187 9.44439V9.85822C8.53187 10.0207 8.59536 10.1756 8.70962 10.2898L11.2413 12.821C11.4799 13.0597 11.8659 13.0597 12.1021 12.821L12.8207 12.1025C13.0594 11.8639 13.0594 11.478 12.8232 11.2393ZM5.28164 8.53042C3.48639 8.53042 2.0314 7.07822 2.0314 5.28073C2.0314 3.48579 3.48385 2.03105 5.28164 2.03105C7.07688 2.03105 8.53187 3.48325 8.53187 5.28073C8.53187 7.07568 7.07942 8.53042 5.28164 8.53042Z" fill="#C18A2B"/>
+        </svg>          
+        <input type="search">
+      </div>
+      <button>DODAJ</button>
+    </div>
+  <!-- ALL USERS AND PAGINATION -->
+    <div class="all-users-and-pagination">
+      <div class="all-users-template">
+        <div class="user">
+          <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.5 14.0625C16.3818 14.0625 19.5312 10.9131 19.5312 7.03125C19.5312 3.14941 16.3818 0 12.5 0C8.61816 0 5.46875 3.14941 5.46875 7.03125C5.46875 10.9131 8.61816 14.0625 12.5 14.0625ZM18.75 15.625H16.0596C14.9756 16.123 13.7695 16.4062 12.5 16.4062C11.2305 16.4062 10.0293 16.123 8.94043 15.625H6.25C2.79785 15.625 0 18.4229 0 21.875V22.6562C0 23.9502 1.0498 25 2.34375 25H22.6562C23.9502 25 25 23.9502 25 22.6562V21.875C25 18.4229 22.2021 15.625 18.75 15.625Z" fill="#C18A2B"/>
+          </svg>
+          <div class="user-name-and-coins">
+            <p>asdsadsadsadsadsdsas</p>
+            <p>2132321213213213223</p>
+          </div>
+          <div class="user-delete-edit-buttons">
+            <button>Obriši</button>
+            <button>Izmeni</button>
+          </div>
+        </div>
+      </div>
+      <div class="pagination">
+        <button>
+          <svg width="11" height="16" viewBox="0 0 11 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.773559 7.27478L7.41418 0.634155C7.87317 0.175171 8.61536 0.175171 9.06946 0.634155L10.173 1.73767C10.632 2.19666 10.632 2.93884 10.173 3.39294L5.46594 8.09998L10.173 12.807C10.632 13.266 10.632 14.0082 10.173 14.4623L9.06946 15.5658C8.61047 16.0248 7.86829 16.0248 7.41418 15.5658L0.773559 8.92517C0.314575 8.47595 0.314575 7.73376 0.773559 7.27478Z" fill="#C18A2B"/>
+          </svg>
+        </button>
+        <button>
+          <svg width="11" height="16" viewBox="0 0 11 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10.6528 8.93713L4.01221 15.5778C3.55322 16.0367 2.81103 16.0367 2.35693 15.5778L1.25342 14.4742C0.794434 14.0153 0.794434 13.2731 1.25342 12.819L5.96045 8.11194L1.25342 3.40491C0.794434 2.94592 0.794434 2.20374 1.25342 1.74963L2.35693 0.646119C2.81592 0.187135 3.55811 0.187135 4.01221 0.646119L10.6528 7.28674C11.1118 7.73596 11.1118 8.47815 10.6528 8.93713Z" fill="#C18A2B"/>
+          </svg>
+        </button>
+      </div>
+    </div>    
+  <!-- USER CARD (DESKTOP ONLY) -->
+    <div class="view-user-card">
+      <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12.5 14.0625C16.3818 14.0625 19.5312 10.9131 19.5312 7.03125C19.5312 3.14941 16.3818 0 12.5 0C8.61816 0 5.46875 3.14941 5.46875 7.03125C5.46875 10.9131 8.61816 14.0625 12.5 14.0625ZM18.75 15.625H16.0596C14.9756 16.123 13.7695 16.4062 12.5 16.4062C11.2305 16.4062 10.0293 16.123 8.94043 15.625H6.25C2.79785 15.625 0 18.4229 0 21.875V22.6562C0 23.9502 1.0498 25 2.34375 25H22.6562C23.9502 25 25 23.9502 25 22.6562V21.875C25 18.4229 22.2021 15.625 18.75 15.625Z" fill="#C18A2B"/>
+      </svg>
+      <p>asdsasasadsadsadsasadsadsadassadsaadsasadsasasadsadsadsadssa</p>
+      <p>12313213121121311231313323</p>
+      <div class="remove-and-edit-buttons">
+        <button>Obriši</button>
+        <button>Izmeni</button>
+      </div>
+      <div class="show-more">
+        <p>Vidi transakcije</p>
+        <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+           <path d="M7.1748 10.2437L0.53418 3.60303C0.0751953 3.14404 0.0751953 2.40186 0.53418 1.94775L1.6377 0.844238C2.09668 0.385254 2.83887 0.385254 3.29297 0.844238L8 5.55127L12.707 0.844238C13.166 0.385254 13.9082 0.385254 14.3623 0.844238L15.4658 1.94775C15.9248 2.40674 15.9248 3.14893 15.4658 3.60303L8.8252 10.2437C8.37598 10.7026 7.63379 10.7026 7.1748 10.2437Z" fill="#C18A2B"/>
+        </svg>
+      </div>
+      <div class="transaction-div">
+        <div class="transaction">
+          <p>narudzbina</p>
+          <p>coinsi</p>
+          <p>vreme</p>
+        </div>
+        <div class="show-less">
+          <p>Smanji pregled</p>
+          <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8.63525 0.344238L15.2759 6.98486C15.7349 7.44385 15.7349 8.18604 15.2759 8.64014L14.1724 9.74365C13.7134 10.2026 12.9712 10.2026 12.5171 9.74365L7.81006 5.03662L3.10303 9.74365C2.64404 10.2026 1.90185 10.2026 1.44775 9.74365L0.344237 8.64014C-0.114747 8.18115 -0.114747 7.43896 0.344237 6.98486L6.98486 0.344238C7.43408 -0.114746 8.17627 -0.114746 8.63525 0.344238Z" fill="#0B2E1C"/>
+            </svg>            
+        </div>
+      </div>
+    </div>
   </main>
 
   <div class="404-container" id="500">
