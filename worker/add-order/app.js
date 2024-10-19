@@ -59,15 +59,15 @@ const addCategory = (category) => {
 
 // Handlers
 const handleShowArticles = () => {
-  articlesActivateBtn.classList.add("active-button");
-  basketActivateBtn.classList.remove("active-button");
+  articlesActivateBtn.classList.add("active-tab");
+  basketActivateBtn.classList.remove("active-tab");
 
   wholeRightSide.classList.add("hidden");
   articleContainer.classList.remove("hidden");
 }
 const handleShowBasket = () => {
-  articlesActivateBtn.classList.remove("active-button");
-  basketActivateBtn.classList.add("active-button");
+  articlesActivateBtn.classList.remove("active-tab");
+  basketActivateBtn.classList.add("active-tab");
 
   wholeRightSide.classList.remove("hidden");
   articleContainer.classList.add("hidden");
@@ -86,6 +86,7 @@ const handleGetArticles = async () => {
 
   const articles = await handler.doRequest(options);
   globalArticles = articles;
+
 
   for(let article of articles) {
     addArticle(article);

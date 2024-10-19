@@ -34,7 +34,10 @@ export const Router ={
   workerLogin: () => {
     window.location.assign(`${basePath}/worker/login/index.html`);
   },
-  workerAdd: () => {
-    window.location.assign(`${basePath}/worker/add-order/index.html`);
+  workerAdd: (id) => {
+    window.location.assign(`${basePath}/worker/add-order/index.html?${id}`);
+  },
+  workerCharge: (id) => {
+    window.location.assign(`${basePath}/worker/charge-order/index.html?${id}`);
   }
 }
