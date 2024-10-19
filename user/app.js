@@ -1,73 +1,79 @@
-import { getTransactionTime, getUserIdFromUrl, URL } from "../assets/helpers";
-import { PageShifter } from "../assets/Pageshifter";
-import { RequestHandler } from "../assets/RequestHandler";
+import { getTransactionTime, getUserIdFromUrl, URL } from "../assets/helpers.js";
+import { PageShifter } from "../assets/Pageshifter.js";
+import { RequestHandler } from "../assets/RequestHandler.js";
 
 // Elements
-const nameElement = document.querySelector("#name");
-const coinsElement = document.querySelector("#coins");
+const nameElement = document.getElementById("name");
+const coinsElement = document.getElementById("coins");
 
-const transactionsElement = document.querySelector(".transactions");
+const transactionContainer = document.querySelector(".transactions");
 
-// Page setup
-const pages = ["main", "404", "500"];
+// Setup pages
+const pages = ["main", "500", "404"]
 const shifter = new PageShifter(pages, "main");
-// request handler
-const handler = new RequestHandler(shifter, null, "user");
-// assets
-let id;
+// Setup fetch handler
+const fetchHandler = new RequestHandler(shifter, null, "admin");
+
+// Assets
+let userId;
+
 const addTransaction = (transaction) => {
   const { Order, createdAt, Coins } = transaction;
 
-  const transactionContainer = document.createElement("div");
-  transactionContainer.classList.add("single-trans");
-  const transactionItems = document.createElement("p");
-  for(let order of Order) {
-    transactionItems.textContent += `${order.Quantity} ${order.Article.Name}`;
-  }
-  const coinsItem = document.createElement("p");
-  coinsItem.textContent = Coins;
-  const dateItem = document.createElement("p");
-  dateItem.textContent = getTransactionTime(new Date(createdAt));
-  transactionContainer.append(transactionItems, coinsItem, dateItem);
+  const singleTrans = document.createElement("div");
+  singleTrans.classList.add("single-trans");
 
-  transactionsElement.appendChild(transactionContainer);
+  const articlesElement = document.createElement("p");
+  const valueElement = document.createElement("p");
+  const dateElement = document.createElement("p");
+
+  articlesElement.textContent = Order.reduce((acc, e) => {
+    return `${acc} ${e.Article.Name} ${e.Quantity},`; 
+  }, "")
+  valueElement.textContent = Coins;
+  dateElement.textContent = getTransactionTime(new Date(createdAt));
+
+  singleTrans.append(articlesElement, valueElement, dateElement);
+  transactionContainer.appendChild(singleTrans);
 }
 
 // Handlers
-const handleGetUser = async () => {
+const handleGetUserInfo = async (e) => {
   const options = {
-    url: `${URL}/users/${id}`,
+    url: `${URL}/users/${userId}`,
     method: "GET",
   }
 
-  const user = await handler.doRequest(options);
-
+  const user = await fetchHandler.doRequest(options);
+  
   nameElement.textContent = user.Name;
   coinsElement.textContent = user.Coins;
+
+  // Setup ids  
+
+  handleGetUserTransactions();
 }
-const handleGetTransactions = async () => {
+
+const handleGetUserTransactions = async(e) => {
   const options = {
-    url: `${URL}/transactions/${id}`,
+    url: `${URL}/transactions/${userId}`,
     method: "GET",
-    queryParams: {
-      ps: 0,
-      pc: 10,
-    }
+    ps: 0,
+    pc: 10,
   }
 
-  const transactions = await handler.doRequest(options);
-  
-  for(let transaction of transactions) {
-    console.log(transaction)
+  const transactions = await fetchHandler.doRequest(options);
+
+  for (let transaction of transactions) {
     addTransaction(transaction);
   }
 }
 
-// Default
-id = getUserIdFromUrl(window.location.search);
-if(!id) {
+// Connect handlers
+userId = getUserIdFromUrl(window.location.search);
+if(!userId) {
   shifter.showPageOnly("404");
   throw Error("User not found");
 }
-handleGetUser();
-handleGetTransactions();
+
+handleGetUserInfo();
