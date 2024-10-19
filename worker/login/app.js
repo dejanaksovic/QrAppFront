@@ -41,7 +41,7 @@ const handleLogin = async () => {
       localStorage.setItem("workerPassword", workerPassword ? workerPassword : passwordInput.value);
     }
     sessionStorage.setItem("workerPassword", workerPassword ? workerPassword : passwordInput.value);
-    return window.location.assign(`${Router.workerMainView}?id=${id}`);
+    return Router.workerAdd();
   }
   if(res.status === 500) {
     return pageShifter.showPageOnly("500");

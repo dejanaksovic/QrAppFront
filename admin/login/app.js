@@ -24,8 +24,6 @@ const flashMessage = new FlashMessage();
 const handleLogin = async () => {
   let res, data;
   try {
-    console.log(passwordInput.value)
-    
     res = await fetch(`${URL}/sessions/admin`, {
       method: "POST",
       headers: {
@@ -46,7 +44,7 @@ const handleLogin = async () => {
       localStorage.setItem("adminPassword", passwordInput.value);
     }
     sessionStorage.setItem("adminPassword", passwordInput.value);
-    return window.location.assign(Router.adminViewAllUsers);
+    return Router.adminViewAllUsers();
   }
   sessionStorage.removeItem("adminPassword");
   localStorage.removeItem("adminPassword");
