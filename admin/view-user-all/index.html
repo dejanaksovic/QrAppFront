@@ -34,17 +34,17 @@
    <!-- SEARCH AND ADD BUTTON -->
     <div class="search-and-add-button">
       <div class="search-div">
-        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="13" id="search-button" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12.8232 11.2393L10.2916 8.70813C10.1773 8.59389 10.0224 8.53042 9.8599 8.53042H9.446C10.1468 7.63422 10.5633 6.50698 10.5633 5.28073C10.5633 2.36364 8.19923 0 5.28164 0C2.36404 0 0 2.36364 0 5.28073C0 8.19783 2.36404 10.5615 5.28164 10.5615C6.50809 10.5615 7.63552 10.1451 8.53187 9.44439V9.85822C8.53187 10.0207 8.59536 10.1756 8.70962 10.2898L11.2413 12.821C11.4799 13.0597 11.8659 13.0597 12.1021 12.821L12.8207 12.1025C13.0594 11.8639 13.0594 11.478 12.8232 11.2393ZM5.28164 8.53042C3.48639 8.53042 2.0314 7.07822 2.0314 5.28073C2.0314 3.48579 3.48385 2.03105 5.28164 2.03105C7.07688 2.03105 8.53187 3.48325 8.53187 5.28073C8.53187 7.07568 7.07942 8.53042 5.28164 8.53042Z" fill="#C18A2B"/>
         </svg>          
-        <input type="search">
+        <input type="text" id="search">
       </div>
-      <button>DODAJ</button>
+      <button id="add-button">DODAJ</button>
     </div>
   <!-- ALL USERS AND PAGINATION -->
     <div class="all-users-and-pagination">
-      <div class="all-users-template">
-        <div class="user">
+      <div class="all-users-template" id="users-container">
+        <!-- <div class="user">
           <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12.5 14.0625C16.3818 14.0625 19.5312 10.9131 19.5312 7.03125C19.5312 3.14941 16.3818 0 12.5 0C8.61816 0 5.46875 3.14941 5.46875 7.03125C5.46875 10.9131 8.61816 14.0625 12.5 14.0625ZM18.75 15.625H16.0596C14.9756 16.123 13.7695 16.4062 12.5 16.4062C11.2305 16.4062 10.0293 16.123 8.94043 15.625H6.25C2.79785 15.625 0 18.4229 0 21.875V22.6562C0 23.9502 1.0498 25 2.34375 25H22.6562C23.9502 25 25 23.9502 25 22.6562V21.875C25 18.4229 22.2021 15.625 18.75 15.625Z" fill="#C18A2B"/>
           </svg>
@@ -56,7 +56,8 @@
             <button>Obriši</button>
             <button>Izmeni</button>
           </div>
-        </div>
+        </div> -->
+        
       </div>
       <div class="pagination">
         <button>
@@ -76,25 +77,25 @@
       <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M12.5 14.0625C16.3818 14.0625 19.5312 10.9131 19.5312 7.03125C19.5312 3.14941 16.3818 0 12.5 0C8.61816 0 5.46875 3.14941 5.46875 7.03125C5.46875 10.9131 8.61816 14.0625 12.5 14.0625ZM18.75 15.625H16.0596C14.9756 16.123 13.7695 16.4062 12.5 16.4062C11.2305 16.4062 10.0293 16.123 8.94043 15.625H6.25C2.79785 15.625 0 18.4229 0 21.875V22.6562C0 23.9502 1.0498 25 2.34375 25H22.6562C23.9502 25 25 23.9502 25 22.6562V21.875C25 18.4229 22.2021 15.625 18.75 15.625Z" fill="#C18A2B"/>
       </svg>
-      <p>asdsasasadsadsadsasadsadsadassadsaadsasadsasasadsadsadsadssa</p>
-      <p>12313213121121311231313323</p>
+      <p id="user-card-name">asdsasasadsadsadsasadsadsadassadsaadsasadsasasadsadsadsadssa</p>
+      <p id="user-card-coins">12313213121121311231313323</p>
       <div class="remove-and-edit-buttons">
-        <button>Obriši</button>
-        <button>Izmeni</button>
+        <button class="user-card-manage-button">Obriši</button>
+        <button class="user-card-remove-button">Izmeni</button>
       </div>
-      <div class="show-more">
+      <div class="show-more" id="see-more">
         <p>Vidi transakcije</p>
         <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
            <path d="M7.1748 10.2437L0.53418 3.60303C0.0751953 3.14404 0.0751953 2.40186 0.53418 1.94775L1.6377 0.844238C2.09668 0.385254 2.83887 0.385254 3.29297 0.844238L8 5.55127L12.707 0.844238C13.166 0.385254 13.9082 0.385254 14.3623 0.844238L15.4658 1.94775C15.9248 2.40674 15.9248 3.14893 15.4658 3.60303L8.8252 10.2437C8.37598 10.7026 7.63379 10.7026 7.1748 10.2437Z" fill="#C18A2B"/>
         </svg>
       </div>
-      <div class="transaction-div">
+      <div class="transaction-div" id="transactions-container">
         <div class="transaction">
           <p>narudzbina</p>
           <p>coinsi</p>
           <p>vreme</p>
         </div>
-        <div class="show-less">
+        <div class="show-less" id="see-less">
           <p>Smanji pregled</p>
           <svg width="16" height="11" viewBox="0 0 16 11" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M8.63525 0.344238L15.2759 6.98486C15.7349 7.44385 15.7349 8.18604 15.2759 8.64014L14.1724 9.74365C13.7134 10.2026 12.9712 10.2026 12.5171 9.74365L7.81006 5.03662L3.10303 9.74365C2.64404 10.2026 1.90185 10.2026 1.44775 9.74365L0.344237 8.64014C-0.114747 8.18115 -0.114747 7.43896 0.344237 6.98486L6.98486 0.344238C7.43408 -0.114746 8.17627 -0.114746 8.63525 0.344238Z" fill="#0B2E1C"/>
