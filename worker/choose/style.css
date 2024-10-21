@@ -1,0 +1,11 @@
+@import "../../base.css";
+
+.wrapper {
+  text-align: center;
+
+  display: grid;
+  place-items: center;
+
+  font-size: 2rem;
+  color: white;
+}

@@ -1,0 +1,107 @@
+@import "../../../base.css";
+
+.nav-item {
+  padding: 1rem;
+}
+
+.nav-item > img{
+  display: block;
+  margin: 0 0 0 auto;
+}
+
+nav {
+  position:absolute;
+  top: 0;
+  right: 0;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 90vh;
+  max-width: min(100vh, 1000px);
+  border: 1px solid var(--clr-accent-muted);
+}
+
+.user-info {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+.user-info img {
+  min-width: 3.5rem;
+}
+
+.user-info h1 {
+  font-size: 2rem;
+}
+
+.user-info p {
+  font-size: 1.5rem;
+}
+
+.action-container {
+  display: flex;
+  gap: 1.5rem
+}
+
+.action-container button {
+  color: white;
+  padding: .5rem 1rem;
+  border-radius: .4rem;
+  font-size: 1rem;
+}
+
+.action-container button:nth-child(1) {
+  background-color: var(--clr-error);
+}
+
+.action-container button:nth-child(2) {
+  border: 1px solid var(--clr-accent-muted);
+  color: var(--clr-accent-muted);
+}
+
+.wrapper {
+  flex-grow: 1;
+  background-color: var(--clr-accent-muted);
+}
+
+.transactions {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr;
+  grid-template-rows: auto 1fr;
+  color: white;
+  text-align: center;
+}
+
+.transactions > *:nth-last-child(n+4) {
+  border-bottom: 3px solid var(--clr-bg-dark);
+}
+
+.transactions > p:nth-child(3n+2) {
+  border-inline: 3px solid var(--clr-bg-dark);
+}
+
+.transactions p {
+  overflow: auto;
+  white-space: nowrap;
+}
+
+/* NAV */
+nav {
+  min-width: 50%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--clr-bg-dark);
+  border: 2px solid var(--clr-accent-muted);
+}
+
+nav a {
+  text-align: right;
+  font-size: 1rem;
+}

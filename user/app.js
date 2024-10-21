@@ -1,84 +1,79 @@
-import { getUserIdFromUrl, URL } from "../assets/helpers.js";
-import { FlashMessage } from "../assets/Flash.js";
+import { getTransactionTime, getUserIdFromUrl, URL } from "../assets/helpers.js";
 import { PageShifter } from "../assets/Pageshifter.js";
-// ELEMENTS
-// Non transac
-const nameContainer = document.getElementById("name-container");
-const balanceContainer = document.getElementById("balance-container");
+import { RequestHandler } from "../assets/RequestHandler.js";
 
-// Transac
-const articlesContainer = document.getElementById("articles-container");
-const coinsContainer = document.getElementById("coins-container");
-const timeContainer = document.getElementById("time-container");
+// Elements
+const nameElement = document.getElementById("name");
+const coinsElement = document.getElementById("coins");
 
-// Flash setup
-const flashMessage = new FlashMessage("flash");
-// Shifter setup
-const pages = ["404", "500", "ui-page"];
-const pageShifter = new PageShifter(pages, "ui-page");
+const transactionContainer = document.querySelector(".transactions");
 
-// Check for non valid id
-const id = getUserIdFromUrl(window.location.search);
-if(!id) {
-  pageShifter.showPageOnly("")
-  throw Error("Not found user");
+// Setup pages
+const pages = ["main", "500", "404"]
+const shifter = new PageShifter(pages, "main");
+// Setup fetch handler
+const fetchHandler = new RequestHandler(shifter, null, "admin");
+
+// Assets
+let userId;
+
+const addTransaction = (transaction) => {
+  const { Order, createdAt, Coins } = transaction;
+
+  const singleTrans = document.createElement("div");
+  singleTrans.classList.add("single-trans");
+
+  const articlesElement = document.createElement("p");
+  const valueElement = document.createElement("p");
+  const dateElement = document.createElement("p");
+
+  articlesElement.textContent = Order.reduce((acc, e) => {
+    return `${acc} ${e.Article.Name} ${e.Quantity},`; 
+  }, "")
+  valueElement.textContent = Coins;
+  dateElement.textContent = getTransactionTime(new Date(createdAt));
+
+  singleTrans.append(articlesElement, valueElement, dateElement);
+  transactionContainer.appendChild(singleTrans);
 }
 
-// request
-const getUser = async () => {
-  let res;
-  let data;
-  try {
-    res = await fetch(`${URL}/users/${id}`);
-    data = await res.json();
+// Handlers
+const handleGetUserInfo = async (e) => {
+  const options = {
+    url: `${URL}/users/${userId}`,
+    method: "GET",
   }
-  catch(err) {
-    return pageShifter.showPageOnly("500");
-  }
-  const { user, message } = data;
 
-  if(user) {
-    nameContainer.textContent = user?.Name;
-    balanceContainer.textContent = user?.Coins;
-      
-    user?.Transactions?.forEach(({ Articles, Coins, Date: date, Quantities }) => {
-      // Setup element for articles
-      const articleElement = document.createElement("p");
-      articleElement.classList.add("articles-text");
-      // Setup inner text
-      let innerText = "";
-      Articles.forEach((e, i) => {
-        innerText+=` ${Quantities[i]} ${e},`
-      })
-      articleElement.textContent = innerText;
-      articleElement.id = "border-bottom";
-      articlesContainer.appendChild(articleElement);
-      
-      // Setup for coins
-      const coinsElement = document.createElement("p");
-      coinsElement.textContent = Coins;
-      coinsElement.id = "border-bottom";
-      coinsContainer.appendChild(coinsElement);
-      
-      // Setup time
-      const timeElement = document.createElement("p");
-      const dateAsDate = new Date(date);
-      timeElement.textContent = `${dateAsDate.getMonth()}/${dateAsDate.getDay()} ${dateAsDate.getHours()}:${dateAsDate.getMinutes()}`;
-      timeElement.id = "border-bottom";
-      timeContainer.appendChild(timeElement);
-    })
-    return;
+  const user = await fetchHandler.doRequest(options);
+  
+  nameElement.textContent = user.Name;
+  coinsElement.textContent = user.Coins;
+
+  // Setup ids  
+
+  handleGetUserTransactions();
+}
+
+const handleGetUserTransactions = async(e) => {
+  const options = {
+    url: `${URL}/transactions/${userId}`,
+    method: "GET",
+    ps: 0,
+    pc: 10,
   }
-  if(message) {
-    // Handle error responses from server
-    if(res.status === 404) {
-      return pageShifter.showPageOnly("404");
-    }
-    if(res.status === 500) {
-      return pageShifter.showPageOnly("500");
-    }
-    return flashMessage.showMessage(message, "error");
+
+  const transactions = await fetchHandler.doRequest(options);
+
+  for (let transaction of transactions) {
+    addTransaction(transaction);
   }
 }
 
-getUser();
+// Connect handlers
+userId = getUserIdFromUrl(window.location.search);
+if(!userId) {
+  shifter.showPageOnly("404");
+  throw Error("User not found");
+}
+
+handleGetUserInfo();

@@ -1,0 +1,413 @@
+@import url(../../base.css);
+@import url(../../styles/popup.css);
+
+/* Phone view */
+
+main {
+  height: 100vh;
+  padding: 1.2rem 2rem;
+  color: var(--clr-font);
+}
+.menu-button img {
+  margin-left: auto;
+  margin-bottom: .5rem;
+}
+.search-and-add-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.search-input {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border: 1px solid var(--clr-accent-muted);
+  border-radius: .3rem;
+  padding: 0 .5rem;
+}
+
+.search-input img {
+  flex: 1;
+  padding: .25rem .5rem .25rem .25rem;
+  border-right: 1px solid var(--clr-accent-muted);
+}
+.search-input:hover {
+  cursor: pointer;
+}
+#search {
+  flex: 4;
+  padding: .5rem;
+  background: none;
+  color: var(--clr-font);
+}
+.add-button {
+  padding: .4rem;
+  color: var(--clr-font);
+  background-color: var(--clr-success);
+  border-radius: .3rem;
+  font-size: 0.8em;
+  font-weight: 500;
+}
+.add-button:hover {
+  background-color: var(--clr-font);
+  color: var(--clr-accent-muted);
+  font-weight: bolder;
+}
+.all-users {
+  max-height: 80vh;
+  border: 0.3rem solid var(--clr-accent-muted);
+  border-radius: .3rem;
+  margin-top: 0.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(auto, 1fr);
+  padding: .7rem;
+  overflow: auto;
+  gap: 1rem;
+}
+.user {
+  border: 1px solid var(--clr-accent-muted);
+  border-radius: .3rem;
+  padding: .4rem;
+  display: grid;
+  grid-template-columns: 1fr 5fr 2fr 2fr;
+  align-items: center;
+}
+
+.user:hover {
+  cursor: pointer;
+}
+
+.selected {
+  background-color: var(--clr-accent-muted) !important;
+}
+.selected svg path{
+  fill: var(--clr-bg-dark) !important;
+}
+.name-and-coins {
+  padding: 0 0.4rem;
+  overflow: auto;
+}
+.remove-button {
+  background-color: var(--clr-error);
+  color: var(--clr-font);
+  padding: .3rem;
+  border-radius: 3px;
+}
+.manage-button {
+  border-radius: 3px;
+  padding: .2rem;
+  color: var(--clr-accent-muted);
+  border: 1px solid var(--clr-accent-muted);
+}
+.manage-button:hover {
+  background-color: white;
+  color: var(--clr-accent-muted);
+  border: 1px solid var(--clr-accent-muted);
+}
+
+.name-and-coins p:nth-child(1) {
+  font-size: 1rem;
+  font-weight: 400;
+}
+.name-and-coins p:nth-child(2) {
+  font-size: .7rem;
+  font-weight: lighter;
+  opacity: 0.7;
+}
+#checkbox {
+  display: none;
+}
+.right-nav {
+  transform: translateX(100%);
+  transform-origin: right;
+  min-width: 50vw;
+  position: absolute;
+  right: 0;
+  top: 0;
+  min-height: 100vh;
+  background-color: var(--clr-bg-dark);
+  transition: transform .2s linear;
+  padding: 1rem;
+  border: .3rem solid var(--clr-accent-muted);
+}
+#checkbox:checked + .right-nav {
+  transform: translateX(0);
+}
+
+.links a{
+  padding: 2rem 0 .5rem 0;
+  border-bottom: 2px solid var(--clr-accent-muted);
+}
+.user-card {
+  display: none;
+}
+.pagination {
+  padding: .5rem;
+  margin: .5rem auto;
+  width: 50%;
+  border: 2px solid var(--clr-accent-muted);
+  display: flex;
+  justify-content: space-between;
+}
+.pagination button{
+  width: 1.5rem;
+  height: 1.5rem;
+  display: grid;
+  place-items: center;
+  color: var(--clr-font);
+  border: 1px solid var(--clr-accent-muted);
+}
+.pagination button:hover {
+  color: var(--clr-bg-dark);
+  background-color: var(--clr-accent-muted);
+  font-weight: bolder;
+}
+.pagination button:hover svg path {
+  fill: var(--clr-bg-dark);
+}
+
+/* Tablet view */
+
+@media (min-width: 768px) {
+  main {
+    padding: 0 2rem;
+  }
+  #search {
+    font-size: 1.2rem;
+  }
+  .search-input img {
+    width: 35px;
+  }
+  .add-button {
+    font-size: 1.2rem;
+    padding: .5rem;
+  }
+  .user {
+    gap: 1rem;
+  }
+  .user img,
+  .user svg {
+    width: 50px;
+  }
+  .name-and-coins p:nth-child(1) {
+    font-size: 1.3rem;
+    padding-bottom: .3rem;
+  }
+  .name-and-coins p:nth-child(2) {
+    font-size: .9rem;
+  }
+  .user button {
+    font-size: 1.2rem;
+    padding: .4rem;
+    border-radius: .4rem;
+  }
+  .pagination button{
+    width: 1.7rem;
+    height: 1.7rem;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--clr-accent-muted);
+  }
+}
+
+/* Desktop */
+
+@media (min-width: 1025px) {
+  body {
+    overflow: hidden;
+  }
+  main {
+    padding: 0 0.5rem;
+    display: grid;
+    grid-template-columns: 6fr 2fr 2fr;
+    grid-template-rows: 1fr 15fr 1fr;
+    gap: .5rem;
+    height: 100vh;
+  }
+  .menu-button {
+    display: none;
+  }
+  .right-nav {
+    min-width: auto;
+    grid-column-start: 3;
+    grid-row: span 3;
+    max-height: 100vh;
+    position: static;
+    transform: translateX(0);
+  }
+  .right-nav img {
+    display: none;
+  }
+  .links a {
+    font-size: 1.2rem;
+  }
+  .search-and-add-button {
+    grid-column-start: 1;
+    grid-row-start: 1;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+  }
+  .search-input img {
+    width: 2.2rem;
+    padding: 0.4rem;
+  }
+  #search {
+    font-size: 1rem;
+  }
+  .add-button {
+    font-size: 1rem;
+  }
+  .all-users {
+    grid-column-start: 1;
+    grid-row-start: 2 ;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    column-gap: 1.2rem;
+    scrollbar-width: none;
+    min-height: 100%;
+  }
+  .user {
+    display: block;
+    text-align: center;
+    padding-top: 1rem;
+  }
+  .user img,
+  .user svg {
+    margin-inline: auto;
+    width: 2.2rem;
+    height: auto;
+  }
+  .name-and-coins{
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    scrollbar-width: none;
+    display: grid;
+    place-items: center;
+  }
+  .name-and-coins p {
+    font-size: 1.2rem;
+    width: 9ch;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+   }
+  .name-and-coins p:nth-child(2) {
+    font-size: .9rem; 
+  }
+  .user button {
+    display: none;
+  }
+  .user-card {
+    display: block;
+    margin-top: .5rem;
+    grid-column-start: 2;
+    grid-row-start: 2;
+    grid-row: span 2;
+    max-height: fit-content;
+    border: 2px solid var(--clr-accent-muted);
+    padding-top: 1rem;
+  }
+  .user-card img {
+    margin-inline: auto;
+    width: 3rem;
+    height: auto;
+  }
+  .user-card-name-and-coins p {
+    margin-inline: auto;
+    padding: 0 .2rem;
+    margin-bottom: .5rem;
+    max-width: 12ch;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .user-card-name-and-coins p:nth-child(1) {
+    font-size: 1.6rem;
+  }
+  .user-card-name-and-coins p:nth-child(2) {
+    font-size: 1rem;
+    font-weight: lighter;
+    opacity: 70%;
+  }
+  .manage-and-remove-buttons {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  
+  .manage-and-remove-buttons button{
+    font-size: 1.2rem;
+    padding: .4rem;
+    border-radius: .4rem;
+    color: var(--clr-font);
+  }
+  .user-card-manage-button {
+    border: 1px solid var(--clr-accent-muted);
+  }
+  .user-card-manage-button:hover {
+    background-color: var(--clr-font);
+    color: var(--clr-accent-muted);
+  }
+  .user-card-remove-button {
+    background-color: var(--clr-error);
+  }
+  .show-more,
+  .show-less {
+    margin-top: 1rem;
+    color: var(--clr-accent-muted);
+    display: flex;
+    justify-content: center;
+  }
+  .show-more img,
+  .show-less img{
+    width: .9rem;
+    margin: 0 .4rem;
+  }
+  .show-more p,
+  .show-less p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .show-more:hover,
+  .show-less:hover {
+    cursor: pointer;
+  }
+  .transactions {
+    margin-top: 1rem;
+    background-color: var(--clr-accent-muted);
+    display: grid;
+    grid-template-columns: 5fr 1.5fr 3.5fr;
+    grid-template-rows: repeat(auto, 1fr);
+    overflow-y: scroll;
+    scrollbar-width: none;
+  }
+  .transactions p {
+    overflow: hidden;
+    border-bottom: 3px solid var(--clr-bg-dark);
+    scrollbar-width: none;
+    padding: .2rem .4rem;
+    text-align: center;
+  }
+  .transactions p:nth-child(3n+2) {
+    border-right: 2px solid var(--clr-bg-dark);
+    border-left: 2px solid var(--clr-bg-dark);
+  }
+  .show-less {
+    margin-top: 0;
+    background-color: var(--clr-accent-muted);
+  }
+  .show-less p {
+    color: var(--clr-bg-dark);
+  }
+  .pagination {
+    grid-column-start: 1;
+    grid-row-start: 3;
+  }
+  .transactions p {
+    overflow: auto;
+    text-wrap: nowrap;
+  } 
+} 

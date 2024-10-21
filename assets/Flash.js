@@ -1,34 +1,43 @@
 export class FlashMessage {
   container;
+  messageDelay;
 
-  constructor(containerId, messageDelay = 4000) {
-    this.container = document.getElementById(containerId);
-
-    if(!this.container)
-      throw Error("Element id wrong or it doesn't exist")
-
+  constructor(messageDelay = 4000) {
+    this.container = document.createElement("div");
     // Default stylings;
-    this.container.classList.add("flash-container", "remove-flash");
-    this.container.style.color = "white";
+    this.container.classList.add("flash-container");
+    document.body.prepend(this.container);
     this.messageDelay = messageDelay;
+
+    // Check for message left from last page
+    const messageFromLastPage = sessionStorage.getItem("flashMessage");
+    if(messageFromLastPage) {
+      const { message, severity } = JSON.parse(messageFromLastPage);
+      this.showMessage(message, severity);
+    }
+    // cleanup
+    sessionStorage.removeItem("flashMessage");
   }
 
   showMessage(message, severity) {
-    // Reset background
-    this.container.classList.remove("bg-error", "bg-warning", "bg-success");
+    // Create message
+    const messageContainer = document.createElement("p");
+    messageContainer.classList.add("flash-message", "remove-flash");
+    messageContainer.textContent = message;
+    this.container.appendChild(messageContainer);
+    messageContainer.classList.remove("remove-flash");
     // Add message
-    this.container.textContent = message;
     switch(severity) {
       case "error": {
-        this.container.classList.add("bg-error");
+        messageContainer.classList.add("bg-error");
         break;
       }
       case "success": {
-        this.container.classList.add("bg-success");
+        messageContainer.classList.add("bg-success");
         break;
       }
       case "warning": {
-        this.container.classList.add("bg-warning");
+        messageContainer.classList.add("bg-warning");
         break;
       }
       default: {
@@ -36,11 +45,19 @@ export class FlashMessage {
       }
     }
 
-    this.container.classList.remove("remove-flash");
+    messageContainer.classList.remove("remove-flash");
 
     setTimeout(() => {
       // Hide the message
-      this.container.classList.add("remove-flash");
-    }, this.messageDelay)
+      messageContainer.classList.add("remove-flash");
+      // Remove the message after animation timing
+      setTimeout(() => {
+      this.container.removeChild(messageContainer);
+      });
+    }, this.messageDelay);
+  }
+
+  leaveMessage(message, severity) {
+    sessionStorage.setItem("flashMessage", JSON.stringify({message, severity}));
   }
 }
