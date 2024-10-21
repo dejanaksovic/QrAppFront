@@ -81,6 +81,9 @@ label {
   border: 1px solid var(--clr-accent-muted);
   border-radius: .5em;
 }
+.user:hover {
+  cursor: pointer;
+}
 .user>svg:nth-child(1) {
   width: 2rem;
   height: auto;

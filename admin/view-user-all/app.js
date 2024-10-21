@@ -8,7 +8,7 @@ const addButton = document.getElementById("add-button");
 const searchInput = document.getElementById("search");
 const searchButton = document.getElementById("search-button");
 
-const selectedContainer = document.querySelector(".user-card");
+const selectedContainer = document.querySelector(".view-user-card");
 const selectedUserName = document.getElementById("user-card-name");
 const selectedUserCoins = document.getElementById("user-card-coins");
 const changeSelectButton = document.querySelector(".user-card-manage-button");
@@ -48,16 +48,17 @@ const addUser = (user) => {
   userContainer.appendChild(icon);
   // Name and balance
   const nameAndCoinsContainer = document.createElement("div");
-  nameAndCoinsContainer.classList.add("name-and-coins");
+  nameAndCoinsContainer.classList.add("user-name-and-coins");
   const nameContainer = document.createElement("p");
-  nameContainer.id = "name";
   nameContainer.textContent = user.Name;
   const coinsContainer = document.createElement("p");
-  coinsContainer.id = "coins";
   coinsContainer.textContent = user.Coins;
   nameAndCoinsContainer.appendChild(nameContainer);
   nameAndCoinsContainer.appendChild(coinsContainer);
   userContainer.appendChild(nameAndCoinsContainer);
+  // Button container
+  const actionButtons = document.createElement("div");
+  actionButtons.classList.add("user-delete-edit-buttons");
   // Buttons
   const delButton = document.createElement("button");
   delButton.classList.add("remove-button");
@@ -70,8 +71,9 @@ const addUser = (user) => {
   changeButton.textContent = "IZMENI";
   changeButton.setAttribute("user-id", user._id);
   changeButton.addEventListener("click", handleChangeRedirect);
-  userContainer.appendChild(delButton);
-  userContainer.appendChild(changeButton);
+  // Connect buttons
+  actionButtons.append(delButton, changeButton);
+  userContainer.append(actionButtons);
   // Add to main container
   usersContainer.appendChild(userContainer);
 }
@@ -92,6 +94,9 @@ const updateSelectedStatus = (user) => {
 
 const addTransaction = (transaction) => {
   const { createdAt, Coins } = transaction;
+  // Conainer
+  const container = document.createElement("div");
+  container.classList.add("transaction");
 
   const orderElement = document.createElement("p");
   const coinsElement = document.createElement("p");
@@ -104,7 +109,8 @@ const addTransaction = (transaction) => {
   coinsElement.textContent = Coins;
   dateElement.textContent = getTransactionTime(new Date(createdAt));
 
-  transactionsContainer.append(orderElement, coinsElement, dateElement);
+  container.append(orderElement, coinsElement, dateElement);
+  transactionsContainer.append(container);
 }
 
 
@@ -142,6 +148,7 @@ const handleChangeRedirect = (e) => {
   return Router.adminChangeUser(id);
 }
 const handleDelete = async (e) => {
+  e.stopPropagation();
   const userId = e.target.getAttribute("user-id");
   const userContainer = document.querySelector(`.user[user-id="${userId}"]`)
   const options = {
@@ -177,7 +184,12 @@ const handleSearchByName = async(e) => {
   }
 }
 const handleSelect = (e) => {
-  // Check for mobile and redirect
+  e.preventDefault();
+
+  if(e.target.tagName === "BUTTON") {
+    return;
+  }
+
   const id = e.currentTarget.getAttribute("user-id");
     if(window.innerWidth <= 1024) {
       return Router.adminViewSelectedUser(id);
