@@ -35,8 +35,6 @@ const handleLogin = async () => {
     })
   }
   catch(err) {
-    sessionStorage.removeItem("adminPassword");
-    localStorage.removeItem("adminPassword");
     return pageShifter.showPageOnly("500");
   }
   if(res.ok) {
