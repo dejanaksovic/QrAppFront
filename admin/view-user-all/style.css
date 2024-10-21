@@ -62,6 +62,7 @@ label {
   align-items: center;
   border: 2px solid var(--clr-accent-muted);
   border-radius: .5em;  
+  padding: 0 0 .5rem 0;
 }
 .all-users-template {
   margin-top: .25em;
@@ -110,7 +111,7 @@ label {
   display: none;
 }
 .pagination {
-  margin-top: .5em;
+  margin-top: auto;
   width: 95%;
   display: flex;
   justify-content: space-between;
@@ -290,7 +291,7 @@ label {
     grid-template-columns: auto;
     grid-template-rows: repeat(auto, 1fr);
     overflow-y: scroll;
-    height: 82vh;
+    height: auto;
   }
   .user {
     padding: .5rem 0;
@@ -391,9 +392,9 @@ label {
   .all-users-template {
     display: grid;
     grid-template-columns: auto;
-    grid-template-rows: repeat(auto, 1fr);
     overflow-y: scroll;
-    height: 82vh;
+    align-content: start;
+    height: auto;
   }
   .user {
     padding: .5rem 0;
