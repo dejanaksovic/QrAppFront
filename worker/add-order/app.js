@@ -144,5 +144,9 @@ confirmButton.addEventListener("click", handleConfirmOrder);
 
 // Default
 userId = getUserIdFromUrl(window.location.search);
+if(!userId) {
+  shifter.showPageOnly("404");
+  throw Error("User id not found");
+}
 handleGetArticles();
 handleGetCategories();
