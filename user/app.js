@@ -28,7 +28,7 @@ const addTransaction = (transaction) => {
   const dateElement = document.createElement("p");
 
   articlesElement.textContent = Order.reduce((acc, e) => {
-    return `${acc} ${e.Article.Name} ${e.Quantity},`; 
+    return `${acc} ${e?.Article?.Name} ${e.Quantity},`; 
   }, "")
   valueElement.textContent = Coins;
   dateElement.textContent = getTransactionTime(new Date(createdAt));
