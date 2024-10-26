@@ -1,7 +1,12 @@
 Models:
   User: Name, balance, transactions[]
+  Articles: Name, price,
+  Transactions: { Articles with quantity }, Coins, DateTime, User 
 
 Pages:
   Admin page [Add, Delete, SeeAll]
   Worker page (single user) [Add/Remove balance]
   User [See self page]
+  Users [All, One, Update, Add]
+  Articles [All, One, Update, Add]
+  Transactions [All, One, update, Add]

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body class="bg-dark">
+  <div class="nav-item" id="nav-item">
+    <img src="../../../svgs/menu-button.svg" alt="">
+  </div>
+  <nav class="hidden">
+    <a href="../index.html">Artikli</a>
+    <a href="../../view-user-all/index.html">Korisnici</a>
+    <a href="../../view-cate">T</a>
+  </nav>
+  <div class="main-container" id="main-container">
+    <!-- USER -->
+    <div class="user-info">
+      <img src="../../../svgs/user-pfp.svg" alt="">
+      <h1 id="user-name">Name</h1>
+      <p id="user-coins">35c</p>
+      <div class="action-container">
+        <button>Obriši</button>
+        <button>Izmeni</button>
+      </div>
+    </div>
+
+    <!-- TRANSACTIONS -->
+    <div class="wrapper">
+      <div class="transactions" id="transactions-container">
+        <p>Porudzbina</p>
+        <p>Vrednost</p>
+        <p>Vreme</p>
+      
+        
+      </div>
+    </div>
+  </div>
+  <!-- 404 -->
+   <div class="404-container" id="404">
+    <h1>404</h1>
+    <p>Korisnik nije pronadjen</p>
+   </div>
+   <!-- 500 -->
+   <div class="404-container" id="500">
+    <h1>Unutrasnja greska</h1>
+    <p>Proverite vezu sa internetom pa probajte opet. Ukoliko se problem nastavi kontaktirajte administratora</p>
+   </div>
+  <script src="app.js" type="module"></script>
+</body>
+</html>

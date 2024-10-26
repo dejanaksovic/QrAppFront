@@ -1,0 +1,130 @@
+@import "../../base.css";
+
+.selection-tab {
+  display: flex;
+  justify-content: space-around;
+  gap: .5rem;
+
+  position: sticky;
+
+  background-color: var(--clr-accent-muted);
+  max-width: 70%;
+  border-radius: 0 0 .5rem .5rem;
+  padding: 1rem;
+  margin: 0 auto;
+}
+
+.selection-tab button {
+  color: var(--clr-bg-dark);
+  font-size: 1rem;
+  font-weight: 900;
+  border-radius: .5rem;
+  padding: 0.2rem .5rem;
+
+  border: 3px solid var(--clr-bg-dark);
+}
+
+.active-tab {
+  color: var(--clr-accent-muted) !important; 
+  background-color: var(--clr-bg-dark) !important;
+}
+
+.main-container {
+  min-height: 90vh;
+  padding: 1rem 1.5rem;
+}
+
+.articles-container {
+  display:grid;
+  justify-items: center;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+select {
+  background-color: var(--clr-accent-muted);
+  color: var(--clr-font);
+  border: none;
+  outline: none;
+  justify-self: start;
+}
+
+.article {
+  display: flex;
+  color: var(--clr-font);
+  gap: 1rem;
+  width: 100%;
+  padding: .5rem 1rem;
+
+  border: 1px solid var(--clr-accent-muted);
+  border-radius: .4rem;
+}
+
+.name-price {
+  margin-right: auto;
+}
+
+.name-price p:nth-child(1) {
+  font-weight: 300;
+  font-size: 1rem;
+}
+
+.name-price p:nth-child(2) {
+  font-weight: 100;
+  font-size: .6rem;
+}
+
+.article img {
+  max-width: 1.5rem;
+}
+
+.article button {
+  color: var(--clr-font);
+  align-self: center;
+  background-color: var(--clr-success);
+  padding: .4rem;
+  border-radius: .2rem;
+}
+
+/* BASKET */
+.basket-container {
+  height: 75vh;
+  color: white;
+  overflow: auto;
+  scrollbar-width: 0;
+}
+.basket-item {
+  display: flex;
+  text-align: center;
+  padding: .5rem;
+  justify-content: space-between;
+  border: 1px solid var(--clr-accent-muted);
+  margin-bottom: .5rem;
+}
+
+.basket-item *:nth-child(1) {
+  flex: 2;
+}
+.basket-item *:nth-child(2),
+.basket-item *:nth-child(3) {
+  flex: 1;
+}
+
+.comulative {
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: .5rem;
+}
+
+.right-side button {
+  margin: 0 auto;
+  font-size: 1.5rem;
+  color:white;
+  background-color: var(--clr-accent-muted);
+  font-weight: 900;
+  padding: .5rem 1.5rem;
+}
+

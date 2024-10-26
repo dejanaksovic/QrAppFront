@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body class="bg-dark">
+  <div class="main-container" id="main-container">
+    <!-- ARTICLES SINGLE, ALL ARTICLES + SEARCH-->
+    <div class="articles-container">
+      <!-- MENU FOR PHONE -->
+      <img class="nav-button" src="../../svgs/menu-button.svg" alt="">
+      <!-- SEARCH -->
+      <div class="search-container">
+        <select name="categories" id="categories">
+          <option value="">Kategorija</option>
+        </select>
+        <button class="bg-success" id="button-add">DODAJ</button>
+      </div>
+      <!-- SINGLE AND ALL -->
+      <div class="articles-wrapper">
+        <!-- ALL ARTICLES -->
+        <div class="articles-view-container" id="all-articles">
+          <!-- SAMPLE IN ALL -->
+           <!-- <div class="article-single-view">
+            <div class="info">
+              <img src="../../svgs/user-pfp.svg" alt="">
+              <div class="name-price-container">
+                <h2>Karamel Makijato</h2>
+                <p>260</p>
+              </div>
+            </div>
+            <div class="article-action">
+              <button>OBRIŠI</button>
+              <button>IZMENI</button>
+            </div>
+           </div> -->
+        </div>
+        <!-- SELECTED ARTICLE -->
+        <!-- SAMPLE CONTAINER -->
+          <div class="article-selected-container" id="selected-article">
+             <div class="helper hidden">
+               <img src="../../svgs/user-pfp.svg" alt="">
+               <h1>Karamel makijato</h1>
+               <p>260</p>
+               <div class="action-container">
+                <button>OBRIŠI</button>
+                <button>IZMENI</button>
+               </div>
+             </div>
+          </div>
+      </div>
+    </div>
+    <!-- NAVIGATION -->
+    <div class="nav-container hidden">
+      <svg width="16" height="22" viewBox="0 0 16 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15.625 0.586359L15.625 21.2895C15.625 21.6118 15.3613 21.8754 15.0391 21.8754H12.6953C12.373 21.8754 12.1094 21.6118 12.1094 21.2895L12.1094 12.6762L2.56348 21.5141C1.55762 22.3491 0 21.6508 0 20.3129L0 1.56292C0 0.225031 1.55762 -0.473211 2.56348 0.36175L12.1094 9.14593L12.1094 0.586359C12.1094 0.264093 12.373 0.000421524 12.6953 0.000421524H15.0391C15.3613 0.000421524 15.625 0.264093 15.625 0.586359Z" fill="#C18A2B"/>
+      </svg>
+      <nav>
+        <a href="../view-user-all/index.html">Korisnici</a>
+        <a href="../view-articles-all/index.html">Artikli</a>
+        <a href="../view-transationcs-all/index.html">Transakcije</a>
+      </nav>
+    </div>
+  </div>
+  <div class="404-container" id="500">
+    <h1>500</h1>
+    <p>Greška pri konekciji. Proverite konekciju sa internetom pa pokušajte opet. Ako se problem nastavi kontaktirajte administratora</p>
+  </div>
+  <script src="app.js" type="module"></script>
+</body>
+</html>

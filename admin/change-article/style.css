@@ -1,0 +1,100 @@
+@import "../../base.css";
+@import "../../styles/popup.css";
+
+main {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  min-width: min(600px, 80vw);
+  border: 3px solid var(--clr-accent-muted);
+  padding: 1rem;
+  min-height: 90%;
+}
+/* SVG */
+img {
+  width: 4rem;
+  align-self: center;
+  margin-bottom: 2.5rem;
+}
+/* Text */
+h1 {
+  text-align: center;
+  color: var(--clr-font);
+  font-size: 3rem;
+}
+
+p {
+  color: var(--clr-font-muted);
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 4.5rem;
+}
+/* INPUTS */
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+input, select {
+  color: var(--clr-font);
+  border: 1px solid var(--clr-accent-muted);
+  background: none;
+  font-size: 1rem;
+  padding: 1rem;
+}
+
+option {
+  background-color: var(--clr-bg-dark);
+}
+
+/* Buttons */
+.action-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+button {
+  color: var(--clr-font);
+  font-size: 1rem;
+  padding: .5rem 1rem;
+  border-radius: .25rem;
+}
+
+button:nth-child(1) {
+  background-color: var(--clr-accent-muted);
+  font-weight: 600;
+}
+
+button:nth-child(2) {
+  color: var(--clr-accent-muted);
+  border: 1px solid var(--clr-accent-muted);
+}
+
+@media screen and (min-width: 1200px) {
+  img {
+    width: 6rem;
+  }
+  h1 {
+    font-size: 4rem;
+  }
+  p {
+    font-size: 3.5rem;
+  }
+  input {
+    font-size: 1.5rem;
+  }
+  button {
+    font-size: 1.5rem;
+  }
+
+  .form-container {
+    padding: 5rem 4rem;
+  }
+}
