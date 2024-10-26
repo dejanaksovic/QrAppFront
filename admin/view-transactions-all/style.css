@@ -54,9 +54,6 @@ main {
   color: var(--clr-font);
   font-size: 1.4rem;
 }
-::-webkit-calendar-picker-indicator {
-  display: none;
-}
 .sort-by-date button {
   background-color: var(--clr-accent-muted);
   color: var(--clr-font);

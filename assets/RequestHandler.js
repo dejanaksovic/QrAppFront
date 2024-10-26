@@ -47,7 +47,6 @@ export class RequestHandler {
     const { method, password, body } = options;
 
     const fullUrl = this.#checkRequestValidity(options);
-    console.log(fullUrl);
     let res, data;
     try {
       res = await fetch(fullUrl, {
@@ -99,6 +98,7 @@ export class RequestHandler {
       return this.shifter.showPageOnly("404");
     }
     if(message) {
+      console.log(data);
       return this.flash.showMessage(message, "error");
     }
     return data.res;
