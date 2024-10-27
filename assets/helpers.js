@@ -13,5 +13,5 @@ export const getBasePath = () => {
 }
 
 export const getTransactionTime = (date) => {
-  return `${date.getDay()}.${date.getMonth()} ${date.getHours()}:${date.getMinutes()}`
+  return `${date.getDate()}.${date.getMonth() + 1} ${date.getHours()}:${date.getMinutes()}`
 }

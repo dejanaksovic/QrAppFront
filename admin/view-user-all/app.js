@@ -184,7 +184,7 @@ const handleSearchByName = async(e) => {
   }
 }
 const handleSelect = (e) => {
-  e.preventDefault();
+  selectedContainer.classList.remove("hidden");
 
   if(e.target.tagName === "BUTTON") {
     return;

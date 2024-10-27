@@ -163,14 +163,18 @@ option {
 
 .nav-container {
   display: flex;
+  padding: 1rem;
   position: absolute;
   right: 0;
   top: 0;
   min-height: 100%;
   border: 3px solid var(--clr-accent-muted);
   background-color: var(--clr-bg-dark);
-  transform: scaleX(0);
-  transform-origin: right;
+  min-width: 40%;
+}
+
+.nav-container > svg:hover {
+  cursor:pointer;
 }
 
 .nav-container > nav {
@@ -312,7 +316,7 @@ option {
 
   .nav-container {
     position: static;
-    transform: scaleX(1);
+    display:flex !important;
   }
 
   .nav-container a {

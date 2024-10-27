@@ -14,6 +14,10 @@ const changeSelectedButton = document.querySelector("#selected-article button:nt
 
 const selectContainer = document.querySelector("select");
 
+const navButton = document.querySelector(".nav-button");
+const navItem = document.querySelector(".nav-container");
+const hideNav = document.querySelector(".nav-container>svg");
+
 let selectedElement;
 
 // setup pages
@@ -111,7 +115,7 @@ const handleDelete = async (e) => {
     password: adminPassword,
   }
   const article =  await requestHandler.doRequest(requestOptions, "Uspesno obrisan korisnika");
-  if(article) {
+  if(mainContainer) {
     mainContainer.remove();
   }
 }
@@ -137,6 +141,12 @@ const handleGetCategories = async (e) => {
     populateCategories(category);
   }
 }
+const handleShowNav = () => {
+  navItem.classList.remove('hidden');
+}
+const handleHideNav = () => {
+  navItem.classList.add("hidden");
+}
 
 // Connect handlers
 addButton.addEventListener("click", handleRedirectAdd);
@@ -146,11 +156,14 @@ delSelectedButton.addEventListener("click", e => {
 });
 changeSelectedButton.addEventListener("click", handleChange);
 selectContainer.addEventListener("change", handleGetAll);
+navButton.addEventListener("click", handleShowNav);
+hideNav.addEventListener("click", handleHideNav);
 
 // Default behaviour
 adminPassword = sessionStorage.getItem("adminPassword");
 if(!adminPassword) {
   window.location.assign(Router.adminLogin);
 }
+
 handleGetAll();
 handleGetCategories();
