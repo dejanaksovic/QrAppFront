@@ -24,7 +24,7 @@ const requestHandler = new RequestHandler(pageShifter, Router.adminViewAllUsers,
 
 // Handlers
 const handleCancel = () => {
-  return window.location.assign(Router.adminViewAllUsers);
+  return Router.adminViewAllUsers();
 }
 
 const handleAddUser = async () => {
