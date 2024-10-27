@@ -1,6 +1,6 @@
-import { URL, getTransactionTime } from "../../assets/helpers";
-import { PageShifter } from "../../assets/Pageshifter";
-import { RequestHandler } from "../../assets/RequestHandler";
+import { URL, getTransactionTime } from "../../assets/helpers.js";
+import { PageShifter } from "../../assets/Pageshifter.js";
+import { RequestHandler } from "../../assets/RequestHandler.js";
 
 // ELEMENTS
 const transactionsContainer = document.querySelector(".transaction-div");

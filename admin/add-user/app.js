@@ -35,7 +35,7 @@ const handleAddUser = async () => {
     body: {
       name: inputName.value,
       coins: balanceInput.value,
-    }
+  }
   }
   const user = await requestHandler.doRequest(requestOptions, "Korisnik uspesno kreiran");
 }
