@@ -90,6 +90,9 @@ const handleCancel = () =>{
 // connect handlers
 confirmButton.addEventListener("click", handleConfirm);
 cancelButton.addEventListener("click", handleCancel);
+categorySelect.addEventListener("change", () => {
+  console.log(categorySelect.value);
+})
 
 // DEFAULT BEHAVIOUR
 id = getUserIdFromUrl(window.location.search);
@@ -98,8 +101,9 @@ if(!id){
   throw Error("Korisnik nije pronadjen");
 }
 adminPassword = sessionStorage.getItem("adminPassword");
-if(!adminPassword)
-  window.location.assign(Router.adminLogin);
+if(!adminPassword) {
+  Router.adminLogin();
+}
 
 // Get by default
 handleGet();
