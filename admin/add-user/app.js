@@ -24,7 +24,7 @@ const requestHandler = new RequestHandler(pageShifter, Router.adminViewAllUsers,
 
 // Handlers
 const handleCancel = () => {
-  return window.location.assign(Router.adminViewAllUsers);
+  return Router.adminViewAllUsers();
 }
 
 const handleAddUser = async () => {
@@ -47,5 +47,5 @@ confirmButton.addEventListener("click", handleAddUser);
 // Default behaviour
 const adminPassword = sessionStorage.getItem("adminPassword");
 if(!adminPassword) {
-  window.location.assign(Router.adminLogin);
+  Router.adminLogin();
 }

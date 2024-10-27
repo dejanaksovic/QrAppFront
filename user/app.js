@@ -18,7 +18,7 @@ const fetchHandler = new RequestHandler(shifter, null, "admin");
 let userId;
 
 const addTransaction = (transaction) => {
-  const { Order, createdAt, Coins } = transaction;
+  const { Order, createdAt, Coins } = transaction || {};
 
   const singleTrans = document.createElement("div");
   singleTrans.classList.add("single-trans");
@@ -28,7 +28,7 @@ const addTransaction = (transaction) => {
   const dateElement = document.createElement("p");
 
   articlesElement.textContent = Order.reduce((acc, e) => {
-    return `${acc} ${e?.Article?.Name} ${e.Quantity},`; 
+    return `${acc} ${e?.Article?.Name} ${e?.Quantity},`; 
   }, "")
   valueElement.textContent = Coins;
   dateElement.textContent = getTransactionTime(new Date(createdAt));
@@ -46,8 +46,8 @@ const handleGetUserInfo = async (e) => {
 
   const user = await fetchHandler.doRequest(options);
   
-  nameElement.textContent = user.Name;
-  coinsElement.textContent = user.Coins;
+  nameElement.textContent = user?.Name;
+  coinsElement.textContent = user?.Coins;
 
   // Setup ids  
 

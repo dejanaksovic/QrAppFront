@@ -1,7 +1,14 @@
+<<<<<<< HEAD
 import { FlashMessage } from "../../assets/Flash.js";
 import { getUserIdFromUrl, URL } from "../../assets/helpers.js";
 import { Router } from "../../assets/PagePaths.js";
 import { PageShifter } from "../../assets/Pageshifter.js";
+=======
+import { getUserIdFromUrl, URL } from "../../assets/helpers.js";
+import { Router } from "../../assets/PagePaths.js";
+import { PageShifter } from "../../assets/Pageshifter.js";
+import { RequestHandler } from "../../assets/RequestHandler.js";
+>>>>>>> main
 
 // ELEMENTS
 const passwordInput = document.getElementById("password-input");
@@ -10,43 +17,37 @@ const rememberCheckbox = document.querySelector("input[type=checkbox]");
 const loginButton = document.querySelector("button");
 
 // assets
-let workerPassword;
+let workerPassword = localStorage.getItem("workerPassword") ?? sessionStorage.getItem("workerPassword");
 let showPassword = false;
 let id = getUserIdFromUrl(window.location.search);
-// flash setup
-const flashMessage = new FlashMessage();
 // Page setup
 const pages = ["main", "500"]
 const pageShifter = new PageShifter(pages, "main");
-
+// handler
+const handler = new RequestHandler(pageShifter, null, "worker");
 // handlers
 const handleLogin = async () => {
-  let res, data;
-  try {
-    res = await fetch(`${URL}/sessions/worker`, {
-      method: "POST",
-      headers: {
-        "Content-Type" : "application/json",
-      },
-      body: JSON.stringify({
-        password: workerPassword ? workerPassword : passwordInput.value
-      })
-    });
+  if(!workerPassword) {
+    workerPassword = passwordInput.value;
   }
-  catch(err) {
-    return pageShifter.showPageOnly("500");
-  }
-  if(res.ok) {
-    if(rememberCheckbox.checked) {
-      localStorage.setItem("workerPassword", workerPassword ? workerPassword : passwordInput.value);
+
+  const options = {
+    url: `${URL}/sessions/worker`,
+    method: "POST",
+    body: {
+      password: workerPassword,
     }
-    sessionStorage.setItem("workerPassword", workerPassword ? workerPassword : passwordInput.value);
-    return Router.workerAdd();
   }
-  if(res.status === 500) {
-    return pageShifter.showPageOnly("500");
+  
+  const res = await handler.doRequest(options);
+
+  if(res.ok) {
+    sessionStorage.setItem("workerPassword", workerPassword);
+    if(rememberCheckbox.checked) {
+      localStorage.setItem("workerPassword", workerPassword);
+    }
+    Router.workerChoose(id);
   }
-  return flashMessage.showMessage("Nevalidni kredencijali", "error");
 }
 const handleTogglePasswordVisibility = () => {
   showPassword = !showPassword;
@@ -58,7 +59,6 @@ loginButton.addEventListener("click", handleLogin);
 showPassButton.addEventListener("click", handleTogglePasswordVisibility);
 
 // Default behaviour
-workerPassword = localStorage.getItem("workerPassword") ? localStorage.getItem("workerPassword") : sessionStorage.getItem("workerPassword");
 if(workerPassword) {
   handleLogin();
 }

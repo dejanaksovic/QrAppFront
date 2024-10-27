@@ -1,4 +1,5 @@
 import { FlashMessage } from "./Flash.js";
+import { getUserIdFromUrl } from "./helpers.js";
 import { Router } from "./PagePaths.js";
 import { PageShifter } from "./Pageshifter.js";
 
@@ -78,18 +79,25 @@ export class RequestHandler {
       if(successMessage) {
         return this.flash.showMessage(successMessage, "success");
       }
-      
+      if(this.successRedirect) {
+        return this.successRedirect();
+      }
     }
     if(res.status === 500) {
       return this.shifter.showPageOnly("500");
     }
     if(res.status === 401 || res.status === 403) {
+      // Refresh storage local and session
+      localStorage.removeItem("workerPassword");
+      localStorage.removeItem("adminPassword");
+      sessionStorage.removeItem("adminPassword");
+      sessionStorage.removeItem("adminPassword");
       switch(this.role) {
         case "admin": {
           return Router.adminLogin();
         }
         case "worker": {
-          return Router.workerLogin();
+          return Router.workerLogin(getUserIdFromUrl(window.location.search));
         }
       }
       return
@@ -98,9 +106,8 @@ export class RequestHandler {
       return this.shifter.showPageOnly("404");
     }
     if(message) {
-      console.log(data);
       return this.flash.showMessage(message, "error");
     }
-    return data.res;
+    return data?.res || res;
   }
 }

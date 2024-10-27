@@ -1,5 +1,6 @@
 import { Basket } from "../../assets/Basket.js";
 import { getUserIdFromUrl, URL } from "../../assets/helpers.js";
+import { Router } from "../../assets/PagePaths.js";
 import { PageShifter } from "../../assets/Pageshifter.js";
 import { RequestHandler } from "../../assets/RequestHandler.js";
 
@@ -17,8 +18,8 @@ const selectItem = document.querySelector("select");
 const confirmButton = document.querySelector("#confirm");
 
 // Setup pages
-const pages = ["main-container", "500", "404"];
-const shifter = new PageShifter(pages, "main-container");
+const pages = ["wrapper", "500", "404"];
+const shifter = new PageShifter(pages, "wrapper");
 // Request handler
 const handler = new RequestHandler(shifter, null, "worker");
 // Basket
@@ -27,7 +28,7 @@ const basket = new Basket(basketContainer, (basket) => {
 });
 
 // ASSETS
-let workerPassword = window.sessionStorage.getItem("workerPassword");
+let workerPassword = sessionStorage.getItem("workerPassword") ?? localStorage.getItem("workerPassword");
 let pageStart = 0;
 let pageCount = 20;
 let globalArticles;
@@ -147,6 +148,9 @@ userId = getUserIdFromUrl(window.location.search);
 if(!userId) {
   shifter.showPageOnly("404");
   throw Error("User not found");
+}
+if(!workerPassword) {
+  Router.workerLogin(userId);
 }
 handleGetArticles();
 handleGetCategories();
