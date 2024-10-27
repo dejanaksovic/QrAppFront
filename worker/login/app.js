@@ -1,14 +1,7 @@
-<<<<<<< HEAD
-import { FlashMessage } from "../../assets/Flash.js";
-import { getUserIdFromUrl, URL } from "../../assets/helpers.js";
-import { Router } from "../../assets/PagePaths.js";
-import { PageShifter } from "../../assets/Pageshifter.js";
-=======
 import { getUserIdFromUrl, URL } from "../../assets/helpers.js";
 import { Router } from "../../assets/PagePaths.js";
 import { PageShifter } from "../../assets/Pageshifter.js";
 import { RequestHandler } from "../../assets/RequestHandler.js";
->>>>>>> main
 
 // ELEMENTS
 const passwordInput = document.getElementById("password-input");
