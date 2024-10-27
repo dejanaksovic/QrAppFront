@@ -34,12 +34,15 @@ const handleLogin = async () => {
   
   const res = await handler.doRequest(options);
 
-  if(res.ok) {
+  if(res?.ok) {
     sessionStorage.setItem("workerPassword", workerPassword);
     if(rememberCheckbox.checked) {
       localStorage.setItem("workerPassword", workerPassword);
     }
     Router.workerChoose(id);
+  }
+  else {
+    workerPassword = null;
   }
 }
 const handleTogglePasswordVisibility = () => {
