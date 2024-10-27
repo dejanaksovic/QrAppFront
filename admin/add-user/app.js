@@ -47,5 +47,5 @@ confirmButton.addEventListener("click", handleAddUser);
 // Default behaviour
 const adminPassword = sessionStorage.getItem("adminPassword");
 if(!adminPassword) {
-  window.location.assign(Router.adminLogin);
+  Router.adminLogin();
 }

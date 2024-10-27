@@ -15,10 +15,12 @@ const id = getUserIdFromUrl(window.location.search);
 chargeButton.addEventListener("click", () => {
   Router.workerCharge(id);
 })
+addButton.addEventListener("click", (e) => {
+  Router.workerAdd(id);
+})
 
 // Defaults
 if(!id) {
   shifter.showPageOnly("404");
   throw Error("User not found");
 }
-
