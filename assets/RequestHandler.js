@@ -60,12 +60,15 @@ export class RequestHandler {
       })
       try {
         data = await res.json();
+        console.log(res, data);
       }
       catch(err) {
-        ;w
+        console.log(err);
+        ;
       }
     }
     catch(err) {
+      console.log(err);
       return this.shifter.showPageOnly("500");
     }
 
