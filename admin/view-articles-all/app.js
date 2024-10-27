@@ -162,7 +162,7 @@ hideNav.addEventListener("click", handleHideNav);
 // Default behaviour
 adminPassword = sessionStorage.getItem("adminPassword");
 if(!adminPassword) {
-  window.location.assign(Router.adminLogin);
+  Router.adminLogin();
 }
 
 handleGetAll();

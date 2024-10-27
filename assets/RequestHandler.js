@@ -79,9 +79,6 @@ export class RequestHandler {
       if(successMessage) {
         return this.flash.showMessage(successMessage, "success");
       }
-      if(this.successRedirect) {
-        return this.successRedirect();
-      }
     }
     if(res.status === 500) {
       return this.shifter.showPageOnly("500");
