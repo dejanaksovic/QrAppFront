@@ -195,7 +195,7 @@ const handleSelect = (e) => {
       return Router.adminViewSelectedUser(id);
     }
 
-    const selectedUserNew = usersGlobal?.find(e => e._id === id);
+  const selectedUserNew = usersGlobal?.find(e => e._id === id);
   // Reset transactions
   handleSeeLess();
   updateSelectedStatus(selectedUserNew);
