@@ -20,7 +20,7 @@ let ps = 0, pc = 100;
 const setDefaultsForDates = () => {
 // Set max dates and default date
   const nowDate = new Date(new Date().getTime() - 24*60*60*1000);
-  const tommorowDate = new Date(nowDate.getTime() + 24*60*60*1000);
+  const tommorowDate = new Date(nowDate.getTime() + 2*24*60*60*1000);
 
   const yearNow = nowDate.getFullYear();
   const monthNow = String(nowDate.getMonth()+1).padStart(2, "0");
