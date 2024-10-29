@@ -245,6 +245,11 @@ const handlePageMore = (e) => {
 // Connect handlers
 addButton.addEventListener("click", handleAddRedirect);
 searchButton.addEventListener("click", handleSearchByName);
+searchInput.addEventListener("keydown", (e) => {
+  if(e.key === "Enter") {
+    handleSearchByName();
+  }
+})
 seeMore.addEventListener("click", handleGetUserTransactions);
 seeLess.addEventListener("click", handleSeeLess);
 changeSelectButton.addEventListener("click", handleChangeRedirect);
