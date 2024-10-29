@@ -53,6 +53,11 @@ const handleTogglePasswordVisibility = () => {
 // connect handlers
 loginButton.addEventListener("click", handleLogin);
 showPassButton.addEventListener("click", handleTogglePasswordVisibility);
+passwordInput.addEventListener("keydown", (e) => {
+  if(e.key === "Enter") {
+    handleLogin();
+  }
+})
 
 // Default behaviour
 if(workerPassword) {

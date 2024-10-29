@@ -61,6 +61,11 @@ const handlePasswordToggle = () => {
 // Connect handlers
 loginButton.addEventListener("click", handleLogin);
 togglePasswordInputType.addEventListener("click", handlePasswordToggle);
+passwordInput.addEventListener("keydown", (e) => {
+  if(e.key === "Enter") {
+    handleLogin();
+  }
+})
 
 // Default behaviour
 const adminPassword = localStorage.getItem("adminPassword");
