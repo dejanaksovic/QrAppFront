@@ -4,7 +4,7 @@ export const getUserIdFromUrl = (url) => {
   return id;
 }
 
-export const URL = "http://localhost:3000";
+export const URL = "https://han.in.rs";
 export const getBasePath = () => {
   const path = window.location.href;
   const pathBySlash = path.split("/");
