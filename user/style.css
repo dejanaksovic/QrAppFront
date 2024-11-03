@@ -59,3 +59,17 @@
 .single-trans p:nth-child(3) {
   text-align: center;
 }
+
+.rules {
+  background-color: var(--clr-accent-muted);
+  color: var(--clr-bg-dark);
+  aspect-ratio: 1/1;
+  min-width: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+  position:absolute;
+  top: 1rem;
+  right: 2rem;
+}
