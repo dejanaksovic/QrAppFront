@@ -265,7 +265,7 @@ label {
     top: 0;
     right: 0;
     transform: translateX(100%);
-    transition: .5s linear;
+    transition: .2s linear;
     display: hidden;
   }
   #checkbox {
@@ -360,17 +360,7 @@ label {
   .view-user-card {
     display: none;
   }
-  .right-nav {
-    width: 40vw;
-    height: 100vh;
-    background-color: var(--clr-bg-dark);
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translateX(100%);
-    transition: .5s linear;
-    display: hidden;
-  }
+
   #checkbox {
     display: none;
   }
