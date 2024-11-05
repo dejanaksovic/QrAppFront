@@ -78,6 +78,24 @@ option {
   display: grid;
   grid-template-columns: 1fr;
 }
+.pagination {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+}
+.pagination button {
+  display: grid;
+  place-items: center;
+  padding: .32em .5em;
+  border-radius: 100%;
+  border: 2px solid var(--clr-accent-muted);
+}
+.pagination button:hover {
+  background-color: var(--clr-accent-muted);
+}
+.pagination button svg path:hover {
+  fill: var(--clr-bg-dark);
+}
 /* VIEW ALL */
 .articles-view-container {
   display: grid;
@@ -136,24 +154,6 @@ option {
 .article-action > button:nth-child(2) {
   border: 1px solid var(--clr-accent-muted);
   color: var(--clr-accent-muted);
-}
-/* pagination */
-.pagination-container {
-  grid-row: 9;
-  display: flex;
-  gap: 1rem;
-}
-
-.pagination-container > p {
-  color: var(--clr-font);
-  padding: .25rem .5rem;
-  font-size: .5rem;
-  border: 1px solid var(--clr-accent-muted);
-  border-radius: .25rem;
-}
-
-.pagination-container > p.active {
-  background-color: var(--clr-accent-muted);
 }
 
 /* HIDE ACTIVE AND NAV INITIALLY */
@@ -303,15 +303,6 @@ option {
 
   .article-action {
     display: none;
-  }
-
-  .pagination-container {
-    grid-column: 1/-1;
-  }
-
-  .pagination-container > p {
-    font-size: 1rem;
-    padding: .5rem 1rem;
   }
 
   .nav-container {
