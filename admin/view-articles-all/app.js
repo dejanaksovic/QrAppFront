@@ -5,7 +5,6 @@ import { RequestHandler } from "../../assets/RequestHandler.js";
 
 // ELEMENTS
 const allArticlesContainer = document.getElementById("all-articles");
-const selectedArticleContainer = document.getElementById("selected-article");
 const helperContainer = document.querySelector(".helper");
 
 const addButton = document.getElementById("button-add");
@@ -18,6 +17,8 @@ const navButton = document.querySelector(".nav-button");
 const navItem = document.querySelector(".nav-container");
 const hideNav = document.querySelector(".nav-container>svg");
 
+const [prevPage, nextPage] = document.querySelectorAll(".pagination button");
+
 let selectedElement;
 
 // setup pages
@@ -27,6 +28,8 @@ const pageShifter = new PageShifter(pages, "main-container");
 const requestHandler = new RequestHandler(pageShifter, null, "admin");
 // utils
 let adminPassword;
+let ps = 0, pc = 30;
+let articlesGlobal = [];
 const addArticle = ({Name, Price, _id}) => {
   const articleContainer = document.createElement("div");
   articleContainer.classList.add("article-single-view");
@@ -81,12 +84,13 @@ const handleGetAll = async () => {
     method: "GET",
     queryParams: {
       categoryId: selectContainer.value,
-      ps: 0,
-      pc: 30,
+      ps,
+      pc,
     }
   }
 
   const articles = await requestHandler.doRequest(requestOptions) ?? {articles: null};
+  articlesGlobal = articles;
 
   // Refresh
   allArticlesContainer.textContent = "";
@@ -147,6 +151,21 @@ const handleShowNav = () => {
 const handleHideNav = () => {
   navItem.classList.add("hidden");
 }
+const handleNextPage = () => {
+  // Returns early if articles on the current page are less then max, shitty solution, but its a solution
+  if(articlesGlobal.length < pc) {
+    return
+  }
+  ps+=1;
+  handleGetAll();
+}
+const handlePrevPage = () => {
+  if(ps === 0) {
+    return;
+  }
+  pc-=1;
+  handleGetAll();
+}
 
 // Connect handlers
 addButton.addEventListener("click", handleRedirectAdd);
@@ -158,6 +177,8 @@ changeSelectedButton.addEventListener("click", handleChange);
 selectContainer.addEventListener("change", handleGetAll);
 navButton.addEventListener("click", handleShowNav);
 hideNav.addEventListener("click", handleHideNav);
+nextPage.addEventListener("click", handleNextPage);
+prevPage.addEventListener("click", handlePrevPage);
 
 // Default behaviour
 adminPassword = sessionStorage.getItem("adminPassword");
