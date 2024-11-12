@@ -6,6 +6,7 @@ import { RequestHandler } from "../../assets/RequestHandler.js";
 // ELEMENTS
 const nameInput = document.getElementById("name-input");
 const priceInput = document.getElementById("price-input");
+const incrementInput = document.getElementById("increment-input");
 const selectElement = document.getElementById("category-input");
 
 const confirmButton = document.getElementById("confirm-button");
@@ -39,6 +40,7 @@ const handleConfirm = async (e) => {
     body: {
       name: nameInput.value,
       price: priceInput.value,
+      increment: Number(incrementInput.value) / 100,
       categoryId: selectElement.value,
     }
   }
