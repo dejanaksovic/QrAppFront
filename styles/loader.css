@@ -1,0 +1,29 @@
+@import "../base.css";
+
+:root {
+  --wdth-loader: 50px;
+}
+
+.loader-spinner {
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: var(--wdth-loader);
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  border: 5px solid var(--clr-accent-muted);
+  border-bottom-color: transparent;
+
+  animation: loader-spin 1s linear infinite;
+}
+
+@keyframes loader-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

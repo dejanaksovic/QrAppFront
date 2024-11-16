@@ -1,7 +1,12 @@
 export class PageShifter {
   pages = [];
   lastShownPage;
+  loader;
   constructor(ids, idToShow) {
+    this.loader = document.createElement("div");
+    this.loader.classList.add("loader-spinner", "hidden");
+    document.body.prepend(this.loader);
+
     ids.forEach(id => {
       const element = document.getElementById(id);
       if(!element || !(element instanceof HTMLElement)) {
@@ -31,5 +36,14 @@ export class PageShifter {
     }
     pageToShow.element.classList.remove("hidden");
     this.lastShownPage = pageToShow.element;
+  }
+
+  showLoader() {
+    this.lastShownPage.classList.add("hidden");
+    this.loader.classList.remove("hidden");
+  }
+  hideLoader() {
+    this.loader.classList.add("hidden");
+    this.lastShownPage.classList.remove("hidden");
   }
 }

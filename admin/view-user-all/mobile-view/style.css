@@ -1,4 +1,5 @@
 @import "../../../base.css";
+@import "../../../styles/loader.css";
 
 .nav-item {
   padding: 1rem;

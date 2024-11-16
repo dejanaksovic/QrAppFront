@@ -32,7 +32,6 @@ export class RequestHandler {
       return url;
     }    
 
-    console.log(queryParams);
     // Itterate over query params
     let queryString = "";
     for(let [key, value] of Object.entries(queryParams)) {
@@ -47,6 +46,7 @@ export class RequestHandler {
   async doRequest(options, successMessage) {
     const { method, password, body } = options;
 
+    this.shifter.showLoader();
     const fullUrl = this.#checkRequestValidity(options);
     let res, data;
     try {
@@ -68,7 +68,7 @@ export class RequestHandler {
       }
     }
     catch(err) {
-      console.log(err);
+      this.shifter.hideLoader();
       return this.shifter.showPageOnly("500");
     }
 
@@ -77,13 +77,16 @@ export class RequestHandler {
     if(res.ok) {
       if(successMessage && this.successRedirect) {
         this.flash.leaveMessage(successMessage, "success");
+        this.shifter.hideLoader();
         return this.successRedirect();
       }
       if(successMessage) {
+        this.shifter.hideLoader();
         return this.flash.showMessage(successMessage, "success");
       }
     }
     if(res.status === 500) {
+      this.shifter.hideLoader();
       return this.shifter.showPageOnly("500");
     }
     if(res.status === 401 || res.status === 403) {
@@ -92,6 +95,7 @@ export class RequestHandler {
       localStorage.removeItem("adminPassword");
       sessionStorage.removeItem("adminPassword");
       sessionStorage.removeItem("adminPassword");
+      this.shifter.hideLoader();
       switch(this.role) {
         case "admin": {
           return Router.adminLogin();
@@ -103,11 +107,14 @@ export class RequestHandler {
       return
     }
     if(res.status === 404) {
+      this.shifter.hideLoader();
       return this.shifter.showPageOnly("404");
     }
     if(message) {
+      this.shifter.hideLoader();
       return this.flash.showMessage(message, "error");
     }
+    this.shifter.hideLoader();
     return data?.res || res;
   }
 }
