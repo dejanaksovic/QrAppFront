@@ -157,7 +157,6 @@ export class RequestHandler {
     }
 
     this.shifter.hideLoader();
-
     return res?.res || res;
   }
 }
