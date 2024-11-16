@@ -43,78 +43,121 @@ export class RequestHandler {
     return `${url}?${queryString}`
   }
 
-  async doRequest(options, successMessage) {
-    const { method, password, body } = options;
+  #isInvalidPassword(role) {
+    console.log("Invalid password");
+    switch(role) {
+      case "admin": {
+        localStorage.removeItem("adminPassword");
+        sessionStorage.removeItem("adminPassword");
+        return Router.adminLogin();
+      }
+      case "worker": {
+        localStorage.removeItem("workerPassword");
+        sessionStorage.removeItem("workerPassword");
+        return Router.workerLogin();
+      } 
+    }
+  }
 
-    this.shifter.showLoader();
-    const fullUrl = this.#checkRequestValidity(options);
-    let res, data;
+  async #handleSendingRequest(url, method, password, body) {
+    let res;
     try {
-      res = await fetch(fullUrl, {
+      res = await fetch(url, {
         method: method || "GET",
         headers: {
           "Content-Type" : "application/json",
-          "authorization" : password,
+          "authorization": password,
         },
         body: JSON.stringify(body),
       })
+      let data;
       try {
         data = await res.json();
-        console.log(res, data);
       }
       catch(err) {
-        console.log(err);
-        ;
+        return {ok: true};
       }
+
+      const { message } = data || {};
+
+      if(!res.ok) {
+        return {
+          status: res.status,
+          message
+        }
+      }
+
+      return data;
     }
     catch(err) {
-      this.shifter.hideLoader();
-      return this.shifter.showPageOnly("500");
+      return {
+        status: 500,
+      };
+    }
+  }
+
+  #handleErrors(res, role) {
+
+    if(res instanceof Error) {
+      this.shifter.showPageOnly("500");
+      return true;
     }
 
-    const message = data?.message;
+    // Short circut
+    if(!res?.status) {
+      return false;
+    }
 
-    if(res.ok) {
-      if(successMessage && this.successRedirect) {
-        this.flash.leaveMessage(successMessage, "success");
-        this.shifter.hideLoader();
-        return this.successRedirect();
-      }
-      if(successMessage) {
-        this.shifter.hideLoader();
-        return this.flash.showMessage(successMessage, "success");
-      }
+    const { status, message } = res || {};
+
+    if(status === 500) {
+      this.shifter.showPageOnly("500");
+      return true;
     }
-    if(res.status === 500) {
-      this.shifter.hideLoader();
-      return this.shifter.showPageOnly("500");
+
+    if(status === 401 || status === 403) {
+      this.#isInvalidPassword(role);
+      return true;
     }
-    if(res.status === 401 || res.status === 403) {
-      // Refresh storage local and session
-      localStorage.removeItem("workerPassword");
-      localStorage.removeItem("adminPassword");
-      sessionStorage.removeItem("adminPassword");
-      sessionStorage.removeItem("adminPassword");
-      this.shifter.hideLoader();
-      switch(this.role) {
-        case "admin": {
-          return Router.adminLogin();
-        }
-        case "worker": {
-          return Router.workerLogin(getUserIdFromUrl(window.location.search));
-        }
-      }
-      return
+
+    if(status === 404) {
+      this.shifter.showPageOnly("404");
+      return true;
     }
-    if(res.status === 404) {
-      this.shifter.hideLoader();
-      return this.shifter.showPageOnly("404");
-    }
+
     if(message) {
-      this.shifter.hideLoader();
-      return this.flash.showMessage(message, "error");
+      this.flash.showMessage(message, "error");
+      return true;
     }
+    
+    return true;
+  }
+  
+  async doRequest(options, successMessage) {
+    const { method, password, body } = options;
+    
+    this.shifter.showLoader();
+    const fullUrl = this.#checkRequestValidity(options);
+    
+    const res = await this.#handleSendingRequest(fullUrl, method, password, body);
+    const error = this.#handleErrors(res, this.role);
+
+    if(error) {
+      this.shifter.hideLoader();
+      return;
+    }
+
+    if(this.successRedirect) {
+      successMessage ? this.flash.leaveMessage(message, "error") : "";
+      this.successRedirect();
+    }
+
+    if(this.successMessage) {
+      this.flash.showMessage(successMessage);
+    }
+
     this.shifter.hideLoader();
-    return data?.res || res;
+
+    return res?.res || res;
   }
 }
