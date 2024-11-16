@@ -118,6 +118,25 @@ label {
   padding: .75em 0;
   border-bottom: 1px solid var(--clr-accent-muted);
 }
+.pagination {
+  width: 100%;
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+}
+.pagination button {
+  display: grid;
+  place-items: center;
+  padding: .32em .5em;
+  border-radius: 100%;
+  border: 2px solid var(--clr-accent-muted);
+}
+.pagination button:hover {
+  background-color: var(--clr-accent-muted);
+}
+.pagination button svg path {
+  fill: var(--clr-bg-dark);
+}
 /* PHONE MEDIA QUERY */
 @media  (max-width: 600px) {
   :root {
@@ -139,6 +158,10 @@ label {
     width: 50vw !important;
     transform: translateX(105%);
     transition: .3s linear;
+  }
+  .right-nav label {
+    width: 100%;
+    margin-left: .5em;
   }
   label {
     grid-area: 1/1/2/2;

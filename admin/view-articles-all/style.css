@@ -93,7 +93,7 @@ option {
 .pagination button:hover {
   background-color: var(--clr-accent-muted);
 }
-.pagination button svg path:hover {
+.pagination button:hover svg path {
   fill: var(--clr-bg-dark);
 }
 /* VIEW ALL */
