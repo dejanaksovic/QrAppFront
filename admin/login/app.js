@@ -2,6 +2,7 @@ import { FlashMessage } from "../../assets/Flash.js";
 import { URL } from "../../assets/helpers.js";
 import { Router } from "../../assets/PagePaths.js";
 import { PageShifter } from "../../assets/Pageshifter.js";
+import { RequestHandler } from "../../assets/RequestHandler.js";
 
 // ELEMENTS
 const passwordInput = document.getElementById("password");
@@ -16,41 +17,28 @@ let showPassword = false;
 // pages setup
 const pages = ["main-page", "500"];
 const pageShifter = new PageShifter(pages, "main-page");
-
-// flash messages
-const flashMessage = new FlashMessage();
+// Handler request
+const requestHandler = new RequestHandler(pageShifter, Router.adminViewAllUsers, "admin");
 
 // Handlers
 const handleLogin = async () => {
-  let res, data;
-  try {
-    res = await fetch(`${URL}/sessions/admin`, {
-      method: "POST",
-      headers: {
-        "Content-Type" : "application/json",
-      },
-      body: JSON.stringify({
-        password: passwordInput.value,
-      })
-    })
+  // Save it
+  console.log("setting");
+  sessionStorage.setItem("adminPassword", passwordInput.value);
+  if(rememberMeInput.value) {
+    localStorage.setItem("adminPassword", passwordInput.value);
   }
-  catch(err) {
-    return pageShifter.showPageOnly("500");
-  }
-  if(res.ok) {
-    if(rememberMeInput.checked) {
-      localStorage.setItem("adminPassword", passwordInput.value);
+
+  const options = {
+    method: "POST",
+    url: `${URL}/sessions/admin`,
+    body: {
+      password: passwordInput.value,
     }
-    sessionStorage.setItem("adminPassword", passwordInput.value);
-    return Router.adminViewAllUsers();
   }
-  sessionStorage.removeItem("adminPassword");
-  localStorage.removeItem("adminPassword");
-  if(res.status === 500) {
-    return pageShifter.showPageOnly("500");
-  }
-  passwordInput.value = "";
-  return flashMessage.showMessage("Pogresna sifra", "error");
+
+  const res = await requestHandler.doRequest(options);
+  console.log(res);
 }
 const handlePasswordToggle = () => {
   showPassword = !showPassword;

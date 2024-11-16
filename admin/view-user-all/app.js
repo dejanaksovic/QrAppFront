@@ -261,6 +261,7 @@ pageLeft.addEventListener("click", handlePageLess);
 pageRight.addEventListener("click", handlePageMore);
 // Default behaviour
 adminPassword = sessionStorage.getItem("adminPassword");
+console.log(adminPassword);
 if(!adminPassword) {
   Router.adminLogin();
 }
