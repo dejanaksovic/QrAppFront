@@ -33,6 +33,7 @@ const popup = new Popup();
 let adminPassword;
 let ps = 0, pc = 30;
 let articlesGlobal = [];
+let lastCategory = "";
 const addArticle = ({Name, Price, _id}) => {
   const articleContainer = document.createElement("div");
   articleContainer.classList.add("article-single-view");
@@ -82,6 +83,12 @@ const populateCategories = (category) => {
 
 // handlers
 const handleGetAll = async () => {
+  // Setup pagination reset
+  if(selectContainer.value !== lastCategory) {
+    ps = 0;
+    lastCategory = selectContainer.value;
+  }
+
   const requestOptions = {
     url: `${URL}/articles`,
     method: "GET",
