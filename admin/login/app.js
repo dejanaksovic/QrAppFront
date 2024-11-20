@@ -23,7 +23,6 @@ const requestHandler = new RequestHandler(pageShifter, Router.adminViewAllUsers,
 // Handlers
 const handleLogin = async () => {
   // Save it
-  console.log("setting");
   sessionStorage.setItem("adminPassword", passwordInput.value);
   if(rememberMeInput.value) {
     localStorage.setItem("adminPassword", passwordInput.value);
@@ -37,7 +36,7 @@ const handleLogin = async () => {
     }
   }
 
-  const res = await requestHandler.doRequest(options);
+  const res = await requestHandler.doRequest(options, "Uspesno logivanje");
   console.log(res);
 }
 const handlePasswordToggle = () => {
