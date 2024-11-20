@@ -170,6 +170,9 @@ const handleDelete = async (e) => {
   selectedContainer.classList.add("hidden");
 }
 const handleSearchByName = async(e) => {
+  // Reset pagination to default
+  pageStart = 0;
+
   const options = {
     url: `${URL}/users`,
     method: "GET",
