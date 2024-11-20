@@ -35,14 +35,14 @@ export class Popup {
     document.body.prepend(mainContainer);
   }
 
-  showPopup(message, path, handler) {
-    this.confirmButton.addEventListener("click", (e) => {
-      console.log("hello!");
-      handler();
+  showPopup(message, handler, event) {
+    const insideHandler = (e) => {
+      handler(event);
       this.mainContainer.classList.add("hidden");
-    }, {once: true});
+      this.confirmButton.removeEventListener("click", insideHandler);
+    }
+    this.confirmButton.addEventListener("click", insideHandler);
     this.messageElement.textContent = message;
-    this.svgElement.src = path;
     this.rejectButton.addEventListener("click", () => {
       this.mainContainer.classList.add("hidden");
     }, {once: true});

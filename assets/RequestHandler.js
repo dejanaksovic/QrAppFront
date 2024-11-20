@@ -151,8 +151,8 @@ export class RequestHandler {
       this.successRedirect();
     }
 
-    if(this.successMessage) {
-      this.flash.showMessage(successMessage);
+    if(successMessage) {
+      this.flash.showMessage(successMessage, "success");
     }
 
     this.shifter.hideLoader();

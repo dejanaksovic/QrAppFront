@@ -1,6 +1,7 @@
 import { getTransactionTime, URL } from "../../assets/helpers.js";
 import { Router } from "../../assets/PagePaths.js";
 import { PageShifter } from "../../assets/Pageshifter.js";
+import { Popup } from "../../assets/Popup.js";
 import { RequestHandler } from "../../assets/RequestHandler.js";
 // Elements
 const usersContainer = document.getElementById("users-container");
@@ -27,6 +28,8 @@ const pageShifter = new PageShifter(pages, "main-page");
 
 // handler
 const fetchHandler = new RequestHandler(pageShifter, undefined, "admin");
+
+const popup = new Popup();
 
 // Assets
 let usersGlobal = [];
@@ -147,7 +150,11 @@ const handleChangeRedirect = (e) => {
   const id = e.target.getAttribute("user-id");
   return Router.adminChangeUser(id);
 }
+const handleDeleteSelect = async (e) => {
+  popup.showPopup("Da li ste sigurni da zelite da obrisete korisnika", handleDelete, e);
+}
 const handleDelete = async (e) => {
+  console.log("Im running");
   e.stopPropagation();
   const userId = e.target.getAttribute("user-id");
   const userContainer = document.querySelector(`.user[user-id="${userId}"]`)
@@ -160,6 +167,7 @@ const handleDelete = async (e) => {
   const deletedUser = await fetchHandler.doRequest(options, "Uspesno obrisan korisnik");
   // Delete on screen
   userContainer.remove();
+  selectedContainer.classList.add("hidden");
 }
 const handleSearchByName = async(e) => {
   const options = {
@@ -176,6 +184,7 @@ const handleSearchByName = async(e) => {
   // Reset search
   searchInput.value = "";
   const users = await fetchHandler.doRequest(options);
+  usersGlobal = users;
 
   clearUserContainer();
 
@@ -191,6 +200,7 @@ const handleSelect = (e) => {
   }
 
   const id = e.currentTarget.getAttribute("user-id");
+  console.log(e.currentTarget);
     if(window.innerWidth <= 1024) {
       return Router.adminViewSelectedUser(id);
     }
@@ -254,8 +264,7 @@ seeMore.addEventListener("click", handleGetUserTransactions);
 seeLess.addEventListener("click", handleSeeLess);
 changeSelectButton.addEventListener("click", handleChangeRedirect);
 delSelectButton.addEventListener("click", e => {
-  handleDelete(e);
-  selectedContainer.classList.add("hidden");
+  handleDeleteSelect(e);
 });
 pageLeft.addEventListener("click", handlePageLess);
 pageRight.addEventListener("click", handlePageMore);

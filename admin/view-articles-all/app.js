@@ -1,6 +1,7 @@
 import { URL } from "../../assets/helpers.js";
 import { Router } from "../../assets/PagePaths.js";
 import { PageShifter } from "../../assets/Pageshifter.js";
+import { Popup } from "../../assets/Popup.js";
 import { RequestHandler } from "../../assets/RequestHandler.js";
 
 // ELEMENTS
@@ -26,6 +27,8 @@ const pages = ["main-container", "500"];
 const pageShifter = new PageShifter(pages, "main-container");
 // request handler
 const requestHandler = new RequestHandler(pageShifter, null, "admin");
+// popup
+const popup = new Popup();
 // utils
 let adminPassword;
 let ps = 0, pc = 30;
@@ -118,10 +121,14 @@ const handleDelete = async (e) => {
     method: "DELETE",
     password: adminPassword,
   }
-  const article =  await requestHandler.doRequest(requestOptions, "Uspesno obrisan korisnika");
+  const article =  await requestHandler.doRequest(requestOptions, "Uspesno obrisan artikal");
   if(mainContainer) {
     mainContainer.remove();
   }
+  helperContainer.classList.add("hidden");
+}
+const handleDeleteSelect = (e) => {
+  popup.showPopup("Da li zelite da obrisete artikal", handleDelete, e);
 }
 const handleSelect = (article, container) => {
   selectedElement = container;
@@ -169,10 +176,7 @@ const handlePrevPage = () => {
 
 // Connect handlers
 addButton.addEventListener("click", handleRedirectAdd);
-delSelectedButton.addEventListener("click", e => {
-  handleDelete(e);
-  helperContainer.classList.add("hidden");
-});
+delSelectedButton.addEventListener("click", handleDeleteSelect);
 changeSelectedButton.addEventListener("click", handleChange);
 selectContainer.addEventListener("change", handleGetAll);
 navButton.addEventListener("click", handleShowNav);
