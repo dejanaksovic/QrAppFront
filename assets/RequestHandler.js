@@ -44,7 +44,6 @@ export class RequestHandler {
   }
 
   #isInvalidPassword(role) {
-    console.log("Invalid password");
     switch(role) {
       case "admin": {
         localStorage.removeItem("adminPassword");
@@ -147,8 +146,8 @@ export class RequestHandler {
       return;
     }
 
-    if(this.successRedirect) {
-      successMessage ? this.flash.leaveMessage(message, "error") : "";
+    if(this.successRedirect && successMessage) {
+      this.flash.leaveMessage(successMessage, "success");
       this.successRedirect();
     }
 

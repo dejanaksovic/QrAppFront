@@ -2,7 +2,7 @@ export class FlashMessage {
   container;
   messageDelay;
 
-  constructor(messageDelay = 4000) {
+  constructor(messageDelay = 2000) {
     this.container = document.createElement("div");
     // Default stylings;
     this.container.classList.add("flash-container");

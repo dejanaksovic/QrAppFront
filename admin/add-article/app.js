@@ -70,7 +70,8 @@ cancelButton.addEventListener("click", handleCancel);
 
 // Default behaviour
 adminPassword = sessionStorage.getItem("adminPassword");
-if(!adminPassword)
-  window.location.assign(Router.adminLogin);
+if(!adminPassword) {
+  Router.adminLogin();
+}
 
 handleGetCategories();
