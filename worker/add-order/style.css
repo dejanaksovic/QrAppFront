@@ -100,6 +100,7 @@ select {
   text-align: center;
   padding: .5rem;
   justify-content: space-between;
+  align-items: center;
   border: 1px solid var(--clr-accent-muted);
   margin-bottom: .5rem;
 }
@@ -126,5 +127,10 @@ select {
   background-color: var(--clr-accent-muted);
   font-weight: 900;
   padding: .5rem 1.5rem;
+}
+
+span:nth-child(1),
+span:nth-child(3) {
+  font-size: 1.8em;
 }
 
