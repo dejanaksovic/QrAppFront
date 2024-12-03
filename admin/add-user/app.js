@@ -7,6 +7,8 @@ import { RequestHandler } from "../../assets/RequestHandler.js";
 // ELEMENTS
 const inputName = document.getElementById("name-input");
 const balanceInput = document.getElementById("balance-input");
+const emailInput = document.getElementById("email-input");
+const phoneInput = document.getElementById("phone-input");
 
 const confirmButton = document.getElementById("confirm-button");
 const cancelButton = document.getElementById("cancel-button");
@@ -35,9 +37,11 @@ const handleAddUser = async () => {
     body: {
       name: inputName.value,
       coins: balanceInput.value,
+      email: emailInput.value,
+      phoneNumber: phoneInput.value,
   }
   }
-  const user = await requestHandler.doRequest(requestOptions, "Korisnik uspesno kreiran");
+const user = await requestHandler.doRequest(requestOptions, "Korisnik uspesno kreiran");
 }
 
 // Connect handlers

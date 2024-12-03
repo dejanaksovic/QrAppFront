@@ -6,6 +6,8 @@ import { RequestHandler } from "../../assets/RequestHandler.js";
 // ELEMENTS
 const nameInput = document.getElementById("name-input");
 const balanceInput = document.getElementById("balance-input");
+const emailInput = document.getElementById("email-input");
+const phoneInput = document.getElementById("phone-input");
 
 const nameElement = document.getElementById("name");
 const coinsElement = document.getElementById("coins");
@@ -32,6 +34,8 @@ const handleChange = async () => {
     body: {
       name: nameInput.value,
       coins: balanceInput.value,
+      email: emailInput.value,
+      phoneNumber: phoneInput.value,
     }
   }
 
