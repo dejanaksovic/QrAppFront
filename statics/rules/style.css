@@ -1,6 +1,6 @@
 @import "../../base.css";
 
-h1, h2 {
+h1, h2, h3 {
   color: var(--clr-accent-muted);
 }
 
@@ -9,11 +9,24 @@ p {
 }
 
 main {
+  display: flex;
   max-width: max(80vw, 1000px);
+  padding: 1rem;
   flex-direction: column;
+  gap: 3rem;
   margin: 0 auto;
 }
 
 span {
   font-weight: 600;
+}
+
+div > p:nth-child(n+2) {
+  padding-left: 1rem;
+}
+
+@media only screen and (max-width: 1200px) {
+  :root {
+    font-size: .7rem; 
+  }
 }
