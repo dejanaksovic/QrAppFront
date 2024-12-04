@@ -71,6 +71,9 @@ const createTransaction = (transaction) => {
 
 const appendTransactions = (transactions) => {
   transactions.forEach(transaction => {
+    if(transaction.Coins > 0) {
+      return;
+    }
     transactionContainer.appendChild(createTransaction(transaction));
   })
 }
