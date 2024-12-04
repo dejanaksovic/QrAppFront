@@ -15,3 +15,11 @@ export const getBasePath = () => {
 export const getTransactionTime = (date) => {
   return `${date.getDate()}.${date.getMonth() + 1} ${date.getHours()}:${date.getMinutes()}`
 }
+
+export const getTransactionPrecise = (date) => {
+  if(!(date instanceof Date)) {
+    throw Error("date must be of type Date")
+  }
+  
+  return `${date.getHours()}:${date.getMinutes()}`
+}

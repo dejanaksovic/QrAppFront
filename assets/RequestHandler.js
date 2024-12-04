@@ -1,5 +1,4 @@
 import { FlashMessage } from "./Flash.js";
-import { getUserIdFromUrl } from "./helpers.js";
 import { Router } from "./PagePaths.js";
 import { PageShifter } from "./Pageshifter.js";
 
