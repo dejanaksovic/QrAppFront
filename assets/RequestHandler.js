@@ -79,6 +79,7 @@ export class RequestHandler {
       const { message } = data || {};
 
       if(!res.ok) {
+        console.log(message);
         return {
           status: res.status,
           message
@@ -88,6 +89,7 @@ export class RequestHandler {
       return data;
     }
     catch(err) {
+      console.log(err);
       return {
         status: 500,
       };
