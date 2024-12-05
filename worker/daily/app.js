@@ -1,6 +1,6 @@
-import { getTransactionPrecise, URL } from "../../assets/helpers";
-import { PageShifter } from "../../assets/Pageshifter";
-import { RequestHandler } from "../../assets/RequestHandler";
+import { getTransactionPrecise, URL } from "../../assets/helpers.js";
+import { PageShifter } from "../../assets/Pageshifter.js";
+import { RequestHandler } from "../../assets/RequestHandler.js";
 
 // shifter
 const pages = ["main", "500"]
