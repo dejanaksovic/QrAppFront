@@ -18,7 +18,12 @@ let showPassword = false;
 const pages = ["main-page", "500"];
 const pageShifter = new PageShifter(pages, "main-page");
 // Handler request
-const requestHandler = new RequestHandler(pageShifter, Router.adminViewAllUsers, "admin");
+// came from some page
+const requestHandler = new RequestHandler(pageShifter,
+  () => {
+    Router.lastPage();
+},
+"admin");
 
 // Handlers
 const handleLogin = async () => {
@@ -37,7 +42,6 @@ const handleLogin = async () => {
   }
 
   const res = await requestHandler.doRequest(options, "Uspesno logivanje");
-  console.log(res);
 }
 const handlePasswordToggle = () => {
   showPassword = !showPassword;

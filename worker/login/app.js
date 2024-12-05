@@ -17,11 +17,17 @@ let id = getUserIdFromUrl(window.location.search);
 const pages = ["main", "500"]
 const pageShifter = new PageShifter(pages, "main");
 // handler
-const handler = new RequestHandler(pageShifter, null, "worker");
+const lastPage = sessionStorage.getItem("lastPage");
+const handler = new RequestHandler(pageShifter, lastPage ? Router.lastPage : Router.workerChoose, "worker");
 // handlers
 const handleLogin = async () => {
   if(!workerPassword) {
     workerPassword = passwordInput.value;
+  }
+
+  sessionStorage.setItem("workerPassword", workerPassword);
+  if(rememberCheckbox.checked) {
+    localStorage.setItem("workerPassword", workerPassword);
   }
 
   const options = {
@@ -32,18 +38,7 @@ const handleLogin = async () => {
     }
   }
   
-  const res = await handler.doRequest(options);
-
-  if(res?.ok) {
-    sessionStorage.setItem("workerPassword", workerPassword);
-    if(rememberCheckbox.checked) {
-      localStorage.setItem("workerPassword", workerPassword);
-    }
-    Router.workerChoose(id);
-  }
-  else {
-    workerPassword = null;
-  }
+  const res = await handler.doRequest(options, "Uspesno logovanje");
 }
 const handleTogglePasswordVisibility = () => {
   showPassword = !showPassword;

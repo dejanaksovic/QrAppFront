@@ -43,6 +43,7 @@ export class RequestHandler {
   }
 
   #isInvalidPassword(role) {
+    sessionStorage.setItem("lastPage", window.location.href);
     switch(role) {
       case "admin": {
         localStorage.removeItem("adminPassword");
@@ -143,6 +144,8 @@ export class RequestHandler {
     const error = this.#handleErrors(res, this.role);
 
     if(error) {
+      console.log("ERROR");
+      console.log(error);
       this.shifter.hideLoader();
       return;
     }

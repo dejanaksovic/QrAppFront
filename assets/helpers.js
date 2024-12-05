@@ -5,6 +5,7 @@ export const getUserIdFromUrl = (url) => {
 }
 
 export const URL = "http://localhost:3000";
+
 export const getBasePath = () => {
   const path = window.location.href;
   const pathBySlash = path.split("/");

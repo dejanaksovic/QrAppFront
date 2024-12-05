@@ -7,8 +7,16 @@ export const Router ={
   base: () => {
     window.location.assign(`${basePath}/index.html`);
   },
+  // General
+  to: (toLink) => {
+    window.location.assign(toLink);
+  },
+  lastPage: () => {
+    window.location.assign(sessionStorage.getItem("lastPage"));
+  },
 // ADMIN
   adminLogin : () => {
+    sessionStorage.setItem("lastPage", window.location.href);
     window.location.assign(`${basePath}/admin/login/index.html`);
   },
   adminViewAllUsers : () => {
@@ -23,7 +31,6 @@ export const Router ={
   adminViewSelectedUser: (id) => {
     window.location.assign(`${basePath}/admin/view-user-all/mobile-view/index.html?id=${id}`);
   },
-
   adminViewAllArticles: () => {
     window.location.assign(`${basePath}/admin/view-articles-all/index.html`);
   },
@@ -36,6 +43,7 @@ export const Router ={
 
   // WORKER
   workerLogin: (id) => {
+    sessionStorage.setItem("lastPage", window.location.href);
     window.location.assign(`${basePath}/worker/login/index.html?id=${id}`);
   },
   workerAdd: (id) => {
