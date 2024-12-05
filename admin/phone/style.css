@@ -1,0 +1,53 @@
+@import "../../base.css";
+
+.container {
+  max-width: min(90vw, 1000px);
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.to {
+  color: var(--clr-accent-muted);
+}
+
+.to span {
+  font-weight: 600;
+}
+
+input {
+  width: 100%;
+  background-color: transparent;
+  border: 1px solid var(--clr-accent-muted);
+  padding: .5rem 1rem;
+}
+
+.message textarea {
+  width: 100%;
+  margin-top: 1rem;
+  min-height: 10ch;
+  background: transparent;
+  border: 1px solid var(--clr-accent-muted);
+}
+
+.action {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.action button {
+  padding: .5rem 1rem;
+  border-radius: .3rem;
+  font-weight: 600;
+}
+
+.action button:nth-child(1) {
+  color: var(--clr-bg-dark);
+  background: var(--clr-accent-muted);
+}
+
+.action button:nth-child(2) {
+  color: var(--clr-accent-muted);
+  border: 1px solid var(--clr-accent-muted);
+}
