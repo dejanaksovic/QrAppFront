@@ -16,6 +16,14 @@ export const getTransactionTime = (date) => {
   return `${date.getDate()}.${date.getMonth() + 1} ${date.getHours()}:${date.getMinutes()}`
 }
 
+export const pickerDate = (date) => {
+  if(! (date instanceof Date)) {
+    throw Error("date must be a Date");
+  }
+
+  return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2, '0')}-${String(date.getDay()+1).padStart(2, "0")}`;
+}
+
 export const getTransactionPrecise = (date) => {
   if(!(date instanceof Date)) {
     throw Error("date must be of type Date")

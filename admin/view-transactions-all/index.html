@@ -1,78 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Transactions</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
-<body>
-  <main id="main">
-<!-- TRANSACTION CONTAINER -->
-    <div class="transaction-div">
-<!-- DATE INPUT -->
-      <div class="sort-by-date">
-        <div class="date-input-from">
-          <p>OD:</p>
-          <input type="date" min="2023-01-01">
-        </div>
-        <div class="date-input-to">
-          <p>DO:</p>
-          <input type="date" min="2023-01-01">
-        </div>
-        <button>POTVRDI</button>
+<body class="bg-dark">
+  <img id="nav-menu" src = "../../svgs/menu-button.svg" alt="">
+  <!-- NAV -->
+  <nav class="bg-dark text-center">
+    <svg id="nav-close" width="16" height="22" viewBox="0 0 16 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M15.625 0.586359L15.625 21.2895C15.625 21.6118 15.3613 21.8754 15.0391 21.8754H12.6953C12.373 21.8754 12.1094 21.6118 12.1094 21.2895L12.1094 12.6762L2.56348 21.5141C1.55762 22.3491 0 21.6508 0 20.3129L0 1.56292C0 0.225031 1.55762 -0.473211 2.56348 0.36175L12.1094 9.14593L12.1094 0.586359C12.1094 0.264093 12.373 0.000421524 12.6953 0.000421524H15.0391C15.3613 0.000421524 15.625 0.264093 15.625 0.586359Z" fill="#C18A2B"></path>
+    </svg>
+    <a href="../view-user-all/">Korisnici</a>
+    <a href="../view-articles-all/">Artikli</a>
+  </nav>
+  <!-- ACTUAL CONTAINER -->
+  <main id="main" class="">
+    <!-- Date -->
+    <div class="time-picker">
+      <div class="form-single">
+        <label for="">Od:</label>
+        <input type="date">
       </div>
-<!-- TRANSACTION IS IN FLEX NOT GRID
-      <div class="transaction">
-        <p>ime korisnika</p>
-        <p>narudzba</p>
-        <p>coins</p>
-        <p>vreme</p>
-      </div>  -->
-      <div class="transaction">
-        <p>ime korisnika</p>
-        <p>narudzba</p>
-        <p>coins</p>
-        <p>vreme</p>
+      <div class="form-single">
+        <label for="">Do:</label>
+        <input type="date">
       </div>
-      
-    </div>
-    <div class="pagination">
-      <button>
-        <svg width="11" height="16" viewBox="0 0 11 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0.773559 7.27478L7.41418 0.634155C7.87317 0.175171 8.61536 0.175171 9.06946 0.634155L10.173 1.73767C10.632 2.19666 10.632 2.93884 10.173 3.39294L5.46594 8.09998L10.173 12.807C10.632 13.266 10.632 14.0082 10.173 14.4623L9.06946 15.5658C8.61047 16.0248 7.86829 16.0248 7.41418 15.5658L0.773559 8.92517C0.314575 8.47595 0.314575 7.73376 0.773559 7.27478Z" fill="#C18A2B"/>
-        </svg>
-      </button>
-      <button>
-        <svg width="11" height="16" viewBox="0 0 11 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M10.6528 8.93713L4.01221 15.5778C3.55322 16.0367 2.81103 16.0367 2.35693 15.5778L1.25342 14.4742C0.794434 14.0153 0.794434 13.2731 1.25342 12.819L5.96045 8.11194L1.25342 3.40491C0.794434 2.94592 0.794434 2.20374 1.25342 1.74963L2.35693 0.646119C2.81592 0.187135 3.55811 0.187135 4.01221 0.646119L10.6528 7.28674C11.1118 7.73596 11.1118 8.47815 10.6528 8.93713Z" fill="#C18A2B"/>
-        </svg>
-      </button>
-    </div>
-    <!-- RIGHT NAVIGATION -->
-    <label for="checkbox">
-      <img src="../../svgs/menu-button.svg" alt="menu-button">
-    </label>
-    <input type="checkbox" id="checkbox">
-    <div class="right-nav">
-      <label for="checkbox">
-        <svg width="16" height="22" viewBox="0 0 16 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M15.625 0.586359L15.625 21.2895C15.625 21.6118 15.3613 21.8754 15.0391 21.8754H12.6953C12.373 21.8754 12.1094 21.6118 12.1094 21.2895L12.1094 12.6762L2.56348 21.5141C1.55762 22.3491 0 21.6508 0 20.3129L0 1.56292C0 0.225031 1.55762 -0.473211 2.56348 0.36175L12.1094 9.14593L12.1094 0.586359C12.1094 0.264093 12.373 0.000421524 12.6953 0.000421524H15.0391C15.3613 0.000421524 15.625 0.264093 15.625 0.586359Z" fill="#C18A2B"/>
-        </svg>
-      </label>
-      <a href="../view-user-all/index.html">Korisnici</a>
-      <a href="../view-articles-all/index.html">Artikli</a>
-      <a href="#">Transakcije</a>
+      <button class="confirm-date">POTVRDI</button>
     </div>
 
+    <!-- SET TYPE -->
+    <div class="type-container">
+      <button class="active">Evidentirano</button>
+      <button>Izdato</button>
+    </div>
+
+    <!-- Transactions -->
+    <div class="transactions-container">
+      <div class="transaction">
+        <div class="trans-time">12:43</div>
+        <div class="trans-order">
+          <p>Karamel makijato</p>
+          <p>2</p>
+          <p>460</p>
+        </div>
+        <div class="trans-order">
+          <p>Karamel makijato</p>
+          <p>2</p>
+          <p>460</p>
+        </div>
+        <div class="trans-order">
+          <p>Ukupno</p>
+          <p>2</p>
+          <p>460</p>
+        </div>
+      </div>
+    </div>
   </main>
   <div class="container-404" id="500">
     <h1>500</h1>
-    <p>Unutrasnja greska. Proverite konekciju sa internetom pa probajte opet. Ako se greska nastavi kontaktirajte administratora</p>
+    <p>Unutrasnja greska</p>
   </div>
   <script src="app.js" type="module"></script>
 </body>
-
 </html>
