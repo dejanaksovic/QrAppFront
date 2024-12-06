@@ -19,17 +19,13 @@ const pages = ["main-page", "500"];
 const pageShifter = new PageShifter(pages, "main-page");
 // Handler request
 // came from some page
-const requestHandler = new RequestHandler(pageShifter,
-  () => {
-    Router.lastPage();
-},
-"admin");
+const requestHandler = new RequestHandler(pageShifter, sessionStorage.getItem("lastPage") ? Router.lastPage : Router.adminViewAllUsers ,"admin");
 
 // Handlers
 const handleLogin = async () => {
   // Save it
   sessionStorage.setItem("adminPassword", passwordInput.value);
-  if(rememberMeInput.value) {
+  if(rememberMeInput.checked) {
     localStorage.setItem("adminPassword", passwordInput.value);
   }
 

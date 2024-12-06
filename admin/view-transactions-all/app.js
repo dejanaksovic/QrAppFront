@@ -45,7 +45,7 @@ const createTimeElem = (date) => {
   if(! date instanceof Date) {
     throw Error("date must be Date");
   }
-  const time = getTransactionPrecise(date);
+  const time = getTransactionTime(date);
   
   const timeElem = document.createElement("div");
   timeElem.classList.add("trans-time");
@@ -53,7 +53,13 @@ const createTimeElem = (date) => {
   
   return timeElem;
 }
+const createNameElem = (transaction) => {
+  const nameElem = document.createElement("div");
+  nameElem.classList.add("trans-time");
+  nameElem.textContent = transaction?.User?.Name;
 
+  return nameElem;
+}
 const createOrderElem = (order) => {
   const { Article, Quantity } = order || {};
 
@@ -70,7 +76,6 @@ const createOrderElem = (order) => {
 
   return orderElem;
 }
-
 const createSumElem = (transaction) => {
   const elem = document.createElement("div");
   elem.classList.add("trans-order");
@@ -82,15 +87,14 @@ const createSumElem = (transaction) => {
     elem.appendChild(infoElem);
   })
 
-
   return elem;
 }
-
 const createTransactionElem = (transaction) => {
   const transactionElem = document.createElement("div");
   transactionElem.classList.add("transaction");
   // Time elem
   transactionElem.appendChild(createTimeElem(new Date(transaction.createdAt)));
+  transactionElem.appendChild(createNameElem(transaction));
   for(let order of transaction.Order) {
     transactionElem.appendChild(createOrderElem(order));
   }
@@ -98,7 +102,6 @@ const createTransactionElem = (transaction) => {
 
   return transactionElem;
 }
-
 const populateTransactions = (transactions) => {
   resetTransactions();
   transactions.forEach(e => {
@@ -132,7 +135,6 @@ const handleGetTransactions = async (e) => {
   }
   
   transGlobal = await handler.doRequest(options);
-  console.log(transGlobal);
   let toShow;
   if(showEvidented.value) {
     toShow = transGlobal.filter(trans => trans.Coins > 0 );
