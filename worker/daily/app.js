@@ -83,10 +83,11 @@ const handleGetTransactions = async (e) => {
   const options = {
     url: `${URL}/transactions/daily`,
     method: "GET",
-    password
+    password,
   }
 
-  const transactions = await handler.doRequest(options, );
+  const transactions = await handler.doRequest(options, null);
+  console.log(transactions);
 
   appendTransactions(transactions);
 }
