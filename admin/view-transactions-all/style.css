@@ -2,7 +2,6 @@
 
 body {
   max-height: 100vh;
-  overflow: hidden;
 }
 
 /* PHONE FIRST */
@@ -83,7 +82,10 @@ main {
 
 /* Transaction */
 .transactions-container {
+  --magic-bottom-number: .5rem;
+
   max-height: 80vh;
+  padding-bottom: var(--magic-bottom-number);
   overflow-y: scroll;
 }
 
