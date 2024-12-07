@@ -129,7 +129,7 @@ const handleConfirmOrder = async (e) => {
     }
   }
 
-  const res = await handler.doRequest(options, "Uspesno dodata porudzbina");
+  const res = await handler.doRequest(options, "Uspešno evidentirana porudžbina");
   basket.reset();
 }
 
