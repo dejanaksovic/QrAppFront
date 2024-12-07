@@ -12,6 +12,7 @@
 }
 
 /* SEARCH AND PHONE NAV */
+
 .articles-container > img {
   display: block;
   margin: 0 0 0 auto;
@@ -106,6 +107,8 @@ option {
   border-radius: .25rem;
   padding: 1.2rem 1rem;
   height: 80vh;
+
+  overflow-y: auto;
 }
 .article-single-view {
   display: flex;
@@ -189,6 +192,7 @@ option {
 
 @media only screen and (min-width: 1200px) {
   /* Hide menu button */
+
   .articles-container > img {
     display: none;
   }
