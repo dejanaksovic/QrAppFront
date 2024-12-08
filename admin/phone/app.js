@@ -70,10 +70,18 @@ const handleAddChip = (e) => {
   const id = e.currentTarget.value;
 
   const user = globalUsers.find(e => e._id === id);
+  if(!user) {
+    return;
+  }
+
+  if(userIds.includes(id)) {
+    return;
+  }
   
   userIds.push(user._id);
   addUserChip(user);
 }
+
 const handleRemoveChip = (e) => {
   const actualTarget = e.currentTarget;
 
@@ -86,6 +94,8 @@ const handleRemoveChip = (e) => {
 }
 
 const handleSendPhoneAll = async () => {
+  console.log(userIds.length);
+
   const options = {
     method: "POST",
     url: `${URL}/communication/phone`,
