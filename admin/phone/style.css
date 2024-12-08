@@ -15,11 +15,50 @@
   font-weight: 600;
 }
 
+select {
+  background-color: var(--clr-accent-muted);
+  padding: 0.3rem;
+  border: none;
+  color: white;
+}
+
+.chip-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+
+  padding: 1rem 0;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+
+  gap: 0.2rem;
+  font-size: 0.6rem;
+
+  border: 1px solid var(--clr-accent-muted);
+  border-radius: 1rem;
+  padding: 0.2rem;
+}
+
+.chip > span:nth-child(1) {
+  display: grid;
+  place-items: center;
+
+  min-width: 1rem;
+  aspect-ratio: 1/1;
+
+  background-color: var(--clr-accent-muted);
+  color: white;
+  border-radius: 50%;
+}
+
 input {
   width: 100%;
   background-color: transparent;
   border: 1px solid var(--clr-accent-muted);
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
 }
 
 .message textarea {
@@ -37,8 +76,8 @@ input {
 }
 
 .action button {
-  padding: .5rem 1rem;
-  border-radius: .3rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.3rem;
   font-weight: 600;
 }
 

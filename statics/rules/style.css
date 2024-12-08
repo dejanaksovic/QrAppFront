@@ -4,7 +4,9 @@ h1 {
   text-align: center;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   color: var(--clr-accent-muted);
 }
 
@@ -25,12 +27,12 @@ span {
   font-weight: 600;
 }
 
-.second-section > p:nth-child(2n+2) {
+.second-section > p:nth-child(2n + 2) {
   padding-left: 1rem;
 }
 
 @media only screen and (max-width: 1200px) {
   :root {
-    font-size: .8rem; 
+    font-size: 0.8rem;
   }
 }
