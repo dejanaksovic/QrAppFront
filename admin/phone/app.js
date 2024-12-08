@@ -51,6 +51,12 @@ const populateSelectSingle = (user) => {
   userSelect.appendChild(optionElem);
 }
 
+const resetAllInputs = () => {
+  userIds = [];
+  chipsContainer.textContent = "";
+  message.value = "";
+}
+
 // Handlers
 const handleGetUsers = async (e) => {
   const options = {
@@ -94,8 +100,6 @@ const handleRemoveChip = (e) => {
 }
 
 const handleSendPhoneAll = async () => {
-  console.log(userIds.length);
-
   const options = {
     method: "POST",
     url: `${URL}/communication/phone`,
@@ -107,7 +111,8 @@ const handleSendPhoneAll = async () => {
   };
 
   const res = await handler.doRequest(options, "Uspešno poslata poruka");
-  return;
+
+  resetAllInputs();
 };
 
 const handleCancel = () => {
