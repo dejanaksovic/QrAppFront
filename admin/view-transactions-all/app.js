@@ -116,10 +116,8 @@ const setDefaultDates = () => {
   const todayEnd = new Date();
   todayEnd.setHours(23, 59);
 
-
   fromTime.value = pickerDate(todayStart);
   toTime.value = pickerDate(todayEnd);
-  console.log(fromTime.value, toTime.value);
 }
 
 // HANDLERS
