@@ -102,7 +102,6 @@ const handleGetTransactions = async (e) => {
   };
 
   const transactions = await handler.doRequest(options, null);
-  console.log(transactions);
 
   appendTransactions(transactions);
 };
