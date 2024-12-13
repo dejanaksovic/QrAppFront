@@ -3,12 +3,12 @@ import { PageShifter } from "../../assets/Pageshifter.js";
 import { RequestHandler } from "../../assets/RequestHandler.js";
 
 // shifter
-const pages = ["main", "500"]
+const pages = ["main", "500"];
 const shifter = new PageShifter(pages, "main");
 // handler
-const handler = new RequestHandler(shifter, null, 'worker');
+const handler = new RequestHandler(shifter, null, "worker");
 
-// Elements 
+// Elements
 const transactionContainer = document.querySelector(".transaction-container");
 
 // Utils
@@ -20,7 +20,16 @@ const createTransactionDate = (date) => {
   dateContainer.textContent = getTransactionPrecise(new Date(date));
 
   return dateContainer;
-}
+};
+
+const createNameElem = (User) => {
+  const elem = document.createElement("div");
+  elem.classList.add("name");
+
+  elem.textContent = User.Name;
+
+  return elem;
+};
 
 const createOrderItem = (orderItem) => {
   const { Article, Quantity } = orderItem || {};
@@ -28,14 +37,14 @@ const createOrderItem = (orderItem) => {
   const info = [Article, Quantity, Number(Article.Price) * Number(Quantity)];
   const elems = [];
 
-  info.forEach(e => {
+  info.forEach((e) => {
     const elem = document.createElement("div");
     elem.textContent = e?.Name || e;
     elems.push(elem);
-  })
+  });
 
   return elems;
-}
+};
 
 const createOrder = (order) => {
   const orderElem = document.createElement("div");
@@ -43,40 +52,46 @@ const createOrder = (order) => {
 
   let fullPrice = 0;
 
-  order.forEach(orderItem => {
+  order.forEach((orderItem) => {
     const infoElems = createOrderItem(orderItem);
-    infoElems.forEach(infoElem => {
+    infoElems.forEach((infoElem) => {
       orderElem.appendChild(infoElem);
-    })
-    fullPrice+= orderItem?.Article?.Price * orderItem?.Quantity;
-  })
+    });
+    fullPrice += orderItem?.Article?.Price * orderItem?.Quantity;
+  });
   // Extra append for sum
   const sumElem = document.createElement("div");
   sumElem.textContent = fullPrice;
-  orderElem.append(document.createElement("div"), document.createElement("div"), sumElem);
+  orderElem.append(
+    document.createElement("div"),
+    document.createElement("div"),
+    sumElem
+  );
 
   return orderElem;
-}
+};
 
 const createTransaction = (transaction) => {
   const transactionElem = document.createElement("div");
   transactionElem.classList.add("transaction");
 
   const dateElem = createTransactionDate(transaction.createdAt);
+  const nameElem = createNameElem(transaction.User);
   const orderElem = createOrder(transaction.Order);
-  transactionElem.append(dateElem, orderElem);
+
+  transactionElem.append(dateElem, nameElem, orderElem);
 
   return transactionElem;
-}
+};
 
 const appendTransactions = (transactions) => {
-  transactions.forEach(transaction => {
-    if(transaction.Coins > 0) {
+  transactions.forEach((transaction) => {
+    if (transaction.Coins > 0) {
       return;
     }
     transactionContainer.appendChild(createTransaction(transaction));
-  })
-}
+  });
+};
 
 // Handlers
 const handleGetTransactions = async (e) => {
@@ -84,12 +99,12 @@ const handleGetTransactions = async (e) => {
     url: `${URL}/transactions/daily`,
     method: "GET",
     password,
-  }
+  };
 
   const transactions = await handler.doRequest(options, null);
   console.log(transactions);
 
   appendTransactions(transactions);
-}
+};
 
 handleGetTransactions();
