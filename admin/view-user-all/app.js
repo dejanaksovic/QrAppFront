@@ -42,9 +42,9 @@ let pageMaxReached = false;
 const addUser = (user) => {
   // user container
   const userContainer = document.createElement("div");
-  userContainer.setAttribute("user-id", user._id);
+  userContainer.setAttribute("user-id", user.Id);
   userContainer.classList.add("user");
-  userContainer.addEventListener("click", handleSelect, {capture: true});
+  userContainer.addEventListener("click", handleSelect, { capture: true });
   // icon
   const icon = document.createElement("img");
   icon.src = "../../svgs/user-pfp.svg";
@@ -66,34 +66,34 @@ const addUser = (user) => {
   const delButton = document.createElement("button");
   delButton.classList.add("remove-button");
   delButton.textContent = "OBRISI";
-  delButton.setAttribute("user-id", user._id);
+  delButton.setAttribute("user-id", user.Id);
   delButton.addEventListener("click", handleDelete);
   // Change
   const changeButton = document.createElement("button");
   changeButton.classList.add("manage-button");
   changeButton.textContent = "IZMENI";
-  changeButton.setAttribute("user-id", user._id);
+  changeButton.setAttribute("user-id", user.Id);
   changeButton.addEventListener("click", handleChangeRedirect);
   // Connect buttons
   actionButtons.append(delButton, changeButton);
   userContainer.append(actionButtons);
   // Add to main container
   usersContainer.appendChild(userContainer);
-}
+};
 const clearUserContainer = () => {
   usersContainer.textContent = "";
-}
+};
 
 const updateSelectedStatus = (user) => {
-  const { Name, Coins, _id } = user;
+  const { Name, Coins, Id } = user;
 
   selectedUserCoins.textContent = Coins;
   selectedUserName.textContent = Name;
 
-  seeMore.setAttribute("user-id", _id);
-  changeSelectButton.setAttribute("user-id", _id);
-  delSelectButton.setAttribute("user-id", _id);
-}
+  seeMore.setAttribute("user-id", Id);
+  changeSelectButton.setAttribute("user-id", Id);
+  delSelectButton.setAttribute("user-id", Id);
+};
 
 const addTransaction = (transaction) => {
   const { createdAt, Coins } = transaction;
@@ -104,9 +104,9 @@ const addTransaction = (transaction) => {
   const orderElement = document.createElement("p");
   const coinsElement = document.createElement("p");
   const dateElement = document.createElement("p");
-  // populate
-  for(let { Article, Quantity } of transaction.Order) {
-    orderElement.textContent+= `${Article.Name} ${Quantity}, `;
+  // populatej
+  for (let { Article, Quantity } of transaction.Order) {
+    orderElement.textContent += `${Article.Name} ${Quantity}, `;
   }
 
   coinsElement.textContent = Coins;
@@ -114,8 +114,7 @@ const addTransaction = (transaction) => {
 
   container.append(orderElement, coinsElement, dateElement);
   transactionsContainer.append(container);
-}
-
+};
 
 // Handlers
 const handleGetUsers = async () => {
@@ -126,15 +125,15 @@ const handleGetUsers = async () => {
     queryParams: {
       ps: pageStart,
       pc: pageCount,
-    }
-  }
+    },
+  };
 
   const users = await fetchHandler.doRequest(options);
   usersGlobal = users;
-  if(users.length < pageCount) {
+  console.log(usersGlobal);
+  if (users.length < pageCount) {
     pageMaxReached = true;
-  }
-  else {
+  } else {
     pageMaxReached = false;
   }
   // RESET
@@ -142,34 +141,41 @@ const handleGetUsers = async () => {
   for (let user of users) {
     addUser(user);
   }
-}
+};
 const handleAddRedirect = () => {
   return Router.adminAddUser();
-}
+};
 const handleChangeRedirect = (e) => {
   const id = e.target.getAttribute("user-id");
   return Router.adminChangeUser(id);
-}
+};
 const handleDeleteSelect = async (e) => {
-  popup.showPopup("Da li ste sigurni da zelite da obrisete korisnika", handleDelete, e);
-}
+  popup.showPopup(
+    "Da li ste sigurni da zelite da obrisete korisnika",
+    handleDelete,
+    e
+  );
+};
 const handleDelete = async (e) => {
   console.log("Im running");
   e.stopPropagation();
   const userId = e.target.getAttribute("user-id");
-  const userContainer = document.querySelector(`.user[user-id="${userId}"]`)
+  const userContainer = document.querySelector(`.user[user-id="${userId}"]`);
   const options = {
     url: `${URL}/users/${userId}`,
     method: "DELETE",
     password: adminPassword,
-  }
+  };
 
-  const deletedUser = await fetchHandler.doRequest(options, "Uspesno obrisan korisnik");
+  const deletedUser = await fetchHandler.doRequest(
+    options,
+    "Uspesno obrisan korisnik"
+  );
   // Delete on screen
   userContainer.remove();
   selectedContainer.classList.add("hidden");
-}
-const handleSearchByName = async(e) => {
+};
+const handleSearchByName = async (e) => {
   // Reset pagination to default
   pageStart = 0;
 
@@ -181,8 +187,8 @@ const handleSearchByName = async(e) => {
       nameFilter: searchInput.value,
       ps: pageStart,
       pc: pageCount,
-    }
-  }
+    },
+  };
 
   // Reset search
   searchInput.value = "";
@@ -191,82 +197,83 @@ const handleSearchByName = async(e) => {
 
   clearUserContainer();
 
-  for(let user of users) {
+  for (let user of users) {
     addUser(user);
   }
-}
+};
 const handleSelect = (e) => {
   selectedContainer.classList.remove("hidden");
 
-  if(e.target.tagName === "BUTTON") {
+  if (e.target.tagName === "BUTTON") {
     return;
   }
 
   const id = e.currentTarget.getAttribute("user-id");
-  console.log(e.currentTarget);
-    if(window.innerWidth <= 1024) {
-      return Router.adminViewSelectedUser(id);
-    }
+  console.log(id);
+  if (window.innerWidth <= 1024) {
+    return Router.adminViewSelectedUser(id);
+  }
 
-  const selectedUserNew = usersGlobal?.find(e => e._id === id);
+  const selectedUserNew = usersGlobal?.find((e) => e.Id === id);
+  console.log(selectedUserNew);
   // Reset transactions
   handleSeeLess();
   updateSelectedStatus(selectedUserNew);
   // Show
   selectedContainer.classList.remove("hidden");
-}
+};
 const handleGetUserTransactions = async (e) => {
   const options = {
     url: `${URL}/transactions/${e.currentTarget.getAttribute("user-id")}`,
     method: "GET",
     password: adminPassword,
-  }
+  };
 
   const transactions = await fetchHandler.doRequest(options);
 
   // Refresh
   transactionsContainer.textContent = "";
-  for(let transaction of transactions) {
+  for (let transaction of transactions) {
     addTransaction(transaction);
   }
 
   transactionsContainer.classList.remove("hidden");
   seeLess.classList.remove("hidden");
   seeMore.classList.add("hidden");
-}
+};
 const handleSeeLess = () => {
   transactionsContainer.classList.add("hidden");
   seeMore.classList.remove("hidden");
   seeLess.classList.add("hidden");
-}
+};
 const handlePageLess = (e) => {
-  if(!pageStart) {
-    return
+  if (!pageStart) {
+    return;
   }
-  pageStart-= 1;
+  pageStart -= 1;
   handleGetUsers();
-}
+};
 
 const handlePageMore = (e) => {
-  if(pageMaxReached) {
-    return
+  if (pageMaxReached) {
+    return;
   }
-  pageStart +=1;
+  pageStart += 1;
   handleGetUsers();
-}
+};
 
 // Connect handlers
 addButton.addEventListener("click", handleAddRedirect);
 searchButton.addEventListener("click", handleSearchByName);
 searchInput.addEventListener("keydown", (e) => {
-  if(e.key === "Enter") {
+  if (e.key === "Enter") {
     handleSearchByName();
   }
-})
+});
 seeMore.addEventListener("click", handleGetUserTransactions);
 seeLess.addEventListener("click", handleSeeLess);
 changeSelectButton.addEventListener("click", handleChangeRedirect);
-delSelectButton.addEventListener("click", e => {
+delSelectButton.addEventListener("click", (e) => {
   handleDeleteSelect(e);
 });
 pageLeft.addEventListener("click", handlePageLess);
@@ -274,7 +281,7 @@ pageRight.addEventListener("click", handlePageMore);
 // Default behaviour
 adminPassword = sessionStorage.getItem("adminPassword");
 console.log(adminPassword);
-if(!adminPassword) {
+if (!adminPassword) {
   Router.adminLogin();
 }
 // Set on load
