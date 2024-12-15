@@ -13,7 +13,6 @@ const phoneInput = document.getElementById("phone-input");
 const confirmButton = document.getElementById("confirm-button");
 const cancelButton = document.getElementById("cancel-button");
 
-
 // page setup
 const pages = ["main-container", "500"];
 const pageShifter = new PageShifter(pages, "main-container");
@@ -21,13 +20,16 @@ const pageShifter = new PageShifter(pages, "main-container");
 const flashMessage = new FlashMessage();
 
 // request setup
-const requestHandler = new RequestHandler(pageShifter, Router.adminViewAllUsers, "admin");
-
+const requestHandler = new RequestHandler(
+  pageShifter,
+  Router.adminViewAllUsers,
+  "admin"
+);
 
 // Handlers
 const handleCancel = () => {
   return Router.adminViewAllUsers();
-}
+};
 
 const handleAddUser = async () => {
   const requestOptions = {
@@ -38,11 +40,14 @@ const handleAddUser = async () => {
       name: inputName.value,
       coins: balanceInput.value,
       email: emailInput.value,
-      phoneNumber: phoneInput.value,
-  }
-  }
-const user = await requestHandler.doRequest(requestOptions, "Korisnik uspesno kreiran");
-}
+      phone: phoneInput.value,
+    },
+  };
+  const user = await requestHandler.doRequest(
+    requestOptions,
+    "Korisnik uspesno kreiran"
+  );
+};
 
 // Connect handlers
 cancelButton.addEventListener("click", handleCancel);
@@ -50,6 +55,6 @@ confirmButton.addEventListener("click", handleAddUser);
 
 // Default behaviour
 const adminPassword = sessionStorage.getItem("adminPassword");
-if(!adminPassword) {
+if (!adminPassword) {
   Router.adminLogin();
 }
