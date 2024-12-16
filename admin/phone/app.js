@@ -12,6 +12,10 @@ const [confirmButton, cancelButton] =
 const userSelect = document.querySelector(".to select");
 const chipsContainer = document.querySelector(".chip-container");
 
+const navButtonOpen = document.querySelector("#nav-button");
+const navButtonClonse = document.querySelector("#close-element");
+const navBar = document.querySelector("nav");
+
 // Pages setup
 const pages = ["main", "500"];
 const shifter = new PageShifter(pages, "main");
@@ -85,7 +89,7 @@ const handleAddChip = (e) => {
     return;
   }
 
-  userIds.push(user._id);
+  userIds.push(user.Id);
   addUserChip(user);
 };
 
@@ -120,9 +124,19 @@ const handleCancel = () => {
   Router.adminViewAllArticles();
 };
 
+const handleCloseNav = () => {
+  navBar.style.setProperty("--translation", "100%");
+};
+const handleOpenNav = () => {
+  navBar.style.setProperty("--translation", "0%");
+};
+
 // Connect handlers
 confirmButton.addEventListener("click", handleSendPhoneAll);
 cancelButton.addEventListener("click", handleCancel);
+
+navButtonOpen.addEventListener("click", handleOpenNav);
+navButtonClonse.addEventListener("click", handleCloseNav);
 
 // Default
 if (!adminPassword) {

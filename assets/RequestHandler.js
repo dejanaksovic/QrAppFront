@@ -3,14 +3,12 @@ import { Router } from "./PagePaths.js";
 import { PageShifter } from "./Pageshifter.js";
 
 export class RequestHandler {
-  constructor (shifter, successRedirect, role) {
-    if(!role)
-      throw Error("Role must be given");
-    if(!["admin", "worker", "user"].includes(role))
+  constructor(shifter, successRedirect, role) {
+    if (!role) throw Error("Role must be given");
+    if (!["admin", "worker", "user"].includes(role))
       throw Error("Role doesn't exist");
-    if(!shifter)
-      throw Error("Page shifter must be given");
-    if(!(shifter instanceof PageShifter))
+    if (!shifter) throw Error("Page shifter must be given");
+    if (!(shifter instanceof PageShifter))
       throw Error("Shifter is not of instane page shifter");
     // Checks pass
     this.role = role;
@@ -22,29 +20,27 @@ export class RequestHandler {
 
   #checkRequestValidity(options) {
     const { url, method, queryParams } = options;
-    if(!url)
-      throw Error("Base url must be given");
-    if(!method)
-      throw Error("Method must be given");
-    
-    if(!queryParams) {
+    if (!url) throw Error("Base url must be given");
+    if (!method) throw Error("Method must be given");
+
+    if (!queryParams) {
       return url;
-    }    
+    }
 
     // Itterate over query params
     let queryString = "";
-    for(let [key, value] of Object.entries(queryParams)) {
-      if(!(typeof(value) === "string") && !(typeof(value)==="number")) {
+    for (let [key, value] of Object.entries(queryParams)) {
+      if (!(typeof value === "string") && !(typeof value === "number")) {
         throw Error(`Invalid value type: ${value}`);
       }
       queryString += `${key}=${value}&`;
     }
-    return `${url}?${queryString}`
+    return `${url}?${queryString}`;
   }
 
   #isInvalidPassword(role) {
     sessionStorage.setItem("lastPage", window.location.href);
-    switch(role) {
+    switch (role) {
       case "admin": {
         localStorage.removeItem("adminPassword");
         sessionStorage.removeItem("adminPassword");
@@ -54,7 +50,7 @@ export class RequestHandler {
         localStorage.removeItem("workerPassword");
         sessionStorage.removeItem("workerPassword");
         return Router.workerLogin();
-      } 
+      }
     }
   }
 
@@ -64,32 +60,33 @@ export class RequestHandler {
       res = await fetch(url, {
         method: method || "GET",
         headers: {
-          "Content-Type" : "application/json",
-          "authorization": password,
+          "Content-Type": "application/json",
+          authorization: password,
         },
         body: JSON.stringify(body),
-      })
+      });
+      console.log(res.status);
       let data;
       try {
         data = await res.json();
-      }
-      catch(err) {
-        return {ok: true};
+        console.log(data);
+      } catch (err) {
+        console.log(err);
+        return { ok: true };
       }
 
       const { message } = data || {};
 
-      if(!res.ok) {
+      if (!res.ok) {
         console.log(message);
         return {
           status: res.status,
-          message
-        }
+          message,
+        };
       }
 
       return data;
-    }
-    catch(err) {
+    } catch (err) {
       console.log(err);
       return {
         status: 500,
@@ -98,64 +95,68 @@ export class RequestHandler {
   }
 
   #handleErrors(res, role) {
-
-    if(res instanceof Error) {
+    if (res instanceof Error) {
       this.shifter.showPageOnly("500");
       return true;
     }
 
     // Short circut
-    if(!res?.status) {
+    if (!res?.status) {
       return false;
     }
 
     const { status, message } = res || {};
 
-    if(status === 500) {
+    if (status === 500) {
       this.shifter.showPageOnly("500");
       return true;
     }
 
-    if(status === 401 || status === 403) {
+    if (status === 401 || status === 403) {
       this.#isInvalidPassword(role);
       return true;
     }
 
-    if(status === 404) {
+    if (status === 404) {
       this.shifter.showPageOnly("404");
       return true;
     }
 
-    if(message) {
+    if (message) {
       this.flash.showMessage(message, "error");
       return true;
     }
-    
+
     return true;
   }
-  
+
   async doRequest(options, successMessage) {
     const { method, password, body } = options;
-    
+
     this.shifter.showLoader();
     const fullUrl = this.#checkRequestValidity(options);
-    
-    const res = await this.#handleSendingRequest(fullUrl, method, password, body);
+
+    const res = await this.#handleSendingRequest(
+      fullUrl,
+      method,
+      password,
+      body
+    );
     const error = this.#handleErrors(res, this.role);
 
-    if(error) {
+    if (error) {
       console.log("ERROR");
       console.log(error);
       this.shifter.hideLoader();
       return;
     }
 
-    if(this.successRedirect && successMessage) {
+    if (this.successRedirect && successMessage) {
       this.flash.leaveMessage(successMessage, "success");
       this.successRedirect();
     }
 
-    if(successMessage) {
+    if (successMessage) {
       this.flash.showMessage(successMessage, "success");
     }
 

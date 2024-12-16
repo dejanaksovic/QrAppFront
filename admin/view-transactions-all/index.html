@@ -1,68 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Transactions</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body class="bg-dark">
-  <img id="nav-menu" src = "../../svgs/menu-button.svg" alt="">
-  <!-- NAV -->
-  <nav class="bg-dark text-center">
-    <svg id="nav-close" width="16" height="22" viewBox="0 0 16 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M15.625 0.586359L15.625 21.2895C15.625 21.6118 15.3613 21.8754 15.0391 21.8754H12.6953C12.373 21.8754 12.1094 21.6118 12.1094 21.2895L12.1094 12.6762L2.56348 21.5141C1.55762 22.3491 0 21.6508 0 20.3129L0 1.56292C0 0.225031 1.55762 -0.473211 2.56348 0.36175L12.1094 9.14593L12.1094 0.586359C12.1094 0.264093 12.373 0.000421524 12.6953 0.000421524H15.0391C15.3613 0.000421524 15.625 0.264093 15.625 0.586359Z" fill="#C18A2B"></path>
-    </svg>
-    <a href="../view-user-all/">Korisnici</a>
-    <a href="../view-articles-all/">Artikli</a>
-  </nav>
-  <!-- ACTUAL CONTAINER -->
-  <main id="main" class="">
-    <!-- Date -->
-    <div class="time-picker">
-      <div class="form-single">
-        <label for="">Od:</label>
-        <input type="date">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transactions</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-dark">
+    <img id="nav-menu" src="../../svgs/menu-button.svg" alt="" />
+    <!-- NAV -->
+    <nav class="bg-dark text-center">
+      <svg
+        id="nav-close"
+        width="16"
+        height="22"
+        viewBox="0 0 16 22"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M15.625 0.586359L15.625 21.2895C15.625 21.6118 15.3613 21.8754 15.0391 21.8754H12.6953C12.373 21.8754 12.1094 21.6118 12.1094 21.2895L12.1094 12.6762L2.56348 21.5141C1.55762 22.3491 0 21.6508 0 20.3129L0 1.56292C0 0.225031 1.55762 -0.473211 2.56348 0.36175L12.1094 9.14593L12.1094 0.586359C12.1094 0.264093 12.373 0.000421524 12.6953 0.000421524H15.0391C15.3613 0.000421524 15.625 0.264093 15.625 0.586359Z"
+          fill="#C18A2B"
+        ></path>
+      </svg>
+      <a href="../view-user-all/">Korisnici</a>
+      <a href="../view-articles-all/">Artikli</a>
+      <a href="../phone/index.html">SMS</a>
+    </nav>
+    <!-- ACTUAL CONTAINER -->
+    <main id="main" class="">
+      <!-- Date -->
+      <div class="time-picker">
+        <div class="form-single">
+          <label for="">Od:</label>
+          <input type="date" />
+        </div>
+        <div class="form-single">
+          <label for="">Do:</label>
+          <input type="date" />
+        </div>
+        <button class="confirm-date">POTVRDI</button>
       </div>
-      <div class="form-single">
-        <label for="">Do:</label>
-        <input type="date">
-      </div>
-      <button class="confirm-date">POTVRDI</button>
-    </div>
 
-    <!-- SET TYPE -->
-    <div class="type-container">
-      <button class="active">Evidentirane transakcije</button>
-      <button>Bonus transakcije</button>
-    </div>
+      <!-- SET TYPE -->
+      <div class="type-container">
+        <button class="active">Evidentirane transakcije</button>
+        <button>Bonus transakcije</button>
+      </div>
 
-    <!-- Transactions -->
-    <div class="transactions-container">
-      <div class="transaction">
-        <div class="trans-time">12:43</div>
-        <div class="trans-order">
-          <p>Karamel makijato</p>
-          <p>2</p>
-          <p>460</p>
-        </div>
-        <div class="trans-order">
-          <p>Karamel makijato</p>
-          <p>2</p>
-          <p>460</p>
-        </div>
-        <div class="trans-order">
-          <p>Ukupno</p>
-          <p>2</p>
-          <p>460</p>
+      <!-- Transactions -->
+      <div class="transactions-container">
+        <div class="transaction">
+          <div class="trans-time">12:43</div>
+          <div class="trans-order">
+            <p>Karamel makijato</p>
+            <p>2</p>
+            <p>460</p>
+          </div>
+          <div class="trans-order">
+            <p>Karamel makijato</p>
+            <p>2</p>
+            <p>460</p>
+          </div>
+          <div class="trans-order">
+            <p>Ukupno</p>
+            <p>2</p>
+            <p>460</p>
+          </div>
         </div>
       </div>
+    </main>
+    <div class="container-404" id="500">
+      <h1>500</h1>
+      <p>Unutrasnja greska</p>
     </div>
-  </main>
-  <div class="container-404" id="500">
-    <h1>500</h1>
-    <p>Unutrasnja greska</p>
-  </div>
-  <script src="app.js" type="module"></script>
-</body>
+    <script src="app.js" type="module"></script>
+  </body>
 </html>

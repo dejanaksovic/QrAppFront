@@ -1,10 +1,48 @@
 @import "../../base.css";
 
+body {
+  overflow-x: clip;
+}
+
 .container {
   max-width: min(90vw, 1000px);
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+}
+
+/* NAV */
+#nav-button {
+  display: block;
+  margin-right: 0;
+  margin-left: auto;
+  margin-top: 0.3rem;
+  margin-right: 0.3rem;
+}
+
+nav {
+  display: flex;
+  position: absolute;
+  right: 0;
+  top: 0;
+  min-height: 100vh;
+  min-width: 100%;
+
+  --translation: 100%;
+  transform: translateX(var(--translation));
+
+  transition: transform 0.3s ease-in-out;
+}
+
+nav > * {
+  flex: 1;
+}
+
+nav > *:nth-child(2) {
+  border: 2px solid var(--clr-accent-muted);
+  background-color: var(--clr-bg-dark);
+  padding-top: 1rem;
+  text-align: center;
 }
 
 .to {
@@ -25,7 +63,7 @@ select {
 .chip-container {
   display: flex;
   flex-wrap: wrap;
-  gap: .5rem;
+  gap: 0.5rem;
 
   padding: 1rem 0;
 }
@@ -66,6 +104,9 @@ input {
   margin-top: 1rem;
   min-height: 10ch;
   background: transparent;
+  color: white;
+  padding: 0.3rem;
+  outline: none;
   border: 1px solid var(--clr-accent-muted);
 }
 
