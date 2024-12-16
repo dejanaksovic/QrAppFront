@@ -124,10 +124,13 @@ main {
 @media only screen and (min-width: 1000px) {
   .transactions-container {
     display: grid;
-    gap: 0.2rem;
     grid-template-columns: repeat(5, 1fr);
-    min-width: 100%;
+    gap: 0.2rem;
 
+    min-width: 100%;
+    max-height: auto;
     padding-inline: 1rem;
+
+    overflow-y: clip;
   }
 }
