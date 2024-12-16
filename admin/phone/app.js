@@ -71,7 +71,12 @@ const handleGetUsers = async (e) => {
   };
 
   globalUsers = await handler.doRequest(options);
-  Array(globalUsers).sort();
+  globalUsers.sort((first, second) => {
+    if (first > second) return 1;
+    return -1;
+  });
+
+  console.log(globalUsers);
 
   for (let user of globalUsers) {
     populateSelectSingle(user);
