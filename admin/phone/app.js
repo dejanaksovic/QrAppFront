@@ -71,6 +71,7 @@ const handleGetUsers = async (e) => {
   };
 
   globalUsers = await handler.doRequest(options);
+  Array(globalUsers).sort();
 
   for (let user of globalUsers) {
     populateSelectSingle(user);
