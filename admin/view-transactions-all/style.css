@@ -10,13 +10,13 @@ main {
 }
 /* Nav */
 #nav-menu {
-  margin: .5rem .5rem 0 auto;
+  margin: 0.5rem 0.5rem 0 auto;
 }
 
 nav {
   --scale: 0;
 
-  position:absolute;
+  position: absolute;
   right: 0;
   top: 0;
   min-height: 100vh;
@@ -26,7 +26,7 @@ nav {
 
   transform: scaleX(var(--scale));
   transform-origin: right;
-  transition: transform .1s linear;
+  transition: transform 0.1s linear;
 }
 
 /* HOVER */
@@ -40,9 +40,9 @@ nav {
 .type-container > button {
   flex-basis: 100%;
   border: 2px solid var(--clr-accent-muted);
-  border-radius: .3rem;
+  border-radius: 0.3rem;
   color: white;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
 }
 
 .type-container > button.active {
@@ -67,8 +67,8 @@ main {
   background-color: var(--clr-accent-muted);
   color: white;
   font-weight: 600;
-  padding: .3rem .5rem;
-  margin-top: .5rem;
+  padding: 0.3rem 0.5rem;
+  margin-top: 0.5rem;
 }
 
 .form-single,
@@ -77,45 +77,57 @@ main {
   color: white;
 }
 .form-single {
-  padding: .3rem;
+  padding: 0.3rem;
 }
 
 /* Transaction */
 .transactions-container {
-  --magic-bottom-number: .5rem;
+  --magic-bottom-number: 0.5rem;
 
   max-height: 80vh;
+  min-width: max(40%, 300px);
   padding-bottom: var(--magic-bottom-number);
   overflow-y: scroll;
 }
 
 .transaction {
   border: 2px solid var(--clr-accent-muted);
-  margin-top: .5rem;
-  padding: .5rem .7rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.7rem;
 }
 
 .trans-time {
-  color: rgba(255, 255, 255, .6)
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .trans-order {
   display: grid;
-  grid-template-columns: 3fr 1fr 2fr; 
+  grid-template-columns: 3fr 1fr 2fr;
 }
 
 .trans-order > * {
   align-content: center;
 }
 
-.trans-order > *:nth-child(3n+1) {
+.trans-order > *:nth-child(3n + 1) {
   justify-self: start;
 }
 
-.trans-order > *:nth-child(3n+2) {
+.trans-order > *:nth-child(3n + 2) {
   justify-self: center;
 }
 
-.trans-order > *:nth-child(3n+3) {
+.trans-order > *:nth-child(3n + 3) {
   justify-self: right;
+}
+
+@media only screen and (min-width: 1000px) {
+  .transactions-container {
+    display: grid;
+    gap: 0.2rem;
+    grid-template-columns: repeat(5, 1fr);
+    min-width: 100%;
+
+    padding-inline: 1rem;
+  }
 }
