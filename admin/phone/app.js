@@ -72,8 +72,8 @@ const handleGetUsers = async (e) => {
 
   globalUsers = await handler.doRequest(options);
   globalUsers.sort((first, second) => {
-    if (first > second) return 1;
-    return -1;
+    if (first.Name > second.Name) return -1;
+    return 1;
   });
 
   console.log(globalUsers);
