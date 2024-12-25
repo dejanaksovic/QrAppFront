@@ -71,12 +71,16 @@ const handleShowArticles = () => {
   articlesActivateBtn.classList.add("active-tab");
   basketActivateBtn.classList.remove("active-tab");
 
+  selectItem.classList.remove("hidden");
+
   wholeRightSide.classList.add("hidden");
   articleContainer.classList.remove("hidden");
 };
 const handleShowBasket = () => {
   articlesActivateBtn.classList.remove("active-tab");
   basketActivateBtn.classList.add("active-tab");
+
+  selectItem.classList.add("hidden");
 
   wholeRightSide.classList.remove("hidden");
   articleContainer.classList.add("hidden");
