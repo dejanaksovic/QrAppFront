@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <title>Document</title>
-</head>
-<body class="bg-dark">
-  <div id="wrapper">
-    <div class="selection-tab">
-      <button>ARTIKLI</button>
-      <button class="active-tab">KORPA</button>
-    </div>
-    <div class="main-container" id="main-container">
-      <div class="left-side">
-        <select name="" id="">
-          <option value="">KATEGORIJA</option>
-        </select>
-        <!-- CONTAINER-ARTICLES -->
-        <div class="articles-container hidden">
-          <!-- SAMPLE ARTICLE -->
-          <!-- <div class="article">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body class="bg-dark">
+    <div id="wrapper">
+      <div class="selection-tab">
+        <button>ARTIKLI</button>
+        <button class="active-tab">KORPA</button>
+      </div>
+      <div class="main-container" id="main-container">
+        <div class="left-side">
+          <select class="hidden" name="" id="categories">
+            <option value="">KATEGORIJA</option>
+          </select>
+          <!-- CONTAINER-ARTICLES -->
+          <div class="articles-container hidden">
+            <!-- SAMPLE ARTICLE -->
+            <!-- <div class="article">
             <img src="../../svgs/user-pfp.svg" alt="">
             <div class="name-price">
               <p>Sample name</p>
@@ -28,39 +28,46 @@
             </div>
             <button>DODAJ</button>
           </div> -->
+          </div>
         </div>
-      </div>
         <!-- BASKET-ARTICLES -->
-      <div class="right-side">
-      <div class="basket-container">
-        <!-- SAMPLE -->
-        <div class="basket-item">
-          <p class="basket-name">NAZIV</p>
-          <p class="basket-quantity">KOLICINA</p>
-          <p class="basket-price">IZNOS</p>
-        </div>
-        <!-- <div class="basket-item">
+        <div class="right-side">
+          <div class="basket-container">
+            <!-- SAMPLE -->
+            <div class="basket-item">
+              <p class="basket-name">NAZIV</p>
+              <p class="basket-quantity">KOLICINA</p>
+              <p class="basket-price">IZNOS</p>
+            </div>
+            <!-- <div class="basket-item">
           <p class="basket-name">Karamel makijato</p>
           <p class="basket-quantity"><span>-</span>3<span>+</span></p>
           <p class="basket-price">630</p>
         </div> -->
-       </div>
-       <div class="comulative">
-        <p>Ukupna vrednost: </p>
-        <p>0</p>
-       </div>
-       <button id="confirm">POTVRDI</button>
+          </div>
+          <div class="comulative">
+            <p>Ukupna vrednost:</p>
+            <p>0</p>
+          </div>
+          <button id="confirm">POTVRDI</button>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="container-404" id="404">
-    <h1>400</h1>
-    <p>Izabrani korisnik nije pronadjen. Ako ste skenirali karticu proverite konekciju sa internetom i probajte ponovo. Ako se problem nastavi kontaktirajte administratora</p>
-  </div>
-  <div class="container-404" id="500">
-    <h1>500</h1>
-    <p>Unutrasnja greska. Proverite konekciju i pokusajte ponovo, ako se problem nastavi kontaktirajte administratora</p>
-  </div>
-  <script src="app.js" type="module"></script>
-</body>
+    <div class="container-404" id="404">
+      <h1>400</h1>
+      <p>
+        Izabrani korisnik nije pronadjen. Ako ste skenirali karticu proverite
+        konekciju sa internetom i probajte ponovo. Ako se problem nastavi
+        kontaktirajte administratora
+      </p>
+    </div>
+    <div class="container-404" id="500">
+      <h1>500</h1>
+      <p>
+        Unutrasnja greska. Proverite konekciju i pokusajte ponovo, ako se
+        problem nastavi kontaktirajte administratora
+      </p>
+    </div>
+    <script src="app.js" type="module"></script>
+  </body>
 </html>

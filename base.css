@@ -1,18 +1,18 @@
 /* INITIALS */
 /* FONT */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import "./styles/loader.css";
 
 :root {
   /* Why do i have to hardcode colors everywhere, Rajko? */
-  --clr-bg-dark: #0B2E1C;
-  --clr-accent-muted: #C18A2B;
+  --clr-bg-dark: #0b2e1c;
+  --clr-accent-muted: #c18a2b;
   --clr-error: #821131;
-  --clr-success: #00712D;
+  --clr-success: #00712d;
   --clr-warning: #ffc300;
-  --clr-font: #FFFFFF;
-  --clr-font-muted: #D4D4D4;
+  --clr-font: #ffffff;
+  --clr-font-muted: #d4d4d4;
   --shd-dark: 4px 4px 4px rgba(0, 0, 0, 0.3);
 }
 
@@ -75,7 +75,7 @@ input {
   background-color: var(--clr-warning) !important;
 }
 .bg-success {
-background-color: var(--clr-success) !important;
+  background-color: var(--clr-success) !important;
 }
 .bg-blur {
   backdrop-filter: blur(7px);
@@ -97,7 +97,7 @@ background-color: var(--clr-success) !important;
 }
 
 .hidden {
-  display: none !important; 
+  display: none !important;
 }
 
 /* Util for flash message */
@@ -113,11 +113,12 @@ background-color: var(--clr-success) !important;
 
 .flash-message {
   position: sticky;
-  border-radius: .2rem;
+  border-radius: 0.2rem;
   min-width: 30vw;
-  padding: .5rem 1rem;
-  transition: all .1s linear;
-  transform-origin: left; 
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.3rem;
+  transition: all 0.1s linear;
+  transform-origin: left;
 }
 
 .remove-flash {
@@ -149,10 +150,9 @@ background-color: var(--clr-success) !important;
 
 /* Input autofill default */
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active{
-  -webkit-box-shadow: 0 0 0 30px #CBA462 inset, 4px 4px 4px rgba(0, 0, 0, 0.3) !important;
-  -webkit-text-fill-color: #FFFFFF !important;
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #cba462 inset, 4px 4px 4px rgba(0, 0, 0, 0.3) !important;
+  -webkit-text-fill-color: #ffffff !important;
 }
-

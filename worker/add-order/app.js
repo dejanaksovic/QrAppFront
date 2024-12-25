@@ -10,6 +10,7 @@ const [articlesActivateBtn, basketActivateBtn] = document.querySelectorAll(
 );
 
 const articleContainer = document.querySelector(".articles-container");
+const categoriesElem = document.querySelector("#categories");
 
 const wholeRightSide = document.querySelector(".right-side");
 const basketContainer = document.querySelector(".basket-container");
@@ -70,6 +71,8 @@ const addCategory = (category) => {
 const handleShowArticles = () => {
   articlesActivateBtn.classList.add("active-tab");
   basketActivateBtn.classList.remove("active-tab");
+  // Show categoires
+  categoriesElem.classList.remove("hidden");
 
   wholeRightSide.classList.add("hidden");
   articleContainer.classList.remove("hidden");
@@ -77,6 +80,8 @@ const handleShowArticles = () => {
 const handleShowBasket = () => {
   articlesActivateBtn.classList.remove("active-tab");
   basketActivateBtn.classList.add("active-tab");
+  // Remove categories
+  categoriesElem.classList.add("hidden");
 
   wholeRightSide.classList.remove("hidden");
   articleContainer.classList.add("hidden");
@@ -121,6 +126,7 @@ const handleAddToBasket = async (e) => {
   const id = e.currentTarget.getAttribute("article-id");
   basket.addArticle(globalArticles.find((e) => e._id === id));
   fullValueContainer.textContent = basket.price;
+  handler.flash.showMessage(`Artikal dodat`, "success");
 };
 const handleConfirmOrder = async (e) => {
   const options = {
