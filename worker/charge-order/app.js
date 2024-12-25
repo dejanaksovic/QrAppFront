@@ -125,6 +125,9 @@ const handleAddToBasket = async (e) => {
   const id = e.currentTarget.getAttribute("article-id");
   basket.addArticle(globalArticles.find((e) => e._id === id));
   fullValueContainer.textContent = basket.price;
+
+  // Show message
+  handler.flash.showMessage("Artikal dodat", "success");
 };
 const handleConfirmOrder = async (e) => {
   const options = {

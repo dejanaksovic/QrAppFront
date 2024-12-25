@@ -90,12 +90,13 @@ export class Basket {
     const articleLogic = this.basket.find((e) => e.articleId === article._id);
     articleLogic.quantity -= 1;
     if (newQuantity === 0) {
-      this.basket.splice(this.basket.indexOf(articleLogic, 1));
+      this.basket.splice(this.basket.indexOf(articleLogic), 1);
       articleElement.elem.remove();
       // Delete it from dom
       const index = this.#domElems.indexOf(articleElement);
       this.#domElems.splice(index, 1);
     }
+    console.log(this.basket);
     this.price -= article.Price;
     this.updateFunc(this);
   }
