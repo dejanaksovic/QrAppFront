@@ -143,6 +143,7 @@ const handleConfirmOrder = async (e) => {
 
   const res = await handler.doRequest(options, "Uspešno naplaćeno korisniku");
   basket.reset();
+  fullValueContainer.textContent = basket.price;
 };
 
 // Connect handlers

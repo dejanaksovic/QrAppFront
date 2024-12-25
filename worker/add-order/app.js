@@ -144,7 +144,9 @@ const handleConfirmOrder = async (e) => {
     options,
     "Uspešno evidentirana porudžbina"
   );
+
   basket.reset();
+  fullValueContainer.textContent = basket.price;
 };
 
 // Connect handlers

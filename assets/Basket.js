@@ -41,7 +41,7 @@ export class Basket {
     });
 
     // Logic
-    // Cech if it exists
+    // Check if it exists
     const existsArticle = this.basket.find((e) => e.articleId === article._id);
     if (existsArticle) {
       return (existsArticle.quantity += 1);
@@ -96,7 +96,6 @@ export class Basket {
       const index = this.#domElems.indexOf(articleElement);
       this.#domElems.splice(index, 1);
     }
-    console.log(this.basket);
     this.price -= article.Price;
     this.updateFunc(this);
   }
@@ -116,6 +115,7 @@ export class Basket {
       item.elem.remove();
     }
     this.#domElems = [];
+    this.price = 0;
   }
 
   get basket() {
