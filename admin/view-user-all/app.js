@@ -130,7 +130,6 @@ const handleGetUsers = async () => {
 
   const users = await fetchHandler.doRequest(options);
   usersGlobal = users;
-  console.log(usersGlobal);
   if (users.length < pageCount) {
     pageMaxReached = true;
   } else {

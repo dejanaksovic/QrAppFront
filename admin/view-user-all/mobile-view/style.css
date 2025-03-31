@@ -33,7 +33,7 @@ nav {
 }
 
 .user-info img {
-  min-width: 3.5rem;
+  max-width: 30vw;
 }
 
 .user-info h1 {

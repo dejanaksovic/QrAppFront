@@ -16,6 +16,11 @@
   color: white;
 }
 
+/* LOGO IMAGE */
+.user-info > img {
+  max-width: 30vw;
+}
+
 .transactions {
   padding: 1rem .5rem;
   background-color: var(--clr-accent-muted);
