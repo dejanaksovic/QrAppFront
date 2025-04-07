@@ -40,7 +40,7 @@ let workerPassword =
   localStorage.getItem("workerPassword");
 let pageStart = 0;
 let pageCount = 20;
-let globalArticles;
+let globalArticles = [];
 let userId;
 
 const addArticle = (article) => {
@@ -154,6 +154,18 @@ const handleConfirmOrder = async (e) => {
   basket.reset();
   fullValueContainer.textContent = basket.price;
 };
+const handlePaginateRight = () => {
+  if(globalArticles.length < 20) return;
+
+  pageStart ++;
+  handleGetArticles();
+}
+const handlePaginateLeft = () => {
+  if(pageStart === 0) return;
+  
+  pageStart --;
+  handleGetArticles();
+}
 
 // Connect handlers
 articlesActivateBtn.addEventListener("click", handleShowArticles);
@@ -164,6 +176,8 @@ selectItem.addEventListener("change", () => {
   handleGetArticles();
 });
 confirmButton.addEventListener("click", handleConfirmOrder);
+leftArrow.addEventListener("click", handlePaginateLeft);
+rightArrow.addEventListener("click", handlePaginateRight);
 
 // Default
 userId = getUserIdFromUrl(window.location.search);
