@@ -40,7 +40,7 @@ let workerPassword =
   sessionStorage.getItem("workerPassword") ??
   localStorage.getItem("workerPassword");
 let pageStart = 0;
-let pageCount = 5;
+let pageCount = 20;
 let globalArticles = [];
 let userId;
 

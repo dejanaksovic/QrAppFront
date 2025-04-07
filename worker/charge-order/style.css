@@ -88,6 +88,19 @@ select {
   border-radius: .2rem;
 }
 
+/* PAGINATION */
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.left-arrow,
+.right-arrow {
+  padding: .5rem;
+  border: 1px solid var(--clr-accent-muted);
+  border-radius: 50%;
+}
 /* BASKET */
 .basket-container {
   height: 75vh;

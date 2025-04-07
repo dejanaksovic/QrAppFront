@@ -9,9 +9,13 @@ const [articlesActivateBtn, basketActivateBtn] = document.querySelectorAll(
   ".selection-tab button"
 );
 
+const [ leftArow, rightArrow ] = document.querySelectorAll(".pagination img");
+
 const articleContainer = document.querySelector(".articles-container");
 
 const wholeRightSide = document.querySelector(".right-side");
+const wholeLeftSide = document.querySelector(".left-side");
+
 const basketContainer = document.querySelector(".basket-container");
 const fullValueContainer = document.querySelector(".comulative p:nth-child(2)");
 
@@ -71,19 +75,15 @@ const handleShowArticles = () => {
   articlesActivateBtn.classList.add("active-tab");
   basketActivateBtn.classList.remove("active-tab");
 
-  selectItem.classList.remove("hidden");
-
   wholeRightSide.classList.add("hidden");
-  articleContainer.classList.remove("hidden");
+  wholeLeftSide.classList.remove("hidden");
 };
 const handleShowBasket = () => {
   articlesActivateBtn.classList.remove("active-tab");
   basketActivateBtn.classList.add("active-tab");
 
-  selectItem.classList.add("hidden");
-
   wholeRightSide.classList.remove("hidden");
-  articleContainer.classList.add("hidden");
+  wholeLeftSide.classList.add("hidden");
 };
 const handleGetArticles = async () => {
   const options = {
@@ -99,6 +99,9 @@ const handleGetArticles = async () => {
 
   const articles = await handler.doRequest(options);
   globalArticles = articles;
+
+  // Clear
+  articleContainer.textContent = "";
 
   for (let article of articles) {
     addArticle(article);
@@ -145,6 +148,18 @@ const handleConfirmOrder = async (e) => {
   basket.reset();
   fullValueContainer.textContent = basket.price;
 };
+const handlePaginateRight = () => {
+  if(globalArticles.length < pageCount) return;
+
+  pageStart++;
+  handleGetArticles();
+}
+const handlePaginateLeft = () => {
+  if(pageStart === 0) return;
+
+  pageStart --;
+  handleGetArticles();
+}
 
 // Connect handlers
 articlesActivateBtn.addEventListener("click", handleShowArticles);
@@ -155,6 +170,8 @@ selectItem.addEventListener("change", () => {
   handleGetArticles();
 });
 confirmButton.addEventListener("click", handleConfirmOrder);
+leftArow.addEventListener("click", handlePaginateLeft);
+rightArrow.addEventListener("click", handlePaginateRight);
 
 // Default
 userId = getUserIdFromUrl(window.location.search);
