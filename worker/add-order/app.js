@@ -17,6 +17,7 @@ const articleContainer = document.querySelector(".articles-container");
 const categoriesElem = document.querySelector("#categories");
 
 const wholeRightSide = document.querySelector(".right-side");
+const wholeLeftSide = document.querySelector(".left-side");
 const basketContainer = document.querySelector(".basket-container");
 const fullValueContainer = document.querySelector(".comulative p:nth-child(2)");
 
@@ -39,7 +40,7 @@ let workerPassword =
   sessionStorage.getItem("workerPassword") ??
   localStorage.getItem("workerPassword");
 let pageStart = 0;
-let pageCount = 20;
+let pageCount = 5;
 let globalArticles = [];
 let userId;
 
@@ -75,22 +76,16 @@ const addCategory = (category) => {
 const handleShowArticles = () => {
   articlesActivateBtn.classList.add("active-tab");
   basketActivateBtn.classList.remove("active-tab");
-  // Show categoires
-  categoriesElem.classList.remove("hidden");
 
   wholeRightSide.classList.add("hidden");
-  articleContainer.classList.remove("hidden");
-  paginationContainer.classList.remove("hidden");
+  wholeLeftSide.classList.remove("hidden");
 };
 const handleShowBasket = () => {
   articlesActivateBtn.classList.remove("active-tab");
   basketActivateBtn.classList.add("active-tab");
-  // Remove categories
-  categoriesElem.classList.add("hidden");
 
   wholeRightSide.classList.remove("hidden");
-  articleContainer.classList.add("hidden");
-  paginationContainer.classList.add("hidden");
+  wholeLeftSide.classList.add("hidden");
 };
 const handleGetArticles = async () => {
   const options = {
@@ -106,6 +101,9 @@ const handleGetArticles = async () => {
 
   const articles = await handler.doRequest(options);
   globalArticles = articles;
+
+  // Clear
+  articleContainer.textContent = "";
 
   for (let article of articles) {
     addArticle(article);
@@ -155,7 +153,8 @@ const handleConfirmOrder = async (e) => {
   fullValueContainer.textContent = basket.price;
 };
 const handlePaginateRight = () => {
-  if(globalArticles.length < 20) return;
+  console.log("paginating right");
+  if(globalArticles.length < pageCount) return;
 
   pageStart ++;
   handleGetArticles();
