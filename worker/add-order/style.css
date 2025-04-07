@@ -88,6 +88,20 @@ select {
   border-radius: .2rem;
 }
 
+/* PAGINATION */
+.pagination {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-arrow,
+.right-arrow {
+  border: 2px solid var(--clr-accent-muted);
+  padding: .5rem;
+  border-radius: 50%;
+  margin-top: 1rem;
+}
+
 /* BASKET */
 .basket-container {
   height: 75vh;

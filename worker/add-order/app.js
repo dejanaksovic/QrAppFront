@@ -9,6 +9,10 @@ const [articlesActivateBtn, basketActivateBtn] = document.querySelectorAll(
   ".selection-tab button"
 );
 
+const paginationContainer = document.querySelector(".pagination");
+const rightArrow = document.querySelector(".right-arrow");
+const leftArrow = document.querySelector(".left-arrow");
+
 const articleContainer = document.querySelector(".articles-container");
 const categoriesElem = document.querySelector("#categories");
 
@@ -76,6 +80,7 @@ const handleShowArticles = () => {
 
   wholeRightSide.classList.add("hidden");
   articleContainer.classList.remove("hidden");
+  paginationContainer.classList.remove("hidden");
 };
 const handleShowBasket = () => {
   articlesActivateBtn.classList.remove("active-tab");
@@ -85,6 +90,7 @@ const handleShowBasket = () => {
 
   wholeRightSide.classList.remove("hidden");
   articleContainer.classList.add("hidden");
+  paginationContainer.classList.add("hidden");
 };
 const handleGetArticles = async () => {
   const options = {
