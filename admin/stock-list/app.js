@@ -1,7 +1,7 @@
-import { URL } from "../../assets/helpers";
-import { Router } from "../../assets/PagePaths";
-import { PageShifter } from "../../assets/Pageshifter";
-import { RequestHandler } from "../../assets/RequestHandler";
+import { URL } from "../../assets/helpers.js";
+import { Router } from "../../assets/PagePaths.js";
+import { PageShifter } from "../../assets/Pageshifter.js";
+import { RequestHandler } from "../../assets/RequestHandler.js";
 
 // ELEMENTS
 const navButtonPhone = document.querySelector(".nav-button");
