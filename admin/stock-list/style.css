@@ -1,0 +1,105 @@
+@import "../../base.css";
+
+/* NAVIGATION */
+.nav-button {
+  margin-left: auto;
+  margin-right: .5rem;
+  margin-top: .5rem;
+}
+
+.nav-container {
+  display: flex;
+  padding: 1rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+  min-height: 100%;
+  border: 3px solid var(--clr-accent-muted);
+  background-color: var(--clr-bg-dark);
+  min-width: 40%;
+}
+
+.nav-container > svg:hover {
+  cursor:pointer;
+}
+
+.nav-container > nav {
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  font-size: 1.5rem;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+/* Buttons */
+.button-container {
+  display: flex;
+  max-width: fit-content;
+  margin-inline: auto;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: var(--clr-accent-muted);
+}
+
+.button-container > button {
+  color: var(--clr-bg-dark);
+  font-weight: bold;
+  padding: .5rem 1rem;
+  border: 2px solid var(--clr-bg-dark);
+  border-radius: .5rem;
+}
+
+button.active {
+  color: var(--clr-accent-muted);
+  background-color: var(--clr-bg-dark);
+}
+
+/* Current */
+.show-container,
+.edit-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  max-width: 90%;
+  margin-top: 1rem;
+  margin-inline: auto;
+  padding: 1rem;
+  color: white;
+  background-color: var(--clr-accent-muted);
+}
+
+.show-container > *:nth-child(2n + 2),
+.edit-container > *:nth-child(2n + 2) {
+  text-align: right;
+}
+
+.edit-container > *:nth-child(2n + 2) {
+  max-width: fit-content;
+}
+
+.show-container > *,
+.edit-container > * {
+  border-bottom: 1px solid var(--clr-bg-dark);
+}
+
+/* REMOVE && ADD */
+input[type=number] {
+  background: transparent;
+  color: white;
+  font-weight: bold;
+}
+input[type=number]::placeholder {
+  color: white;
+}
+
+/* CONFIRM BUTTON */
+button.confirm {
+  margin-inline: auto;
+  margin-top: 1rem;
+  background-color: var(--clr-accent-muted);
+  color: white;
+  font-weight: bold;
+  padding: 1rem 2rem;
+  border-radius: .5rem;
+}

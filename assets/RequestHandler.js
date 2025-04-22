@@ -69,9 +69,7 @@ export class RequestHandler {
       let data;
       try {
         data = await res.json();
-        console.log(data);
       } catch (err) {
-        console.log(err);
         return { ok: true };
       }
 
@@ -145,8 +143,6 @@ export class RequestHandler {
     const error = this.#handleErrors(res, this.role);
 
     if (error) {
-      console.log("ERROR");
-      console.log(error);
       this.shifter.hideLoader();
       return;
     }

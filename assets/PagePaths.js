@@ -40,6 +40,9 @@ export const Router ={
   adminChangeArticle: (id) => {
     window.location.assign(`${basePath}/admin/change-article/index.html?id=${id}`);
   },
+  adminStockList: () => {
+    window.location.assign(`${basePath}/admin/stock-list/index.html`);
+  },
 
   // WORKER
   workerLogin: (id) => {

@@ -105,6 +105,8 @@ input {
   top: 1rem;
   left: 1rem;
   position: absolute;
+  max-width: 70%;
+  font-size: .5rem;
   z-index: 1;
   background-color: transparent;
   color: white;
